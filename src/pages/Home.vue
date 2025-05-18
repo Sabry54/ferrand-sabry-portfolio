@@ -9,9 +9,14 @@ import { ref, onMounted, onUnmounted } from "vue";
 import HomeSlider from "../components/HomeSlider.vue";
 
 const container = ref(null);
+const isMobile = ref(window.innerWidth < 768);
+
+const handleResize = () => {
+  isMobile.value = window.innerWidth < 768;
+};
 
 const handleScroll = (e) => {
-  if (e.deltaY !== 0) {
+  if (!isMobile.value && e.deltaY !== 0) {
     e.preventDefault();
     const scrollContainer = container.value.querySelector(".overflow-x-auto");
     if (scrollContainer) {
@@ -24,12 +29,14 @@ const handleScroll = (e) => {
 
 onMounted(() => {
   container.value.addEventListener("wheel", handleScroll, { passive: false });
+  window.addEventListener("resize", handleResize);
 });
 
 onUnmounted(() => {
   if (container.value) {
     container.value.removeEventListener("wheel", handleScroll);
   }
+  window.removeEventListener("resize", handleResize);
 });
 </script>
 
@@ -39,5 +46,12 @@ onUnmounted(() => {
   overflow: hidden;
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    height: auto;
+    overflow: visible;
+  }
 }
 </style>
