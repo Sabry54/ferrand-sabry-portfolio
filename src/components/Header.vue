@@ -2,27 +2,49 @@
 <template>
   <header class="py-4 border-b border-gray-200">
     <div class="container flex justify-between items-center">
-      <a
-        href="/"
+      <router-link
+        to="/"
         class="text-2xl font-bold text-primary hover:text-accent transition-colors"
       >
         Ferrand Sabry
-      </a>
+      </router-link>
       <nav>
         <ul class="flex space-x-6">
           <li>
-            <a
-              href="/"
+            <router-link
+              to="/"
               class="text-secondary hover:text-accent transition-colors"
-              >Accueil</a
+              active-class="text-accent"
             >
+              Accueil
+            </router-link>
           </li>
           <li>
-            <a
-              href="#contact"
+            <router-link
+              to="/a-propos"
               class="text-secondary hover:text-accent transition-colors"
-              >Contact</a
+              active-class="text-accent"
             >
+              À propos
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/competences"
+              class="text-secondary hover:text-accent transition-colors"
+              active-class="text-accent"
+            >
+              Compétences
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/contact"
+              class="text-secondary hover:text-accent transition-colors"
+              active-class="text-accent"
+            >
+              Contact
+            </router-link>
           </li>
         </ul>
       </nav>

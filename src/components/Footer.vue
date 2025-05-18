@@ -16,10 +16,10 @@
             </li>
             <li>
               <a
-                href="/contact"
+                href="/politique-confidentialite"
                 class="text-secondary hover:text-accent transition-colors"
               >
-                Contact
+                Politique de confidentialité
               </a>
             </li>
           </ul>
