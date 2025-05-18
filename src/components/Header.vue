@@ -1,6 +1,8 @@
 <!-- Header.vue -->
 <template>
-  <header class="py-4 border-b border-gray-200 relative z-50">
+  <header
+    class="fixed top-0 left-0 right-0 py-4 border-b border-gray-200 bg-white relative z-50"
+  >
     <div class="container flex justify-between items-center">
       <router-link
         to="/"
@@ -13,7 +15,7 @@
       <button
         @click="toggleMenu"
         class="md:hidden flex flex-col justify-center items-end w-12 h-12 relative p-2"
-        :class="{ 'menu-open': isMenuOpen }"
+        :class="{ 'menu-open': isMenuOpen, 'text-white': isMenuOpen }"
       >
         <span class="burger-line line-1"></span>
         <span class="burger-line line-2"></span>
