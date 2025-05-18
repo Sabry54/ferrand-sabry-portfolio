@@ -5,6 +5,10 @@
 @layer base {
   body {
     @apply bg-white text-primary font-sans;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 }
 
