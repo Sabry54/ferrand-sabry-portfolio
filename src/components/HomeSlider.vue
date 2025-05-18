@@ -1,10 +1,10 @@
 <template>
   <div
-    class="h-full overflow-x-auto snap-x snap-mandatory scroll-smooth md:w-[400vw] flex flex-col md:flex-row"
+    class="h-screen overflow-y-auto md:overflow-x-auto snap-mandatory scroll-smooth md:w-[400vw] flex flex-col md:flex-row"
   >
     <!-- Slide 1 : Introduction -->
     <div
-      class="w-full md:w-screen h-screen md:h-full bg-gradient-to-br from-primary to-secondary p-8 flex items-center snap-start"
+      class="w-full md:w-screen h-screen bg-gradient-to-br from-primary to-secondary p-8 flex items-center snap-start"
     >
       <div class="container mx-auto text-white">
         <h2 class="text-4xl md:text-6xl font-bold mb-6 animate-fadeIn">
@@ -120,13 +120,15 @@ import Footer from "./Footer.vue";
 }
 
 /* Masquer la barre de défilement tout en gardant la fonctionnalité */
-.overflow-x-auto {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
+@media (min-width: 768px) {
+  .overflow-x-auto {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
 
-.overflow-x-auto::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 }
 
 .footer-container {
@@ -136,9 +138,16 @@ import Footer from "./Footer.vue";
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Gestion du scroll selon le device */
 @media (max-width: 768px) {
-  .snap-x {
+  .snap-mandatory {
     scroll-snap-type: y mandatory;
+  }
+}
+
+@media (min-width: 768px) {
+  .snap-mandatory {
+    scroll-snap-type: x mandatory;
   }
 }
 </style>
