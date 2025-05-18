@@ -1,7 +1,7 @@
 <!-- Header.vue -->
 <template>
   <header
-    class="fixed top-0 left-0 right-0 py-4 border-b border-gray-200 bg-white relative z-50"
+    class="fixed top-0 left-0 right-0 w-full py-4 border-b border-gray-200 bg-white z-[100]"
   >
     <div class="container flex justify-between items-center">
       <router-link
@@ -134,9 +134,14 @@ const closeMenu = () => {
 </script>
 
 <style scoped>
+/* Ajout d'une hauteur fixe pour le header */
+header {
+  height: 72px;
+}
+
 .burger-line {
   height: 2px;
-  background-color: currentColor;
+  background-color: #000; /* Couleur par défaut noire */
   transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center;
   position: absolute;
@@ -158,6 +163,11 @@ const closeMenu = () => {
   width: 28px;
   top: 28px;
   right: 10px;
+}
+
+/* Quand le menu est ouvert, les lignes deviennent blanches */
+.menu-open .burger-line {
+  background-color: #fff;
 }
 
 .menu-open .line-1 {
