@@ -14,8 +14,8 @@
       <!-- Menu Burger -->
       <button
         @click="toggleMenu"
-        class="md:hidden flex flex-col justify-center items-end w-12 h-12 relative p-2"
-        :class="{ 'menu-open': isMenuOpen, 'text-white': isMenuOpen }"
+        class="md:hidden flex flex-col justify-center items-end w-12 h-12 relative p-2 z-[200]"
+        :class="{ 'menu-open': isMenuOpen }"
       >
         <span class="burger-line line-1"></span>
         <span class="burger-line line-2"></span>
@@ -66,7 +66,7 @@
 
       <!-- Navigation Mobile -->
       <nav
-        class="fixed inset-0 bg-primary bg-opacity-95 md:hidden transition-transform duration-300 ease-in-out"
+        class="fixed inset-0 bg-primary bg-opacity-95 md:hidden transition-transform duration-300 ease-in-out z-[150]"
         :class="isMenuOpen ? 'translate-x-0' : 'translate-x-full'"
         @click="closeMenu"
       >
@@ -140,12 +140,17 @@ header {
 }
 
 .burger-line {
-  height: 2px;
-  background-color: #000; /* Couleur par défaut noire */
+  height: 3px;
+  background-color: #1a1a1a;
   transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center;
   position: absolute;
   right: 8px;
+}
+
+.menu-open .burger-line {
+  background-color: white;
+  height: 3px;
 }
 
 .line-1 {
@@ -165,16 +170,12 @@ header {
   right: 10px;
 }
 
-/* Quand le menu est ouvert, les lignes deviennent blanches */
-.menu-open .burger-line {
-  background-color: #fff;
-}
-
 .menu-open .line-1 {
   width: 32px;
   top: 20px;
   right: 8px;
   transform: rotate(45deg);
+  background-color: white;
 }
 
 .menu-open .line-2 {
@@ -187,6 +188,7 @@ header {
   top: 20px;
   right: 8px;
   transform: rotate(-45deg);
+  background-color: white;
 }
 
 /* Animation d'entrée et de sortie du menu mobile */
