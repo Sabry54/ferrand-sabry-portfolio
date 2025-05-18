@@ -4,24 +4,37 @@
     <div id="sliderTrack" class="slider-track">
       <!-- Slide 1 : Introduction -->
       <div
-        class="slide bg-gradient-to-br from-primary to-secondary p-8 flex items-center"
+        class="slide h-screen bg-[#BF4158] p-8 flex items-center"
+        :class="{ 'desktop-slide': isDesktop }"
       >
-        <div class="container mx-auto text-white">
-          <h2 class="text-6xl font-bold mb-6 animate-fadeIn">
-            Design Web Créatif
-          </h2>
-          <p class="text-2xl max-w-2xl animate-slideUp">
-            Création d'expériences numériques uniques et mémorables pour votre
-            présence en ligne.
-          </p>
+        <div
+          class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4"
+        >
+          <div class="text-white max-w-xl slide-content order-2 md:order-1">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6 animate-fadeIn">
+              Design Web Créatif
+            </h2>
+            <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
+              Création d'expériences numériques uniques et mémorables pour votre
+              présence en ligne.
+            </p>
+          </div>
+          <div class="w-full md:w-1/2 order-1 md:order-2">
+            <img
+              src="../assets/luffy-unicorn.png"
+              alt="Mascotte créative"
+              class="w-3/4 md:w-full h-auto max-w-[200px] md:max-w-md mx-auto animate-fadeIn"
+            />
+          </div>
         </div>
       </div>
 
       <!-- Slide 2 : Services -->
       <div
         class="slide bg-gradient-to-br from-accent to-primary p-8 flex items-center"
+        :class="{ 'desktop-slide': isDesktop }"
       >
-        <div class="container mx-auto text-white">
+        <div class="container mx-auto text-white slide-content">
           <h2 class="text-6xl font-bold mb-8 animate-fadeIn">Mes Services</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-slideUp">
             <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
@@ -42,8 +55,9 @@
       <!-- Slide 3 : Portfolio -->
       <div
         class="slide bg-gradient-to-br from-secondary to-accent p-8 flex items-center"
+        :class="{ 'desktop-slide': isDesktop }"
       >
-        <div class="container mx-auto text-white">
+        <div class="container mx-auto text-white slide-content">
           <h2 class="text-6xl font-bold mb-8 animate-fadeIn">Portfolio</h2>
           <div class="grid grid-cols-2 md:grid-cols-3 gap-6 animate-slideUp">
             <div class="aspect-square bg-white/20 rounded-lg"></div>
@@ -53,9 +67,12 @@
       </div>
 
       <!-- Slide 4 : Contact -->
-      <div class="slide bg-gradient-to-br from-primary to-accent flex flex-col">
+      <div
+        class="slide bg-gradient-to-br from-primary to-accent flex flex-col"
+        :class="{ 'desktop-slide': isDesktop }"
+      >
         <div class="flex-grow p-8 flex items-center">
-          <div class="container mx-auto text-white">
+          <div class="container mx-auto text-white slide-content">
             <h2 class="text-6xl font-bold mb-8 animate-fadeIn">
               Travaillons Ensemble
             </h2>
@@ -73,57 +90,54 @@
             </div>
           </div>
         </div>
-        <Footer class="footer-container hidden md:block" />
       </div>
     </div>
 
-    <!-- Navigation points (desktop only) -->
-    <div
-      class="nav-dots hidden md:flex absolute bottom-8 left-1/2 transform -translate-x-1/2 space-x-4"
-    >
+    <!-- Indicateurs de pagination -->
+    <div v-if="isDesktop" class="pagination-indicators">
       <button
         v-for="index in 4"
         :key="index"
         @click="goToSlide(index - 1)"
-        class="w-3 h-3 rounded-full bg-white/50 transition-all"
-        :class="{ 'bg-white': currentSlide === index - 1 }"
+        class="pagination-dot"
+        :class="{ active: currentSlide === index - 1 }"
+        :aria-label="'Aller au slide ' + index"
       ></button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import Footer from "./Footer.vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
+import { gsap } from "gsap";
 
 const currentSlide = ref(0);
 const isAnimating = ref(false);
 const touchStart = ref(0);
 const touchEnd = ref(0);
+const isDesktop = computed(() => window.innerWidth > 768);
 
 const handleWheel = (e) => {
-  if (window.innerWidth <= 768) return; // Désactive sur mobile
   e.preventDefault();
 
   if (isAnimating.value) return;
 
   const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
 
-  if (Math.abs(delta) < 50) return; // Seuil minimum pour le défilement
+  if (Math.abs(delta) < 50) return;
 
   isAnimating.value = true;
+  const direction = delta > 0 ? 1 : -1;
 
-  if (delta > 0 && currentSlide.value < 3) {
-    currentSlide.value++;
-  } else if (delta < 0 && currentSlide.value > 0) {
-    currentSlide.value--;
-  }
-
-  updateSlidePosition();
-
-  setTimeout(() => {
+  if (
+    (direction > 0 && currentSlide.value < 3) ||
+    (direction < 0 && currentSlide.value > 0)
+  ) {
+    currentSlide.value += direction;
+    animateSlide();
+  } else {
     isAnimating.value = false;
-  }, 500);
+  }
 };
 
 const handleTouchStart = (e) => {
@@ -131,35 +145,48 @@ const handleTouchStart = (e) => {
 };
 
 const handleTouchMove = (e) => {
-  if (window.innerWidth > 768) e.preventDefault();
+  e.preventDefault();
   touchEnd.value = e.touches[0].clientX;
 };
 
 const handleTouchEnd = () => {
-  if (window.innerWidth <= 768) return;
-
   const swipeDistance = touchStart.value - touchEnd.value;
 
   if (Math.abs(swipeDistance) > 50) {
-    if (swipeDistance > 0 && currentSlide.value < 3) {
-      currentSlide.value++;
-    } else if (swipeDistance < 0 && currentSlide.value > 0) {
-      currentSlide.value--;
+    const direction = swipeDistance > 0 ? 1 : -1;
+    if (
+      (direction > 0 && currentSlide.value < 3) ||
+      (direction < 0 && currentSlide.value > 0)
+    ) {
+      currentSlide.value += direction;
+      animateSlide();
     }
-    updateSlidePosition();
   }
 };
 
-const goToSlide = (index) => {
-  currentSlide.value = index;
-  updateSlidePosition();
+const animateSlide = () => {
+  const track = document.getElementById("sliderTrack");
+  if (!track) {
+    isAnimating.value = false;
+    return;
+  }
+
+  gsap.to(track, {
+    x: `${-currentSlide.value * 100}vw`,
+    duration: 1,
+    ease: "power3.inOut",
+    onComplete: () => {
+      isAnimating.value = false;
+    },
+  });
 };
 
-const updateSlidePosition = () => {
-  const track = document.getElementById("sliderTrack");
-  if (!track) return;
-  const position = currentSlide.value * -100;
-  track.style.transform = `translateX(${position}vw)`;
+const goToSlide = (index) => {
+  if (isAnimating.value) return;
+
+  isAnimating.value = true;
+  currentSlide.value = index;
+  animateSlide();
 };
 
 onMounted(() => {
@@ -167,6 +194,11 @@ onMounted(() => {
   window.addEventListener("touchstart", handleTouchStart);
   window.addEventListener("touchmove", handleTouchMove, { passive: false });
   window.addEventListener("touchend", handleTouchEnd);
+
+  const track = document.getElementById("sliderTrack");
+  if (track) {
+    gsap.set(track, { x: 0 });
+  }
 });
 
 onUnmounted(() => {
@@ -180,43 +212,53 @@ onUnmounted(() => {
 <style>
 .slider-wrapper {
   position: relative;
-  height: 100%;
   width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slider-track {
+  position: relative;
+  width: 400vw;
+  height: 100%;
+  display: flex;
+}
+
+.slide {
+  width: 100vw;
+  height: 100%;
+  flex-shrink: 0;
 }
 
 /* Styles pour mobile (< 768px) */
 @media (max-width: 768px) {
   .slider-track {
+    position: relative;
+    width: 400vw;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 100%;
   }
 
   .slide {
-    width: 100%;
-    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    flex-shrink: 0;
   }
 }
 
 /* Styles pour desktop (>= 768px) */
 @media (min-width: 769px) {
-  .slider-wrapper {
-    overflow: hidden;
-  }
-
   .slider-track {
-    display: flex;
-    flex-direction: row;
+    position: relative;
     width: 400vw;
     height: 100%;
-    transition: transform 0.3s ease-out;
-    touch-action: none;
+    display: flex;
   }
 
   .slide {
     width: 100vw;
     height: 100%;
+    flex-shrink: 0;
   }
 }
 
@@ -248,10 +290,41 @@ onUnmounted(() => {
   }
 }
 
-.footer-container {
-  height: 80px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+/* Styles pour les indicateurs de pagination */
+.pagination-indicators {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 50;
+}
+
+.pagination-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.pagination-dot.active {
+  background: white;
+  border-color: white;
+  transform: scale(1.2);
+}
+
+.pagination-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .pagination-indicators {
+    display: none;
+  }
 }
 </style>

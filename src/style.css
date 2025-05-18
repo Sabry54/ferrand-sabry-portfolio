@@ -9,6 +9,17 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    overflow-y: hidden;
+  }
+
+  /* Masquer la barre de défilement pour tous les éléments */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

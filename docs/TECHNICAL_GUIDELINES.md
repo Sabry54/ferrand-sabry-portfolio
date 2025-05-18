@@ -12,12 +12,10 @@
   - Slides empilées verticalement
   - Hauteur minimale: 100vh par slide
   - Footer masqué sur le dernier slide
-  - Pas de points de navigation
 
 - **Desktop** (≥768px):
-  - Défilement horizontal contrôlé
+  - Défilement horizontal contrôlé par wheel/swipe
   - Slides alignées horizontalement (400vw total)
-  - Navigation par points visible
   - Footer visible sur tous les slides
   - Transitions fluides avec transform
 
@@ -49,8 +47,7 @@
 1. Container principal : `.slider-wrapper`
 2. Track des slides : `.slider-track`
 3. Slides individuelles : `.slide`
-4. Navigation points : `.nav-dots`
-5. Footer conditionnel : `.footer-container.hidden.md:block`
+4. Footer conditionnel : `.footer-container.hidden.md:block`
 
 ### ⚠️ Points de Non-Régression
 
@@ -58,7 +55,7 @@
 - Maintenir la séparation mobile/desktop pour le défilement
 - Préserver les hauteurs des slides (100vh en mobile)
 - Conserver la logique de masquage du footer en mobile
-- Garder la navigation par points uniquement en desktop
+- Maintenir le seuil de défilement (50px) pour éviter les déclenchements accidentels
 
 ## Styles Globaux
 
@@ -103,7 +100,7 @@ colors: {
 Avant chaque déploiement, vérifier :
 
 1. Défilement vertical en mobile
-2. Défilement horizontal en desktop
+2. Défilement horizontal en desktop (wheel et touch)
 3. Visibilité correcte du footer selon le device
-4. Fonctionnement des points de navigation
-5. Transitions fluides des slides
+4. Transitions fluides des slides
+5. Seuil de déclenchement du défilement

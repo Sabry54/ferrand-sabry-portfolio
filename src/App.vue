@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="app-container">
     <Header />
-    <main class="flex-1 pt-[72px]">
+    <main class="flex-1 overflow-hidden">
       <router-view />
     </main>
     <Footer />
@@ -122,6 +122,14 @@ onUnmounted(() => {
 </script>
 
 <style>
+.app-container {
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
@@ -129,6 +137,12 @@ body {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+/* Sur la page d'accueil */
+.h-screen {
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Curseur personnalisé - uniquement sur desktop */

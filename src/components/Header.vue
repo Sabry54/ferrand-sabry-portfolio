@@ -1,12 +1,21 @@
 <!-- Header.vue -->
 <template>
   <header
-    class="fixed top-0 left-0 right-0 w-full py-4 border-b border-gray-200 bg-white z-[100]"
+    class="fixed top-0 left-0 right-0 w-full py-2 z-[100] transition-all duration-300"
+    :class="[
+      isHome ? 'bg-transparent border-transparent' : 'bg-white border-gray-200',
+      'border-b',
+    ]"
   >
     <div class="container flex justify-between items-center">
       <router-link
         to="/"
-        class="text-2xl font-bold text-primary hover:text-accent transition-colors"
+        class="text-2xl font-bold transition-colors"
+        :class="
+          isHome
+            ? 'text-white hover:text-gray-200'
+            : 'text-primary hover:text-accent'
+        "
       >
         Ferrand Sabry
       </router-link>
@@ -17,9 +26,9 @@
         class="md:hidden flex flex-col justify-center items-end w-12 h-12 relative p-2 z-[200]"
         :class="{ 'menu-open': isMenuOpen }"
       >
-        <span class="burger-line line-1"></span>
-        <span class="burger-line line-2"></span>
-        <span class="burger-line line-3"></span>
+        <span class="burger-line line-1" :class="{ 'bg-white': isHome }"></span>
+        <span class="burger-line line-2" :class="{ 'bg-white': isHome }"></span>
+        <span class="burger-line line-3" :class="{ 'bg-white': isHome }"></span>
       </button>
 
       <!-- Navigation Desktop -->
@@ -28,7 +37,12 @@
           <li>
             <router-link
               to="/"
-              class="text-secondary hover:text-accent transition-colors"
+              class="transition-colors"
+              :class="
+                isHome
+                  ? 'text-white hover:text-gray-200'
+                  : 'text-secondary hover:text-accent'
+              "
               active-class="text-accent"
             >
               Accueil
@@ -37,7 +51,12 @@
           <li>
             <router-link
               to="/a-propos"
-              class="text-secondary hover:text-accent transition-colors"
+              class="transition-colors"
+              :class="
+                isHome
+                  ? 'text-white hover:text-gray-200'
+                  : 'text-secondary hover:text-accent'
+              "
               active-class="text-accent"
             >
               À propos
@@ -46,7 +65,12 @@
           <li>
             <router-link
               to="/competences"
-              class="text-secondary hover:text-accent transition-colors"
+              class="transition-colors"
+              :class="
+                isHome
+                  ? 'text-white hover:text-gray-200'
+                  : 'text-secondary hover:text-accent'
+              "
               active-class="text-accent"
             >
               Compétences
@@ -55,7 +79,12 @@
           <li>
             <router-link
               to="/contact"
-              class="text-secondary hover:text-accent transition-colors"
+              class="transition-colors"
+              :class="
+                isHome
+                  ? 'text-white hover:text-gray-200'
+                  : 'text-secondary hover:text-accent'
+              "
               active-class="text-accent"
             >
               Contact
@@ -118,9 +147,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 
+const route = useRoute();
 const isMenuOpen = ref(false);
+const isHome = computed(() => route.path === "/");
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -137,11 +169,18 @@ const closeMenu = () => {
 /* Ajout d'une hauteur fixe pour le header */
 header {
   height: 72px;
+  mix-blend-mode: normal;
+}
+
+/* Quand on est sur la page d'accueil */
+header.bg-transparent {
+  background: transparent !important;
+  backdrop-filter: none;
 }
 
 .burger-line {
   height: 3px;
-  background-color: #1a1a1a;
+  background-color: white;
   transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center;
   position: absolute;
