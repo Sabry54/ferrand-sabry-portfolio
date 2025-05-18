@@ -1,21 +1,12 @@
 <!-- Header.vue -->
 <template>
   <header
-    class="fixed top-0 left-0 right-0 w-full py-2 z-[100] transition-all duration-300"
-    :class="[
-      isHome ? 'bg-transparent border-transparent' : 'bg-white border-gray-200',
-      'border-b',
-    ]"
+    class="fixed top-0 left-0 right-0 w-full py-2 z-[100] transition-all duration-300 bg-transparent border-transparent"
   >
     <div class="container flex justify-between items-center">
       <router-link
         to="/"
-        class="text-2xl font-bold transition-colors"
-        :class="
-          isHome
-            ? 'text-white hover:text-gray-200'
-            : 'text-primary hover:text-accent'
-        "
+        class="text-2xl font-bold text-white hover:text-gray-200 transition-colors"
       >
         Ferrand Sabry
       </router-link>
@@ -26,9 +17,9 @@
         class="md:hidden flex flex-col justify-center items-end w-12 h-12 relative p-2 z-[200]"
         :class="{ 'menu-open': isMenuOpen }"
       >
-        <span class="burger-line line-1" :class="{ 'bg-white': isHome }"></span>
-        <span class="burger-line line-2" :class="{ 'bg-white': isHome }"></span>
-        <span class="burger-line line-3" :class="{ 'bg-white': isHome }"></span>
+        <span class="burger-line line-1"></span>
+        <span class="burger-line line-2"></span>
+        <span class="burger-line line-3"></span>
       </button>
 
       <!-- Navigation Desktop -->
@@ -37,12 +28,7 @@
           <li>
             <router-link
               to="/"
-              class="transition-colors"
-              :class="
-                isHome
-                  ? 'text-white hover:text-gray-200'
-                  : 'text-secondary hover:text-accent'
-              "
+              class="text-white hover:text-gray-200 transition-colors"
               active-class="text-accent"
             >
               Accueil
@@ -51,12 +37,7 @@
           <li>
             <router-link
               to="/a-propos"
-              class="transition-colors"
-              :class="
-                isHome
-                  ? 'text-white hover:text-gray-200'
-                  : 'text-secondary hover:text-accent'
-              "
+              class="text-white hover:text-gray-200 transition-colors"
               active-class="text-accent"
             >
               À propos
@@ -65,12 +46,7 @@
           <li>
             <router-link
               to="/competences"
-              class="transition-colors"
-              :class="
-                isHome
-                  ? 'text-white hover:text-gray-200'
-                  : 'text-secondary hover:text-accent'
-              "
+              class="text-white hover:text-gray-200 transition-colors"
               active-class="text-accent"
             >
               Compétences
@@ -79,12 +55,7 @@
           <li>
             <router-link
               to="/contact"
-              class="transition-colors"
-              :class="
-                isHome
-                  ? 'text-white hover:text-gray-200'
-                  : 'text-secondary hover:text-accent'
-              "
+              class="text-white hover:text-gray-200 transition-colors"
               active-class="text-accent"
             >
               Contact
@@ -147,12 +118,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import { useRoute } from "vue-router";
+import { ref } from "vue";
 
-const route = useRoute();
 const isMenuOpen = ref(false);
-const isHome = computed(() => route.path === "/");
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -170,12 +138,6 @@ const closeMenu = () => {
 header {
   height: 72px;
   mix-blend-mode: normal;
-}
-
-/* Quand on est sur la page d'accueil */
-header.bg-transparent {
-  background: transparent !important;
-  backdrop-filter: none;
 }
 
 .burger-line {
