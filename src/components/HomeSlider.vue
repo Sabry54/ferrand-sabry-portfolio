@@ -15,33 +15,35 @@
             <div class="rotating-title h-[80px] md:h-[100px] overflow-hidden">
               <div class="title-container">
                 <h2 class="text-4xl md:text-6xl font-bold font-limelight">
-                  Think
+                  🌊 Flow
                 </h2>
                 <h2 class="text-4xl md:text-6xl font-bold font-limelight">
-                  Build
+                  🧭 Explore
                 </h2>
                 <h2 class="text-4xl md:text-6xl font-bold font-limelight">
-                  Enhance
+                  🧪 Tinker
                 </h2>
                 <h2 class="text-4xl md:text-6xl font-bold font-limelight">
-                  Engage
+                  ✨ Resonate
                 </h2>
               </div>
             </div>
             <div class="mt-4 space-y-2">
-              <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
-                Thinking beyond the brief.
+              <p class="text-sm md:text-2xl max-w-2xl animate-slideUp">
+                Coding as a state of mind — riding the momentum instead of
+                forcing the structure.
               </p>
-              <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
-                Building unique digital experiences powered by AI, design, and
-                interactivity.
+              <p class="text-sm md:text-2xl max-w-2xl animate-slideUp">
+                No fixed roadmap, just curiosity and the freedom to follow what
+                feels right.
               </p>
-              <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
-                Optimizing every detail for maximum impact.
+              <p class="text-sm md:text-2xl max-w-2xl animate-slideUp">
+                Experimenting with tools, ideas, and interactions to see what
+                clicks.
               </p>
-              <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
-                Creating real connections, capturing attention, driving true
-                engagement.
+              <p class="text-sm md:text-2xl max-w-2xl animate-slideUp">
+                Creating things that feel natural, intentional, and quietly
+                powerful.
               </p>
             </div>
           </div>
@@ -94,33 +96,189 @@
           </div>
           <div
             v-if="!isMobile"
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-slideUp relative z-[10]"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 animate-slideUp relative z-[10]"
           >
-            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
-              <p>
-                Intuitive and aesthetic interfaces that captivate your users
+            <div
+              class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+            >
+              <div class="flex flex-col items-center gap-1 mb-1">
+                <div class="text-2xl mb-1 animate-bounce">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-base font-bold mb-1 font-limelight">
+                  Inspiration
+                </h3>
+              </div>
+              <p
+                class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+              >
+                What sparked this project. A vague idea, a desire to explore...
+                and here we go.
               </p>
             </div>
-            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 class="text-2xl font-bold mb-4">Web Development</h3>
-              <p>Modern and efficient technical solutions</p>
+            <div
+              class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+            >
+              <div class="flex flex-col items-center gap-1 mb-1">
+                <div class="text-2xl mb-1 animate-pulse">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-base font-bold mb-1 font-limelight">Process</h3>
+              </div>
+              <p
+                class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+              >
+                Coding without a strict roadmap. Testing, undoing, starting
+                over. The journey matters more than the destination.
+              </p>
             </div>
-            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 class="text-2xl font-bold mb-4">[Case 3]</h3>
-              <p>Description for case 3</p>
+            <div
+              class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+            >
+              <div class="flex flex-col items-center gap-1 mb-1">
+                <div class="text-2xl mb-1 animate-spin-slow">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-base font-bold mb-1 font-limelight">
+                  Current Tools
+                </h3>
+              </div>
+              <p
+                class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+              >
+                No fixed stack. Using what speaks to me today: Cursor, some JS,
+                maybe Supabase tomorrow?
+              </p>
             </div>
-            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 class="text-2xl font-bold mb-4">[Case 4]</h3>
-              <p>Description for case 4</p>
+            <div
+              class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+            >
+              <div class="flex flex-col items-center gap-1 mb-1">
+                <div class="text-2xl mb-1 animate-ping-slow">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-base font-bold mb-1 font-limelight">
+                  Natural Evolution
+                </h3>
+              </div>
+              <p
+                class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+              >
+                The project builds up in layers. Nothing is set in stone,
+                everything can change if the momentum calls for it.
+              </p>
             </div>
-            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 class="text-2xl font-bold mb-4">[Case 5]</h3>
-              <p>Description for case 5</p>
+            <div
+              class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+            >
+              <div class="flex flex-col items-center gap-1 mb-1">
+                <div class="text-2xl mb-1 animate-float">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-base font-bold mb-1 font-limelight">Vibe</h3>
+              </div>
+              <p
+                class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+              >
+                Keeping it relaxed and minimalist. Simple code, calm interfaces,
+                clear logic.
+              </p>
             </div>
-            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 class="text-2xl font-bold mb-4">[Case 6]</h3>
-              <p>Description for case 6</p>
+            <div
+              class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+            >
+              <div class="flex flex-col items-center gap-1 mb-1">
+                <div class="text-2xl mb-1 animate-wiggle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-white"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-base font-bold mb-1 font-limelight">
+                  Work in Progress
+                </h3>
+              </div>
+              <p
+                class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+              >
+                Intentionally under construction. Not a finished product, but a
+                living playground.
+              </p>
             </div>
           </div>
           <div
@@ -578,5 +736,72 @@ body {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ping-slow {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 2s ease-in-out infinite;
 }
 </style>
