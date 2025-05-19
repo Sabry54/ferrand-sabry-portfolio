@@ -31,25 +31,25 @@
               class="text-white hover:text-gray-200 transition-colors"
               active-class="text-accent"
             >
-              Accueil
+              Home
             </router-link>
           </li>
           <li>
             <router-link
-              to="/a-propos"
+              to="/about"
               class="text-white hover:text-gray-200 transition-colors"
               active-class="text-accent"
             >
-              À propos
+              About
             </router-link>
           </li>
           <li>
             <router-link
-              to="/competences"
+              to="/skills"
               class="text-white hover:text-gray-200 transition-colors"
               active-class="text-accent"
             >
-              Compétences
+              Skills
             </router-link>
           </li>
           <li>
@@ -78,27 +78,27 @@
               active-class="text-accent"
               @click="closeMenu"
             >
-              Accueil
+              Home
             </router-link>
           </li>
           <li>
             <router-link
-              to="/a-propos"
+              to="/about"
               class="text-white text-2xl hover:text-accent transition-colors"
               active-class="text-accent"
               @click="closeMenu"
             >
-              À propos
+              About
             </router-link>
           </li>
           <li>
             <router-link
-              to="/competences"
+              to="/skills"
               class="text-white text-2xl hover:text-accent transition-colors"
               active-class="text-accent"
               @click="closeMenu"
             >
-              Compétences
+              Skills
             </router-link>
           </li>
           <li>

@@ -1,47 +1,41 @@
 <template>
-  <main class="py-20 bg-[#BF4158]">
-    <div class="container pt-20 pb-40">
-      <h1 class="text-4xl font-bold text-white mb-8">Contact</h1>
+  <main class="min-h-[calc(100vh+200px)] bg-[#BF4158]">
+    <div class="container mx-auto px-4 py-20">
+      <h1 class="text-4xl font-bold text-white mb-12">Contact</h1>
       <div class="max-w-2xl mx-auto">
         <form class="space-y-6">
           <div>
-            <label for="name" class="block text-white mb-2">Nom</label>
+            <label for="name" class="block text-white mb-2">Name</label>
             <input
               type="text"
               id="name"
-              name="name"
-              class="w-full p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/50"
-              placeholder="Votre nom"
+              class="w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white"
+              placeholder="Your name"
             />
           </div>
-
           <div>
             <label for="email" class="block text-white mb-2">Email</label>
             <input
               type="email"
               id="email"
-              name="email"
-              class="w-full p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/50"
-              placeholder="votre@email.com"
+              class="w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white"
+              placeholder="your.email@example.com"
             />
           </div>
-
           <div>
             <label for="message" class="block text-white mb-2">Message</label>
             <textarea
               id="message"
-              name="message"
               rows="6"
-              class="w-full p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/50"
-              placeholder="Votre message"
+              class="w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white"
+              placeholder="Your message"
             ></textarea>
           </div>
-
           <button
             type="submit"
-            class="w-full md:w-auto px-8 py-3 bg-white text-[#BF4158] font-bold rounded-lg hover:bg-opacity-90 transition-all"
+            class="w-full py-4 bg-white text-[#BF4158] rounded-lg font-bold hover:bg-opacity-90 transition-all"
           >
-            Envoyer
+            Send Message
           </button>
         </form>
 

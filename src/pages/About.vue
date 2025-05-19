@@ -1,25 +1,24 @@
 <template>
   <main class="min-h-[calc(100vh+200px)] bg-[#BF4158]">
     <div class="container mx-auto px-4 py-20">
-      <h1 class="text-4xl font-bold text-white mb-8">À Propos</h1>
+      <h1 class="text-4xl font-bold text-white mb-8">About</h1>
       <div class="prose prose-lg max-w-none">
         <p class="text-xl text-white mb-6">
-          Passionné par le design web depuis plus de 5 ans, je crée des
-          expériences numériques qui allient esthétique et fonctionnalité. Je
-          suis constamment à la recherche de nouvelles façons d'innover.
+          Passionate about web design for over 5 years, I create digital
+          experiences that combine aesthetics and functionality. I am constantly
+          looking for new ways to innovate.
         </p>
         <p class="text-lg text-white mb-6">
-          Mon approche combine créativité et rigueur technique pour donner vie à
-          des interfaces modernes et intuitives. Chaque projet est une
-          opportunité de repousser les limites du design tout en respectant les
-          standards du web.
+          My approach combines creativity and technical rigor to bring modern
+          and intuitive interfaces to life. Each project is an opportunity to
+          push the boundaries of design while respecting web standards.
         </p>
-        <h2 class="text-2xl font-bold text-white mt-12 mb-6">Mon Parcours</h2>
+        <h2 class="text-2xl font-bold text-white mt-12 mb-6">My Journey</h2>
         <p class="text-lg text-white mb-6">
-          Formation continue en design et développement web, veille
-          technologique constante, et collaboration avec des clients variés
-          m'ont permis de développer une expertise solide dans la création
-          d'interfaces web performantes.
+          Continuous training in design and web development, constant
+          technological watch, and collaboration with various clients have
+          allowed me to develop solid expertise in creating high-performance web
+          interfaces.
         </p>
       </div>
     </div>

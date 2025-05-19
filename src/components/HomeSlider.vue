@@ -11,18 +11,43 @@
           class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4"
         >
           <div class="text-white max-w-xl slide-content order-2 md:order-1">
-            <h2 class="text-4xl md:text-6xl font-bold mb-6 animate-fadeIn">
-              Design Web Créatif
-            </h2>
-            <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
-              Création d'expériences numériques uniques et mémorables pour votre
-              présence en ligne.
-            </p>
+            <div class="rotating-title h-[80px] md:h-[100px] overflow-hidden">
+              <div class="title-container">
+                <h2 class="text-4xl md:text-6xl font-bold font-limelight">
+                  Think
+                </h2>
+                <h2 class="text-4xl md:text-6xl font-bold font-limelight">
+                  Build
+                </h2>
+                <h2 class="text-4xl md:text-6xl font-bold font-limelight">
+                  Enhance
+                </h2>
+                <h2 class="text-4xl md:text-6xl font-bold font-limelight">
+                  Engage
+                </h2>
+              </div>
+            </div>
+            <div class="mt-4 space-y-2">
+              <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
+                Thinking beyond the brief.
+              </p>
+              <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
+                Building unique digital experiences powered by AI, design, and
+                interactivity.
+              </p>
+              <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
+                Optimizing every detail for maximum impact.
+              </p>
+              <p class="text-xl md:text-2xl max-w-2xl animate-slideUp">
+                Creating real connections, capturing attention, driving true
+                engagement.
+              </p>
+            </div>
           </div>
           <div class="w-full md:w-1/2 order-1 md:order-2">
             <img
               src="../assets/luffy-unicorn.png"
-              alt="Mascotte créative"
+              alt="Creative mascot"
               class="w-3/4 md:w-full h-auto max-w-[200px] md:max-w-md mx-auto animate-fadeIn"
             />
           </div>
@@ -35,18 +60,17 @@
         :class="{ 'desktop-slide': isDesktop }"
       >
         <div class="container mx-auto text-white slide-content">
-          <h2 class="text-6xl font-bold mb-8 animate-fadeIn">Mes Services</h2>
+          <h2 class="text-6xl font-bold mb-8 animate-fadeIn">My Services</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-slideUp">
             <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 class="text-2xl font-bold mb-4">Design UI/UX</h3>
+              <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
               <p>
-                Interfaces intuitives et esthétiques qui captivent vos
-                utilisateurs
+                Intuitive and aesthetic interfaces that captivate your users
               </p>
             </div>
             <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
-              <h3 class="text-2xl font-bold mb-4">Développement Web</h3>
-              <p>Solutions techniques modernes et performantes</p>
+              <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+              <p>Modern and efficient technical solutions</p>
             </div>
           </div>
         </div>
@@ -74,18 +98,17 @@
         <div class="flex-grow p-8 flex items-center">
           <div class="container mx-auto text-white slide-content">
             <h2 class="text-6xl font-bold mb-8 animate-fadeIn">
-              Travaillons Ensemble
+              Let's Work Together
             </h2>
             <div class="max-w-xl animate-slideUp">
               <p class="text-2xl mb-8">
-                Prêt à donner vie à votre projet ? Contactez-moi pour en
-                discuter.
+                Ready to bring your project to life? Contact me to discuss it.
               </p>
               <router-link
                 to="/contact"
                 class="inline-block px-8 py-4 bg-white text-primary rounded-lg font-bold hover:bg-opacity-90 transition-all"
               >
-                Me Contacter
+                Contact Me
               </router-link>
             </div>
           </div>
@@ -101,7 +124,7 @@
         @click="goToSlide(index - 1)"
         class="pagination-dot"
         :class="{ active: currentSlide === index - 1 }"
-        :aria-label="'Aller au slide ' + index"
+        :aria-label="'Go to slide ' + index"
       ></button>
     </div>
   </div>
@@ -199,6 +222,36 @@ onMounted(() => {
   if (track) {
     gsap.set(track, { x: 0 });
   }
+
+  // Animation du titre rotatif
+  const titleContainer = document.querySelector(".title-container");
+  if (titleContainer) {
+    const titles = titleContainer.querySelectorAll("h2");
+    let currentIndex = 0;
+
+    const animateTitles = () => {
+      gsap.to(titles[currentIndex], {
+        opacity: 0,
+        y: -20,
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => {
+          currentIndex = (currentIndex + 1) % titles.length;
+          gsap.to(titles[currentIndex], {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+            onComplete: () => {
+              setTimeout(animateTitles, 1500);
+            },
+          });
+        },
+      });
+    };
+
+    setTimeout(animateTitles, 1500);
+  }
 });
 
 onUnmounted(() => {
@@ -210,6 +263,8 @@ onUnmounted(() => {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
 .slider-wrapper {
   position: relative;
   width: 100%;
@@ -293,7 +348,7 @@ onUnmounted(() => {
 /* Styles pour les indicateurs de pagination */
 .pagination-indicators {
   position: fixed;
-  right: 2rem;
+  left: 2rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -326,5 +381,34 @@ onUnmounted(() => {
   .pagination-indicators {
     display: none;
   }
+}
+
+.font-limelight {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+}
+
+.rotating-title {
+  position: relative;
+}
+
+.title-container {
+  position: relative;
+}
+
+.title-container h2 {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.title-container h2:first-child {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
