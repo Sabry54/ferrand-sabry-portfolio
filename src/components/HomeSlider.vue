@@ -358,6 +358,20 @@ onMounted(() => {
   window.addEventListener("touchend", handleTouchEnd);
   window.addEventListener("resize", updateIsMobile);
 
+  // Hauteur dynamique sur mobile pour gérer les barres navigateur
+  const setSliderHeight = () => {
+    if (window.innerWidth <= 768) {
+      const wrapper = document.querySelector(".slider-wrapper");
+      if (wrapper && wrapper instanceof HTMLElement)
+        wrapper.style.height = window.innerHeight + "px";
+    } else {
+      const wrapper = document.querySelector(".slider-wrapper");
+      if (wrapper && wrapper instanceof HTMLElement) wrapper.style.height = "";
+    }
+  };
+  setSliderHeight();
+  window.addEventListener("resize", setSliderHeight);
+
   const track = document.getElementById("sliderTrack");
   if (track) {
     gsap.set(track, { x: 0, y: 0 });
