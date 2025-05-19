@@ -1,5 +1,6 @@
 <template>
   <div class="slider-wrapper">
+    <LightBubbles />
     <!-- Container des slides -->
     <div id="sliderTrack" class="slider-track">
       <!-- Slide 1 : Introduction -->
@@ -139,6 +140,7 @@
 import { ref, onMounted, onUnmounted, computed, watch } from "vue";
 import { gsap } from "gsap";
 import Footer from "./Footer.vue";
+import LightBubbles from "./LightBubbles.vue";
 
 const currentSlide = ref(0);
 const isAnimating = ref(false);
@@ -357,6 +359,8 @@ onUnmounted(() => {
   .slide {
     width: 100vw;
     height: 100vh;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 
