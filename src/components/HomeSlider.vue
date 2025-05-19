@@ -57,12 +57,45 @@
 
       <!-- Slide 2 : Services -->
       <div
-        class="slide bg-gradient-to-br from-accent to-primary p-8 flex items-center"
+        class="slide bg-[#73CCB4] p-8 flex items-center relative overflow-hidden"
         :class="{ 'desktop-slide': isDesktop }"
       >
-        <div class="container mx-auto text-white slide-content">
-          <h2 class="text-6xl font-bold mb-8 animate-fadeIn">My Services</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-slideUp">
+        <img
+          src="../assets/sanji-smoke.png"
+          alt="Sanji smoking"
+          class="absolute w-1/3 md:w-1/4 h-auto opacity-100 transition-all duration-300 z-[8]"
+          :class="{
+            'right-0 top-1/2 -translate-y-1/2': !isMobile,
+            'left-8 bottom-8 -translate-x-0': isMobile,
+          }"
+        />
+        <div class="container mx-auto text-white slide-content relative">
+          <div class="relative z-[20]">
+            <h2
+              class="text-5xl md:text-[7.5rem] font-extrabold uppercase tracking-tighter mb-0 animate-fadeIn"
+            >
+              WELCOME
+            </h2>
+            <h3
+              class="text-3xl md:text-6xl font-extrabold uppercase tracking-tighter mt-0 mb-0 animate-fadeIn"
+            >
+              TO MY PROJECT
+            </h3>
+          </div>
+          <div class="relative z-[15]">
+            <p
+              class="text-base md:text-lg font-medium mt-16 mb-8 animate-fadeIn"
+            >
+              This project is an exploration of vibe coding: a flexible,
+              intuitive approach with no rigid roadmap—just moving forward with
+              whatever tools feel right. The goal is to experiment, build, and
+              adjust in real time without being locked into a fixed structure.
+            </p>
+          </div>
+          <div
+            v-if="!isMobile"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-slideUp relative z-[10]"
+          >
             <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
               <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
               <p>
@@ -73,6 +106,47 @@
               <h3 class="text-2xl font-bold mb-4">Web Development</h3>
               <p>Modern and efficient technical solutions</p>
             </div>
+            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
+              <h3 class="text-2xl font-bold mb-4">[Case 3]</h3>
+              <p>Description for case 3</p>
+            </div>
+            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
+              <h3 class="text-2xl font-bold mb-4">[Case 4]</h3>
+              <p>Description for case 4</p>
+            </div>
+            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
+              <h3 class="text-2xl font-bold mb-4">[Case 5]</h3>
+              <p>Description for case 5</p>
+            </div>
+            <div class="p-6 bg-white/10 rounded-lg backdrop-blur-sm">
+              <h3 class="text-2xl font-bold mb-4">[Case 6]</h3>
+              <p>Description for case 6</p>
+            </div>
+          </div>
+          <div
+            class="flex justify-center items-center mt-12 animate-slideUp relative z-[25]"
+          >
+            <router-link
+              to="/about"
+              class="group relative inline-flex items-center justify-center px-5 py-2 overflow-hidden font-bold text-white transition-all duration-500 ease-out rounded-2xl bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 hover:border-white/30"
+            >
+              <span class="relative flex items-center text-base tracking-wide">
+                Discover More
+                <svg
+                  class="w-4 h-4 ml-1 transform transition-transform duration-500 group-hover:translate-x-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  ></path>
+                </svg>
+              </span>
+            </router-link>
           </div>
         </div>
       </div>
@@ -149,6 +223,9 @@ const touchEnd = ref(0);
 const isMobile = ref(window.innerWidth <= 768);
 const isDesktop = computed(() => window.innerWidth > 768);
 const showFooterMobile = ref(false);
+
+const burgerOpen = ref(false); // menu burger mobile
+const selectedCard = ref(null); // encart sélectionné mobile
 
 const updateIsMobile = () => {
   isMobile.value = window.innerWidth <= 768;
@@ -362,6 +439,18 @@ onUnmounted(() => {
     padding-top: 0;
     padding-bottom: 0;
   }
+  .mobile-cards-scroll {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+  }
+  .mobile-cards-scroll > div {
+    min-width: 80vw;
+    flex: 0 0 auto;
+  }
 }
 
 /* Styles pour desktop (>= 768px) */
@@ -473,5 +562,14 @@ onUnmounted(() => {
 .title-container h2:first-child {
   opacity: 1;
   transform: translateY(0);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
