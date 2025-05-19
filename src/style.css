@@ -23,6 +23,16 @@
   }
 }
 
+@media (max-width: 768px) {
+  body {
+    overflow-y: visible !important;
+    overflow-x: visible !important;
+  }
+  .app-container {
+    overflow: visible !important;
+  }
+}
+
 @layer components {
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
