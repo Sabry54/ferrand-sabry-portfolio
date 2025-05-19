@@ -417,7 +417,7 @@ body {
   height: 100vh;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .slider-track {
