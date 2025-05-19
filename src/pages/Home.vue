@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container">
+  <div class="home-container hide-footer-mobile">
     <HomeSlider />
   </div>
 </template>

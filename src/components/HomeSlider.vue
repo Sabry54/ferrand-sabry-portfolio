@@ -127,25 +127,44 @@
         :aria-label="'Go to slide ' + index"
       ></button>
     </div>
+
+    <!-- Footer mobile : rendu uniquement après le dernier slide, dans le flux -->
+    <div v-if="showFooterMobile" style="width: 100%">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import { ref, onMounted, onUnmounted, computed, watch } from "vue";
 import { gsap } from "gsap";
+import Footer from "./Footer.vue";
 
 const currentSlide = ref(0);
 const isAnimating = ref(false);
 const touchStart = ref(0);
 const touchEnd = ref(0);
+const isMobile = ref(window.innerWidth <= 768);
 const isDesktop = computed(() => window.innerWidth > 768);
+const showFooterMobile = ref(false);
+
+const updateIsMobile = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
 
 const handleWheel = (e) => {
   e.preventDefault();
 
   if (isAnimating.value) return;
 
-  const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+  let delta;
+  if (isMobile.value) {
+    // Sur mobile, scroll vertical
+    delta = e.deltaY;
+  } else {
+    // Sur desktop/tablette, scroll horizontal
+    delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+  }
 
   if (Math.abs(delta) < 50) return;
 
@@ -164,16 +183,29 @@ const handleWheel = (e) => {
 };
 
 const handleTouchStart = (e) => {
-  touchStart.value = e.touches[0].clientX;
+  if (isMobile.value) {
+    touchStart.value = e.touches[0].clientY;
+  } else {
+    touchStart.value = e.touches[0].clientX;
+  }
 };
 
 const handleTouchMove = (e) => {
   e.preventDefault();
-  touchEnd.value = e.touches[0].clientX;
+  if (isMobile.value) {
+    touchEnd.value = e.touches[0].clientY;
+  } else {
+    touchEnd.value = e.touches[0].clientX;
+  }
 };
 
 const handleTouchEnd = () => {
-  const swipeDistance = touchStart.value - touchEnd.value;
+  let swipeDistance;
+  if (isMobile.value) {
+    swipeDistance = touchStart.value - touchEnd.value;
+  } else {
+    swipeDistance = touchStart.value - touchEnd.value;
+  }
 
   if (Math.abs(swipeDistance) > 50) {
     const direction = swipeDistance > 0 ? 1 : -1;
@@ -194,14 +226,29 @@ const animateSlide = () => {
     return;
   }
 
-  gsap.to(track, {
-    x: `${-currentSlide.value * 100}vw`,
-    duration: 1,
-    ease: "power3.inOut",
-    onComplete: () => {
-      isAnimating.value = false;
-    },
-  });
+  if (isMobile.value) {
+    // Animation verticale sur mobile
+    gsap.to(track, {
+      y: `${-currentSlide.value * 100}vh`,
+      x: 0,
+      duration: 1,
+      ease: "power3.inOut",
+      onComplete: () => {
+        isAnimating.value = false;
+      },
+    });
+  } else {
+    // Animation horizontale sur desktop/tablette
+    gsap.to(track, {
+      x: `${-currentSlide.value * 100}vw`,
+      y: 0,
+      duration: 1,
+      ease: "power3.inOut",
+      onComplete: () => {
+        isAnimating.value = false;
+      },
+    });
+  }
 };
 
 const goToSlide = (index) => {
@@ -212,15 +259,29 @@ const goToSlide = (index) => {
   animateSlide();
 };
 
+// Affichage différé du footer mobile sur le dernier slide
+watch([isMobile, currentSlide], ([mobile, slide]) => {
+  if (mobile && slide === 3) {
+    setTimeout(() => {
+      if (isMobile.value && currentSlide.value === 3) {
+        showFooterMobile.value = true;
+      }
+    }, 400); // délai pour n'afficher le footer qu'après l'arrivée sur le dernier slide
+  } else {
+    showFooterMobile.value = false;
+  }
+});
+
 onMounted(() => {
   window.addEventListener("wheel", handleWheel, { passive: false });
   window.addEventListener("touchstart", handleTouchStart);
   window.addEventListener("touchmove", handleTouchMove, { passive: false });
   window.addEventListener("touchend", handleTouchEnd);
+  window.addEventListener("resize", updateIsMobile);
 
   const track = document.getElementById("sliderTrack");
   if (track) {
-    gsap.set(track, { x: 0 });
+    gsap.set(track, { x: 0, y: 0 });
   }
 
   // Animation du titre rotatif
@@ -259,6 +320,7 @@ onUnmounted(() => {
   window.removeEventListener("touchstart", handleTouchStart);
   window.removeEventListener("touchmove", handleTouchMove);
   window.removeEventListener("touchend", handleTouchEnd);
+  window.removeEventListener("resize", updateIsMobile);
 });
 </script>
 
@@ -288,16 +350,13 @@ onUnmounted(() => {
 /* Styles pour mobile (< 768px) */
 @media (max-width: 768px) {
   .slider-track {
-    position: relative;
-    width: 400vw;
-    height: 100%;
-    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 400vh;
   }
-
   .slide {
     width: 100vw;
     height: 100vh;
-    flex-shrink: 0;
   }
 }
 
