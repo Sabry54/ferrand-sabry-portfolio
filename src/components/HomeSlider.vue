@@ -9,11 +9,11 @@
         :class="{ 'desktop-slide': isDesktop }"
       >
         <div
-          class="container mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8 md:gap-32"
+          class="container mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8 md:gap-32 md:mt-[72px]"
         >
           <div class="text-white max-w-xl slide-content order-2 md:order-1">
             <div
-              class="rotating-title h-[80px] md:h-[100px] overflow-hidden md:mb-32"
+              class="rotating-title h-[80px] md:h-[100px] overflow-hidden md:mb-12"
             >
               <div class="title-container">
                 <h2 class="text-4xl md:text-6xl font-sans font-extrabold">
@@ -30,7 +30,7 @@
                 </h2>
               </div>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 md:mb-12">
               <p
                 class="font-limelight animate-slideUp hidden md:block md:text-[1.25rem]"
                 style="
@@ -159,10 +159,8 @@
               v-if="!isMobile"
               class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 animate-slideUp relative z-[10] w-full max-w-6xl"
             >
+              <!-- Inspiration -->
               <div
-                v-for="(card, index) in 3"
-                :key="index"
-                v-if="!isMobile || index === 0"
                 class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
               >
                 <div class="flex flex-col items-center gap-1 mb-1">
@@ -182,17 +180,20 @@
                       />
                     </svg>
                   </div>
-                  <h3 class="text-base font-bold mb-1 text-center">
+                  <h3
+                    class="text-base font-bold mb-1 text-center hidden md:block"
+                  >
                     Inspiration
                   </h3>
                 </div>
                 <p
-                  class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+                  class="text-sm text-center font-medium text-white/90 px-2 py-1 rounded-xl border border-white/10 hidden md:block"
                 >
                   What sparked this project. A vague idea, a desire to
                   explore... and here we go.
                 </p>
               </div>
+              <!-- Process -->
               <div
                 class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
               >
@@ -213,15 +214,20 @@
                       />
                     </svg>
                   </div>
-                  <h3 class="text-base font-bold mb-1 text-center">Process</h3>
+                  <h3
+                    class="text-base font-bold mb-1 text-center hidden md:block"
+                  >
+                    Process
+                  </h3>
                 </div>
                 <p
-                  class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+                  class="text-sm text-center font-medium text-white/90 px-2 py-1 rounded-xl border border-white/10 hidden md:block"
                 >
                   Coding without a strict roadmap. Testing, undoing, starting
                   over. The journey matters more than the destination.
                 </p>
               </div>
+              <!-- Current Tools -->
               <div
                 class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
               >
@@ -242,106 +248,17 @@
                       />
                     </svg>
                   </div>
-                  <h3 class="text-base font-bold mb-1 text-center">
+                  <h3
+                    class="text-base font-bold mb-1 text-center hidden md:block"
+                  >
                     Current Tools
                   </h3>
                 </div>
                 <p
-                  class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
+                  class="text-sm text-center font-medium text-white/90 px-2 py-1 rounded-xl border border-white/10 hidden md:block"
                 >
                   No fixed stack. Using what speaks to me today: Cursor, some
                   JS, maybe Supabase tomorrow?
-                </p>
-              </div>
-              <div
-                class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
-              >
-                <div class="flex flex-col items-center gap-1 mb-1">
-                  <div class="text-2xl mb-1 animate-ping-slow">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-white"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                      />
-                    </svg>
-                  </div>
-                  <h3 class="text-base font-bold mb-1 text-center">
-                    Natural Evolution
-                  </h3>
-                </div>
-                <p
-                  class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
-                >
-                  The project builds up in layers. Nothing is set in stone,
-                  everything can change if the momentum calls for it.
-                </p>
-              </div>
-              <div
-                class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
-              >
-                <div class="flex flex-col items-center gap-1 mb-1">
-                  <div class="text-2xl mb-1 animate-float">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-white"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"
-                      />
-                    </svg>
-                  </div>
-                  <h3 class="text-base font-bold mb-1 text-center">Vibe</h3>
-                </div>
-                <p
-                  class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
-                >
-                  Keeping it relaxed and minimalist. Simple code, calm
-                  interfaces, clear logic.
-                </p>
-              </div>
-              <div
-                class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
-              >
-                <div class="flex flex-col items-center gap-1 mb-1">
-                  <div class="text-2xl mb-1 animate-wiggle">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-white"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
-                      />
-                    </svg>
-                  </div>
-                  <h3 class="text-base font-bold mb-1 text-center">
-                    Work in Progress
-                  </h3>
-                </div>
-                <p
-                  class="text-sm text-center font-medium text-white/90 backdrop-blur-[2px] px-2 py-1 rounded-xl border border-white/10"
-                >
-                  Intentionally under construction. Not a finished product, but
-                  a living playground.
                 </p>
               </div>
             </div>
@@ -378,21 +295,27 @@
 
       <!-- Slide 3 : Portfolio -->
       <div
-        class="slide bg-gradient-to-br from-secondary to-accent p-8 flex items-start pt-32"
+        class="slide bg-gradient-to-br from-secondary to-accent p-8 flex items-start pt-32 relative h-screen"
         :class="{ 'desktop-slide': isDesktop }"
       >
-        <div class="container mx-auto text-white slide-content">
+        <img
+          src="../assets/images/home/cheer_to_you_if_see_this.png"
+          alt="Portfolio mascot"
+          class="absolute max-w-[200px] md:max-w-md w-full h-auto opacity-100 transition-all duration-300 z-[8] animate-fadeIn"
+          style="pointer-events: none; right: 25%; bottom: 10%"
+        />
+        <div class="container mx-auto text-white slide-content md:mt-[72px]">
           <h2
-            class="text-6xl font-extrabold mb-4 md:mb-32 animate-fadeIn font-montserrat"
+            class="text-6xl font-extrabold mb-12 animate-fadeIn font-montserrat"
           >
             Portfolio
           </h2>
           <p
-            class="font-limelight text-center animate-fadeIn md:text-[1.25rem] text-white/90 mb-4 md:mb-32"
+            class="font-limelight text-center animate-fadeIn md:text-[1.25rem] text-white/90 mb-12"
           >
             A selection of recent projects and creative experiments.
           </p>
-          <div class="w-full flex justify-center">
+          <div class="w-full flex justify-center relative z-10">
             <div
               class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-20 max-w-4xl w-full"
             >
@@ -401,38 +324,80 @@
                   class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
                 >
                   <h3
-                    class="text-base font-bold mb-1 font-limelight text-center"
+                    class="text-base font-bold mb-1 font-limelight text-center hidden md:block"
                   >
                     Projet 1
                   </h3>
-                  <div class="aspect-square bg-white/20 rounded-lg mb-2"></div>
+                  <div
+                    class="aspect-square bg-white/20 rounded-lg mb-2 overflow-hidden flex items-center justify-center w-1/2 mx-auto md:w-full"
+                  >
+                    <img
+                      src="../assets/images/portfolio/divers/image00051.png"
+                      alt="Projet 1"
+                      class="object-cover w-full h-full"
+                    />
+                  </div>
                   <p
-                    class="text-sm text-center font-medium text-white/90 px-2 py-1"
+                    class="text-sm text-center font-medium text-white/90 px-2 py-1 hidden md:block"
                   >
                     Description du projet 1.
                   </p>
                 </div>
               </template>
               <template v-else>
-                <div
-                  v-for="(project, index) in [1, 2, 3]"
+                <router-link
+                  v-for="(card, index) in portfolioCards"
                   :key="index"
-                  class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+                  :to="{ path: '/portfolio', query: { section: card.folder } }"
+                  class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105 w-1/2 mx-auto md:w-full cursor-pointer"
                 >
                   <h3
-                    class="text-base font-bold mb-1 font-limelight text-center"
+                    class="text-base font-bold mb-1 font-limelight text-center hidden md:block"
                   >
-                    Projet {{ project }}
+                    {{ card.title }}
                   </h3>
-                  <div class="aspect-square bg-white/20 rounded-lg mb-2"></div>
-                  <p
-                    class="text-sm text-center font-medium text-white/90 px-2 py-1"
+                  <div
+                    class="aspect-square bg-white/20 rounded-lg mb-2 overflow-hidden flex items-center justify-center w-1/2 mx-auto md:w-full"
                   >
-                    Description du projet {{ project }}.
+                    <img
+                      :src="card.image"
+                      :alt="card.title"
+                      class="object-cover w-full h-full"
+                    />
+                  </div>
+                  <p
+                    class="text-sm text-center font-medium text-white/90 px-2 py-1 hidden md:block"
+                  >
+                    {{ card.description }}
                   </p>
-                </div>
+                </router-link>
               </template>
             </div>
+          </div>
+          <div
+            class="flex justify-center items-center mt-12 animate-slideUp relative z-[25]"
+          >
+            <router-link
+              to="/portfolio"
+              class="group relative inline-flex items-center justify-center px-5 py-2 overflow-hidden font-bold text-white transition-all duration-500 ease-out rounded-2xl bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 hover:border-white/30"
+            >
+              <span class="relative flex items-center text-base tracking-wide">
+                Discover More
+                <svg
+                  class="w-4 h-4 ml-1 transform transition-transform duration-500 group-hover:translate-x-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  ></path>
+                </svg>
+              </span>
+            </router-link>
           </div>
         </div>
       </div>
@@ -622,6 +587,236 @@ watch([isMobile, currentSlide], ([mobile, slide]) => {
     showFooterMobile.value = false;
   }
 });
+
+// --- Début logique encarts portfolio dynamiques ---
+
+// Liste des dossiers et titres anglais
+const portfolioFolders = [
+  {
+    name: "divers",
+    title: "Various",
+    images: [
+      "image00051.png",
+      "image00052.png",
+      "image00066.png",
+      "image00067.png",
+      "image00068.png",
+      "image00069.png",
+      "image00085.png",
+      "image00087.png",
+      "image00095.png",
+      "image00096.png",
+      "image00098.png",
+    ],
+  },
+  {
+    name: "réaliste",
+    title: "Realistic",
+    images: [
+      "image00032.png",
+      "image00033.png",
+      "image00034.png",
+      "image00043.png",
+      "image00047.png",
+      "image00048.png",
+      "image00049.png",
+      "image00050.png",
+      "image00101.png",
+      "image00102.png",
+      "image00103.png",
+      "image00104.png",
+      "image00116.png",
+      "image00117.png",
+      "image00118.png",
+      "image00119.png",
+      "image00120.png",
+      "image00123.png",
+      "image00124.png",
+      "image00125.png",
+      "image00126.png",
+      "image00127.png",
+      "image00128.png",
+      "image00142.png",
+      "image00143.png",
+      "image00144.png",
+      "image00145.png",
+    ],
+  },
+  {
+    name: "live-action",
+    title: "Live Action",
+    images: [
+      "image00053.png",
+      "image00054.png",
+      "image00055.png",
+      "image00056.png",
+      "image00057.png",
+      "image00058.png",
+      "image00059.png",
+      "image00060.png",
+      "image00061.png",
+      "image00062.png",
+      "image00063.png",
+      "image00064.png",
+      "image00065.png",
+      "image00097.png",
+      "image00105.png",
+      "image00106.png",
+      "image00107.png",
+      "image00108.png",
+      "image00109.png",
+      "image00110.png",
+      "image00111.png",
+      "image00112.png",
+      "image00113.png",
+      "image00114.png",
+      "image00115.png",
+      "image00129.png",
+      "image00130.png",
+      "image00131.png",
+      "image00132.png",
+      "image00133.png",
+      "image00134.png",
+      "image00135.png",
+      "image00136.png",
+      "image00153.png",
+      "image00154.png",
+      "image00155.png",
+      "image00156.png",
+      "image00157.png",
+      "image00158.png",
+      "image00159.png",
+      "image00160.png",
+    ],
+  },
+  {
+    name: "mangas",
+    title: "Mangas",
+    images: [
+      "0_1.webp",
+      "0_3.webp",
+      "image00001.png",
+      "image00002.png",
+      "image00003.png",
+      "image00004.png",
+      "image00005.png",
+      "image00006.png",
+      "image00007.png",
+      "image00008.png",
+      "image00009.png",
+      "image00010.png",
+      "image00011.png",
+      "image00012.png",
+      "image00013.png",
+      "image00014.png",
+      "image00015.png",
+      "image00016.png",
+      "image00017.png",
+      "image00018.png",
+      "image00019.png",
+      "image00020.png",
+      "image00021.png",
+      "image00022.png",
+      "image00023.png",
+      "image00024.png",
+      "image00025.png",
+      "image00026.png",
+      "image00027.png",
+      "image00028.png",
+      "image00029.png",
+      "image00030.png",
+      "image00031.png",
+      "image00035.png",
+      "image00036.png",
+      "image00037.png",
+      "image00039.png",
+      "image00040.png",
+      "image00041.png",
+      "image00044.png",
+      "image00045.png",
+      "image00046.png",
+      "image00081.png",
+      "image00137.png",
+      "image00138.png",
+      "image00139.png",
+      "image00140.png",
+      "image00141.png",
+      "image00146.png",
+      "image00147.png",
+      "image00148.png",
+      "image00161.png",
+      "image00162.png",
+      "image00163.png",
+      "image00164.png",
+      "image00165.png",
+      "image00166.png",
+      "image00167.png",
+      "image00168.png",
+      "image00169.png",
+      "image00170.png",
+    ],
+  },
+  {
+    name: "ghibli",
+    title: "Ghibli",
+    images: [
+      "0_0 (1).webp",
+      "0_0 (2).webp",
+      "0_0 (3).webp",
+      "0_0.webp",
+      "0_1 (1).webp",
+      "0_1 (2).webp",
+    ],
+  },
+  {
+    name: "art",
+    title: "Art",
+    images: [
+      "image00121.png",
+      "image00122.png",
+      "image00150.png",
+      "image00151.png",
+      "image00152.png",
+    ],
+  },
+];
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function getRandomImage(folder) {
+  const idx = getRandomInt(folder.images.length);
+  return `/src/assets/images/portfolio/${folder.name}/${folder.images[idx]}`;
+}
+
+function getRandomPortfolioCards(count) {
+  // On clone et on mélange le tableau
+  const shuffled = [...portfolioFolders].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count).map((folder) => ({
+    title: folder.title,
+    image: getRandomImage(folder),
+  }));
+}
+
+const portfolioCards = ref([]);
+
+const updatePortfolioCards = () => {
+  if (window.innerWidth <= 768) {
+    portfolioCards.value = getRandomPortfolioCards(1);
+  } else {
+    portfolioCards.value = getRandomPortfolioCards(3);
+  }
+};
+
+onMounted(() => {
+  updatePortfolioCards();
+  window.addEventListener("resize", updatePortfolioCards);
+});
+onUnmounted(() => {
+  window.removeEventListener("resize", updatePortfolioCards);
+});
+// --- Fin logique encarts portfolio dynamiques ---
 
 onMounted(() => {
   window.addEventListener("wheel", handleWheel, { passive: false });
@@ -917,5 +1112,28 @@ body {
 
 .animate-wiggle {
   animation: wiggle 2s ease-in-out infinite;
+}
+
+.slide3-img {
+  position: absolute;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  opacity: 1;
+  transition: all 0.3s;
+  z-index: 8;
+  right: -80px;
+  top: calc(50% + 35px);
+  margin-top: 8%;
+  margin-right: 20%;
+}
+@media (min-width: 768px) {
+  .slide3-img {
+    max-width: 28rem;
+    right: -140px;
+    top: calc(50% + 100px);
+    margin-top: 8%;
+    margin-right: 20%;
+  }
 }
 </style>
