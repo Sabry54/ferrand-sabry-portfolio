@@ -787,24 +787,45 @@ const portfolioFolders = [
   },
 ];
 
+// Définition du type pour les cartes portfolio (JSDoc)
+/**
+ * @typedef {Object} PortfolioCard
+ * @property {string} title
+ * @property {string} image
+ * @property {string} [description]
+ * @property {string} [folder]
+ */
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+/**
+ * @param {Object} folder
+ * @returns {string}
+ */
 function getRandomImage(folder) {
   const idx = getRandomInt(folder.images.length);
-  return `/src/assets/images/portfolio/${folder.name}/${folder.images[idx]}`;
+  // Chemin compatible avec la structure du dossier public en production
+  return `/images/portfolio/${folder.name}/${folder.images[idx]}`;
 }
 
+/**
+ * @param {number} count
+ * @returns {PortfolioCard[]}
+ */
 function getRandomPortfolioCards(count) {
   // On clone et on mélange le tableau
   const shuffled = [...portfolioFolders].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count).map((folder) => ({
     title: folder.title,
     image: getRandomImage(folder),
+    description: folder.description || "",
+    folder: folder.name,
   }));
 }
 
+/** @type {import('vue').Ref<PortfolioCard[]>} */
 const portfolioCards = ref([]);
 
 const updatePortfolioCards = () => {
