@@ -5,14 +5,16 @@
     <div id="sliderTrack" class="slider-track">
       <!-- Slide 1 : Introduction -->
       <div
-        class="slide h-screen bg-[#BF4158] p-8 flex items-center"
+        class="slide h-screen bg-[#BF4158] p-8 flex items-center md:items-start md:pt-32"
         :class="{ 'desktop-slide': isDesktop }"
       >
         <div
-          class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4"
+          class="container mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8 md:gap-32"
         >
           <div class="text-white max-w-xl slide-content order-2 md:order-1">
-            <div class="rotating-title h-[80px] md:h-[100px] overflow-hidden">
+            <div
+              class="rotating-title h-[80px] md:h-[100px] overflow-hidden md:mb-32"
+            >
               <div class="title-container">
                 <h2 class="text-4xl md:text-6xl font-sans font-extrabold">
                   🌊 Flow
@@ -101,7 +103,7 @@
             <img
               src="../assets/images/home/luffy-unicorn.png"
               alt="Creative mascot"
-              class="absolute max-w-[200px] md:max-w-md w-full h-auto opacity-100 transition-all duration-300 z-[8] right-[-80px] md:right-[-140px] top-[calc(50%+35px)] md:top-1/2 -translate-y-1/2 animate-fadeIn"
+              class="absolute max-w-[200px] md:max-w-md w-full h-auto opacity-100 transition-all duration-300 z-[8] right-[-80px] md:right-[-140px] top-[calc(50%-57px)] md:top-[calc(50%+100px)] animate-fadeIn"
             />
           </div>
         </div>
@@ -122,7 +124,7 @@
           }"
         />
         <div
-          class="container mx-auto text-white slide-content relative h-[calc(100vh-144px)] mt-[72px] flex items-center"
+          class="container mx-auto text-white slide-content relative h-[calc(100vh-144px)] mt-[72px] flex items-center -mt-[30px] md:mt-0"
         >
           <div class="w-full">
             <div class="relative z-[20] mb-12">
@@ -158,6 +160,9 @@
               class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 animate-slideUp relative z-[10] w-full max-w-6xl"
             >
               <div
+                v-for="(card, index) in 3"
+                :key="index"
+                v-if="!isMobile || index === 0"
                 class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
               >
                 <div class="flex flex-col items-center gap-1 mb-1">
@@ -373,61 +378,60 @@
 
       <!-- Slide 3 : Portfolio -->
       <div
-        class="slide bg-gradient-to-br from-secondary to-accent p-8 flex items-center"
+        class="slide bg-gradient-to-br from-secondary to-accent p-8 flex items-start pt-32"
         :class="{ 'desktop-slide': isDesktop }"
       >
         <div class="container mx-auto text-white slide-content">
           <h2
-            class="text-6xl font-extrabold mb-4 animate-fadeIn font-montserrat"
+            class="text-6xl font-extrabold mb-4 md:mb-32 animate-fadeIn font-montserrat"
           >
             Portfolio
           </h2>
           <p
-            class="font-limelight text-center animate-fadeIn md:text-[1.25rem] text-white/90 mb-8"
+            class="font-limelight text-center animate-fadeIn md:text-[1.25rem] text-white/90 mb-4 md:mb-32"
           >
             A selection of recent projects and creative experiments.
           </p>
           <div class="w-full flex justify-center">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-4xl w-full">
-              <div
-                class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
-              >
-                <h3 class="text-base font-bold mb-1 font-limelight text-center">
-                  Projet 1
-                </h3>
-                <div class="aspect-square bg-white/20 rounded-lg mb-2"></div>
-                <p
-                  class="text-sm text-center font-medium text-white/90 px-2 py-1"
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-20 max-w-4xl w-full"
+            >
+              <template v-if="isMobile">
+                <div
+                  class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
                 >
-                  Description du projet 1.
-                </p>
-              </div>
-              <div
-                class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
-              >
-                <h3 class="text-base font-bold mb-1 font-limelight text-center">
-                  Projet 2
-                </h3>
-                <div class="aspect-square bg-white/20 rounded-lg mb-2"></div>
-                <p
-                  class="text-sm text-center font-medium text-white/90 px-2 py-1"
+                  <h3
+                    class="text-base font-bold mb-1 font-limelight text-center"
+                  >
+                    Projet 1
+                  </h3>
+                  <div class="aspect-square bg-white/20 rounded-lg mb-2"></div>
+                  <p
+                    class="text-sm text-center font-medium text-white/90 px-2 py-1"
+                  >
+                    Description du projet 1.
+                  </p>
+                </div>
+              </template>
+              <template v-else>
+                <div
+                  v-for="(project, index) in [1, 2, 3]"
+                  :key="index"
+                  class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
                 >
-                  Description du projet 2.
-                </p>
-              </div>
-              <div
-                class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
-              >
-                <h3 class="text-base font-bold mb-1 font-limelight text-center">
-                  Projet 3
-                </h3>
-                <div class="aspect-square bg-white/20 rounded-lg mb-2"></div>
-                <p
-                  class="text-sm text-center font-medium text-white/90 px-2 py-1"
-                >
-                  Description du projet 3.
-                </p>
-              </div>
+                  <h3
+                    class="text-base font-bold mb-1 font-limelight text-center"
+                  >
+                    Projet {{ project }}
+                  </h3>
+                  <div class="aspect-square bg-white/20 rounded-lg mb-2"></div>
+                  <p
+                    class="text-sm text-center font-medium text-white/90 px-2 py-1"
+                  >
+                    Description du projet {{ project }}.
+                  </p>
+                </div>
+              </template>
             </div>
           </div>
         </div>
