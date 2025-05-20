@@ -20,6 +20,7 @@ import { ref, onMounted } from "vue";
 
 const NUM_BUBBLES = 40;
 const MIN_VISIBLE = 10;
+
 /** @type {import('vue').Ref<Bubble[]>} */
 const bubbles = ref([]);
 
@@ -46,6 +47,7 @@ function createBubble(i) {
   const delay = random(-duration * (NUM_BUBBLES / MIN_VISIBLE), 16);
   const animName = `bubbleRainX${i % 4}`;
   const color = COLORS[Math.floor(random(0, COLORS.length))];
+
   return {
     id: i,
     style: {
@@ -88,6 +90,7 @@ onMounted(() => {
     var(--bubble-color, rgba(255, 255, 255, 0.13)) 80%,
     transparent 100%
   );
+  will-change: transform;
 }
 @keyframes bubbleRainX0 {
   0% {
