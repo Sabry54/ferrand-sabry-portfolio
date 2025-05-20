@@ -320,7 +320,8 @@
               class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-20 max-w-4xl w-full"
             >
               <template v-if="isMobile">
-                <div
+                <router-link
+                  to="/portfolio"
                   class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
                 >
                   <h3
@@ -342,7 +343,7 @@
                   >
                     Description du projet 1.
                   </p>
-                </div>
+                </router-link>
               </template>
               <template v-else>
                 <router-link

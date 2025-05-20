@@ -45,11 +45,11 @@
           </li>
           <li>
             <router-link
-              to="/skills"
+              to="/portfolio"
               class="text-white hover:text-gray-200 transition-colors font-montserrat"
               active-class="text-accent"
             >
-              Skills
+              Portfolio
             </router-link>
           </li>
           <li>
@@ -93,12 +93,12 @@
           </li>
           <li>
             <router-link
-              to="/skills"
+              to="/portfolio"
               class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
               active-class="text-accent"
               @click="closeMenu"
             >
-              Skills
+              Portfolio
             </router-link>
           </li>
           <li>
