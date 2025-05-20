@@ -293,21 +293,11 @@
         </div>
       </div>
 
-      <!-- Slide 3 : Portfolio -->
+      <!-- Slide 3 : Portfolio avec cartes holographiques -->
       <div
-        class="slide bg-gradient-to-br from-secondary to-accent p-8 flex items-start pt-32 relative h-screen"
+        class="slide bg-[#333844] p-8 flex items-center justify-center"
         :class="{ 'desktop-slide': isDesktop }"
       >
-        <img
-          src="../assets/images/home/cheer_to_you_if_see_this.png"
-          alt="Portfolio mascot"
-          class="absolute max-w-[200px] md:max-w-md w-full h-auto opacity-100 transition-all duration-300 z-[8] animate-fadeIn"
-          :style="
-            isMobile
-              ? 'pointer-events: none; right: -9%; bottom: 30%;'
-              : 'pointer-events: none; right: 0%; bottom: 30%; margin-left: 350px;'
-          "
-        />
         <div class="container mx-auto text-white slide-content md:mt-[72px]">
           <h2
             class="text-6xl font-extrabold mb-12 animate-fadeIn font-montserrat"
@@ -319,71 +309,36 @@
           >
             A selection of recent projects and creative experiments.
           </p>
-          <div class="w-full flex justify-center relative z-10">
-            <div
-              class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-20 max-w-4xl w-full"
-            >
-              <template v-if="isMobile">
-                <router-link
-                  to="/portfolio"
-                  class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105"
-                >
-                  <h3
-                    class="text-base font-bold mb-1 font-limelight text-center hidden md:block"
-                  >
-                    {{ portfolioCards[0]?.title || "Portfolio" }}
-                  </h3>
-                  <div
-                    class="aspect-square bg-white/20 rounded-lg mb-2 overflow-hidden flex items-center justify-center w-1/2 mx-auto md:w-full"
-                  >
-                    <img
-                      :src="
-                        portfolioCards[0]?.image ||
-                        '/portfolio/divers/image00051.png'
-                      "
-                      :alt="portfolioCards[0]?.title || 'Portfolio'"
-                      class="object-cover w-full h-full"
-                    />
-                  </div>
-                  <p
-                    class="text-sm text-center font-medium text-white/90 px-2 py-1 hidden md:block"
-                  >
-                    {{
-                      portfolioCards[0]?.description || "Découvrez mes projets"
-                    }}
-                  </p>
-                </router-link>
-              </template>
-              <template v-else>
-                <router-link
-                  v-for="(card, index) in portfolioCards"
-                  :key="index"
-                  :to="{ path: '/portfolio', query: { section: card.folder } }"
-                  class="p-2 bg-white/10 rounded-lg backdrop-blur-sm transition-transform duration-300 hover:scale-105 w-1/2 mx-auto md:w-full cursor-pointer"
-                >
-                  <h3
-                    class="text-base font-bold mb-1 font-limelight text-center hidden md:block"
-                  >
-                    {{ card.title }}
-                  </h3>
-                  <div
-                    class="aspect-square bg-white/20 rounded-lg mb-2 overflow-hidden flex items-center justify-center w-1/2 mx-auto md:w-full"
-                  >
-                    <img
-                      :src="card.image"
-                      :alt="card.title"
-                      class="object-cover w-full h-full"
-                    />
-                  </div>
-                  <p
-                    class="text-sm text-center font-medium text-white/90 px-2 py-1 hidden md:block"
-                  >
-                    {{ card.description }}
-                  </p>
-                </router-link>
-              </template>
+          <section class="cards">
+            <div class="three-d-wrapper">
+              <router-link
+                :to="{ path: '/portfolio', query: { section: 'divers' } }"
+                class="card portfolio-1 animated"
+                style="display: block; text-decoration: none"
+              ></router-link>
             </div>
-          </div>
+            <div class="three-d-wrapper hidden md:block">
+              <router-link
+                :to="{ path: '/portfolio', query: { section: 'réaliste' } }"
+                class="card portfolio-2 animated"
+                style="display: block; text-decoration: none"
+              ></router-link>
+            </div>
+            <div class="three-d-wrapper hidden md:block">
+              <router-link
+                :to="{ path: '/portfolio', query: { section: 'live-action' } }"
+                class="card portfolio-3 animated"
+                style="display: block; text-decoration: none"
+              ></router-link>
+            </div>
+            <div class="three-d-wrapper hidden md:block">
+              <router-link
+                :to="{ path: '/portfolio', query: { section: 'mangas' } }"
+                class="card portfolio-4 animated"
+                style="display: block; text-decoration: none"
+              ></router-link>
+            </div>
+          </section>
           <div
             class="flex justify-center items-center mt-12 animate-slideUp relative z-[25]"
           >
@@ -462,6 +417,7 @@ import { ref, onMounted, onUnmounted, computed, watch } from "vue";
 import { gsap } from "gsap";
 import Footer from "./Footer.vue";
 import LightBubbles from "./LightBubbles.vue";
+import { initHolographicEffect } from "./HolographicEffect.js";
 
 const currentSlide = ref(0);
 const isAnimating = ref(false);
@@ -607,8 +563,29 @@ const animateSlide = () => {
   }
 };
 
+const animatedSlides = ref(new Set());
+
 const animateSlideContent = (slideElement) => {
   if (!slideElement) return;
+
+  // Vérifier si le slide a déjà été animé
+  const slideIndex = Array.from(document.querySelectorAll(".slide")).indexOf(
+    slideElement
+  );
+  if (animatedSlides.value.has(slideIndex)) {
+    // Si déjà animé, on s'assure que les éléments sont visibles
+    const elements = slideElement.querySelectorAll(
+      "h2:not(.title-container h2), h3, p, a[href], button"
+    );
+    gsap.set(elements, {
+      opacity: 1,
+      x: 0,
+    });
+    return;
+  }
+
+  // Marquer le slide comme animé
+  animatedSlides.value.add(slideIndex);
 
   // Animation des titres avec effet de cascade latéral
   const titles = slideElement.querySelectorAll(
@@ -671,7 +648,7 @@ const animateSlideContent = (slideElement) => {
 };
 
 const goToSlide = (index) => {
-  if (isAnimating.value) return;
+  if (isAnimating.value || index < 0 || index > 3) return;
 
   isAnimating.value = true;
   currentSlide.value = index;
@@ -936,6 +913,7 @@ const updatePortfolioCards = () => {
 onMounted(() => {
   updatePortfolioCards();
   window.addEventListener("resize", updatePortfolioCards);
+  initHolographicEffect();
 });
 onUnmounted(() => {
   window.removeEventListener("resize", updatePortfolioCards);
@@ -1227,21 +1205,6 @@ body {
   }
 }
 
-@keyframes wiggle {
-  0% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-5deg);
-  }
-  75% {
-    transform: rotate(5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
 }
@@ -1279,5 +1242,474 @@ body {
     margin-top: 8%;
     margin-right: 20%;
   }
+}
+
+/* Effet holographique style carte Pokémon */
+.holographic {
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  touch-action: none;
+  isolation: isolate;
+  border-radius: 5% / 3.5%;
+  box-shadow: -5px -5px 5px -5px var(--color1), 5px 5px 5px -5px var(--color2),
+    -7px -7px 10px -5px transparent, 7px 7px 10px -5px transparent,
+    0 0 5px 0px rgba(255, 255, 255, 0), 0 55px 35px -20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease, box-shadow 0.2s ease;
+  will-change: transform, filter;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.holographic:before,
+.holographic:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  mix-blend-mode: color-dodge;
+  transition: all 0.33s ease;
+  pointer-events: none;
+}
+
+.holographic:before {
+  background-position: 50% 50%;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    115deg,
+    transparent 0%,
+    var(--color1) 25%,
+    transparent 47%,
+    transparent 53%,
+    var(--color2) 75%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  filter: brightness(0.5) contrast(1);
+  z-index: 1;
+}
+
+.holographic:after {
+  opacity: 1;
+  background-image: url("https://assets.codepen.io/13471/sparkles.gif"),
+    url(https://assets.codepen.io/13471/holo.png),
+    linear-gradient(
+      125deg,
+      #ff008450 15%,
+      #fca40040 30%,
+      #ffff0030 40%,
+      #00ff8a20 60%,
+      #00cfff40 70%,
+      #cc4cfa50 85%
+    );
+  background-position: 50% 50%;
+  background-size: 160%;
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  transition: all 0.33s ease;
+  mix-blend-mode: color-dodge;
+  opacity: 0.75;
+}
+
+.holographic:hover {
+  box-shadow: -20px -20px 30px -25px var(--color1),
+    20px 20px 30px -25px var(--color2), -7px -7px 10px -5px var(--color1),
+    7px 7px 10px -5px var(--color2), 0 0 13px 4px rgba(255, 255, 255, 0.3),
+    0 55px 35px -20px rgba(0, 0, 0, 0.5);
+}
+
+.holographic:hover:before {
+  background-image: linear-gradient(
+    110deg,
+    transparent 25%,
+    var(--color1) 48%,
+    var(--color2) 52%,
+    transparent 75%
+  );
+  background-position: 50% 50%;
+  background-size: 250% 250%;
+  opacity: 0.88;
+  filter: brightness(0.66) contrast(1.33);
+}
+
+.holographic:hover:after {
+  filter: brightness(1) contrast(1);
+  opacity: 1;
+}
+
+/* Variables de couleurs pour chaque encart */
+.holographic {
+  --color1: #54a29e;
+  --color2: #a79d66;
+}
+
+/* Animation de la carte */
+@keyframes holoCard {
+  0%,
+  100% {
+    transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+  }
+  5%,
+  8% {
+    transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg);
+  }
+  13%,
+  16% {
+    transform: rotateZ(0deg) rotateX(-9deg) rotateY(32deg);
+  }
+  35%,
+  38% {
+    transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg);
+  }
+  55% {
+    transform: rotateZ(-3deg) rotateX(-12deg) rotateY(-27deg);
+  }
+}
+
+.holographic.animated {
+  animation: holoCard 12s ease 0s 1;
+}
+
+/* Effet de mouvement au survol */
+.holographic {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.holographic:hover {
+  transform: rotateX(5deg) rotateY(5deg);
+}
+
+.holographic:hover:before {
+  background-position: 50% 50%;
+  background-size: 250% 250%;
+  opacity: 0.88;
+  filter: brightness(0.66) contrast(1.33);
+}
+
+.holographic:hover:after {
+  filter: brightness(1) contrast(1);
+  opacity: 1;
+}
+
+/* Effet de brillance */
+.glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 3;
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.holographic:hover .glare {
+  opacity: 1;
+}
+
+:root {
+  --color1: rgb(0, 231, 255);
+  --color2: rgb(255, 0, 231);
+  --back: url(https://cdn2.bulbagarden.net/upload/1/17/Cardback.jpg);
+  --charizard1: #fac;
+  --charizard2: #ddccaa;
+  --charizardfront: url(https://assets.codepen.io/13471/charizard-gx.webp);
+  --pika1: #54a29e;
+  --pika2: #a79d66;
+  --pikafront: url(https://assets.codepen.io/13471/pikachu-gx.webp);
+  --eevee1: #efb2fb;
+  --eevee2: #acc6f8;
+  --eeveefront: url(https://assets.codepen.io/13471/eevee-gx.webp);
+  --mewtwo1: #efb2fb;
+  --mewtwo2: #acc6f8;
+  --mewtwofront: url(https://assets.codepen.io/13471/mewtwo-gx.webp);
+  --portfolio1: #54a29e;
+  --portfolio2: #a79d66;
+  --portfolio3: #efb2fb;
+  --portfolio4: #acc6f8;
+  --portfolio1-front: url("/images/portfolio/divers/image00051.png");
+  --portfolio2-front: url("/images/portfolio/réaliste/image00032.png");
+  --portfolio3-front: url("/images/portfolio/live-action/image00053.png");
+  --portfolio4-front: url("/images/portfolio/mangas/image00001.png");
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (min-width: 600px) {
+  .cards {
+    flex-direction: row;
+  }
+}
+
+.card {
+  width: 51.48vw;
+  height: 72vw;
+  position: relative;
+  overflow: hidden;
+  margin: 20px;
+  z-index: 10;
+  touch-action: none;
+  isolation: isolate;
+  border-radius: 5% / 3.5%;
+  box-shadow: -5px -5px 5px -5px var(--color1), 5px 5px 5px -5px var(--color2),
+    -7px -7px 10px -5px transparent, 7px 7px 10px -5px transparent,
+    0 0 5px 0px rgba(255, 255, 255, 0), 0 55px 35px -20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease, box-shadow 0.2s ease;
+  will-change: transform, filter;
+  background-color: #040712;
+  background-image: var(--front);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  transform-style: preserve-3d;
+  display: block;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 600px) {
+  .card {
+    width: clamp(10.32vw, 48.8vh, 14.4vw);
+    height: clamp(14.4vw, 68vh, 20.16vw);
+  }
+}
+
+.card:before,
+.card:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  mix-blend-mode: color-dodge;
+  transition: all 0.33s ease;
+}
+
+.card:before {
+  background-position: 50% 50%;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    115deg,
+    transparent 0%,
+    var(--color1) 25%,
+    transparent 47%,
+    transparent 53%,
+    var(--color2) 75%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  filter: brightness(0.5) contrast(1);
+  z-index: 1;
+}
+
+.card:after {
+  opacity: 1;
+  background-image: url("https://assets.codepen.io/13471/sparkles.gif"),
+    url(https://assets.codepen.io/13471/holo.png),
+    linear-gradient(
+      125deg,
+      #ff008450 15%,
+      #fca40040 30%,
+      #ffff0030 40%,
+      #00ff8a20 60%,
+      #00cfff40 70%,
+      #cc4cfa50 85%
+    );
+  background-position: 50% 50%;
+  background-size: 160%;
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  transition: all 0.33s ease;
+  mix-blend-mode: color-dodge;
+  opacity: 0.75;
+}
+
+.card.charizard {
+  --color1: var(--charizard1);
+  --color2: var(--charizard2);
+  --front: var(--charizardfront);
+}
+
+.card.pika {
+  --color1: var(--pika1);
+  --color2: var(--pika2);
+  --front: var(--pikafront);
+}
+
+.card.mewtwo {
+  --color1: var(--mewtwo1);
+  --color2: var(--mewtwo2);
+  --front: var(--mewtwofront);
+}
+
+.card.eevee {
+  --color1: #ec9bb6;
+  --color2: #ccac6f;
+  --color3: #69e4a5;
+  --color4: #8ec5d6;
+  --color5: #b98cce;
+  --front: var(--eeveefront);
+}
+
+.card.portfolio-1 {
+  --color1: var(--portfolio1);
+  --color2: var(--portfolio2);
+  --front: var(--portfolio1-front);
+}
+
+.card.portfolio-2 {
+  --color1: var(--portfolio3);
+  --color2: var(--portfolio4);
+  --front: var(--portfolio2-front);
+}
+
+.card.portfolio-3 {
+  --color1: var(--portfolio1);
+  --color2: var(--portfolio3);
+  --front: var(--portfolio3-front);
+}
+
+.card.portfolio-4 {
+  --color1: var(--portfolio2);
+  --color2: var(--portfolio4);
+  --front: var(--portfolio4-front);
+}
+
+.three-d-wrapper {
+  perspective: 750px;
+  isolation: isolate;
+  transform: translate3d(0.1px, 0.1px, 0.1px);
+}
+
+@keyframes holoSparkle {
+  0%,
+  100% {
+    opacity: 0.75;
+    background-position: 50% 50%;
+    filter: brightness(1.2) contrast(1.25);
+  }
+  5%,
+  8% {
+    opacity: 1;
+    background-position: 40% 40%;
+    filter: brightness(0.8) contrast(1.2);
+  }
+  13%,
+  16% {
+    opacity: 0.5;
+    background-position: 50% 50%;
+    filter: brightness(1.2) contrast(0.8);
+  }
+  35%,
+  38% {
+    opacity: 1;
+    background-position: 60% 60%;
+    filter: brightness(1) contrast(1);
+  }
+  55% {
+    opacity: 0.33;
+    background-position: 45% 45%;
+    filter: brightness(1.2) contrast(1.25);
+  }
+}
+
+@keyframes holoGradient {
+  0%,
+  100% {
+    opacity: 0.5;
+    background-position: 50% 50%;
+    filter: brightness(0.5) contrast(1);
+  }
+  5%,
+  9% {
+    background-position: 100% 100%;
+    opacity: 1;
+    filter: brightness(0.75) contrast(1.25);
+  }
+  13%,
+  17% {
+    background-position: 0% 0%;
+    opacity: 0.88;
+  }
+  35%,
+  39% {
+    background-position: 100% 100%;
+    opacity: 1;
+    filter: brightness(0.5) contrast(1);
+  }
+  55% {
+    background-position: 0% 0%;
+    opacity: 1;
+    filter: brightness(0.75) contrast(1.25);
+  }
+}
+
+@keyframes holoCard {
+  0%,
+  100% {
+    transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+  }
+  5%,
+  8% {
+    transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg);
+  }
+  13%,
+  16% {
+    transform: rotateZ(0deg) rotateX(-9deg) rotateY(32deg);
+  }
+  35%,
+  38% {
+    transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg);
+  }
+  55% {
+    transform: rotateZ(-3deg) rotateX(-12deg) rotateY(-27deg);
+  }
+}
+
+.card.animated {
+  transition: none;
+  animation: holoCard 12s ease 0s 1;
+}
+
+.card.animated:before {
+  transition: none;
+  animation: holoGradient 12s ease 0s 1;
+}
+
+.card.animated:after {
+  transition: none;
+  animation: holoSparkle 12s ease 0s 1;
+}
+
+.cards .card:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.cards .card:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.cards .card:nth-child(4) {
+  animation-delay: 0.75s;
 }
 </style>

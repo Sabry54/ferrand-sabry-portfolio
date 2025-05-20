@@ -3,6 +3,7 @@ import Home from "../pages/Home.vue";
 import About from "../pages/About.vue";
 import Portfolio from "../pages/Portfolio.vue";
 import Contact from "../pages/Contact.vue";
+import TestHolo from "../views/TestHolo.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: "/contact",
       name: "contact",
       component: Contact,
+    },
+    {
+      path: "/test-holo",
+      name: "TestHolo",
+      component: TestHolo,
     },
   ],
 });
