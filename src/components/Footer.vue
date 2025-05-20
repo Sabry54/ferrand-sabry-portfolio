@@ -3,9 +3,13 @@
   <footer class="footer-overlay">
     <div class="container">
       <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="text-xs md:text-base text-white mb-1 md:mb-0">
-          © 2025 Ferrand Sabry
-        </p>
+        <div class="text-center">
+          <p
+            class="text-xs md:text-base text-white hover:text-accent transition-colors cursor-pointer"
+          >
+            © {{ new Date().getFullYear() }} Ferrand Sabry. All rights reserved.
+          </p>
+        </div>
         <nav>
           <ul class="flex space-x-3 md:space-x-6">
             <li>

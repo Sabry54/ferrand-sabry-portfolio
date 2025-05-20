@@ -1,12 +1,12 @@
 <!-- Header.vue -->
 <template>
   <header
-    class="fixed top-0 left-0 right-0 w-full py-2 z-[100] transition-all duration-300 bg-transparent border-transparent"
+    class="fixed top-0 left-0 right-0 w-full py-4 z-[100] transition-all duration-300 bg-transparent border-transparent"
   >
     <div class="container flex justify-between items-center">
       <router-link
         to="/"
-        class="text-2xl font-bold text-white hover:text-gray-200 transition-colors"
+        class="text-2xl font-bold text-white hover:text-gray-200 transition-colors font-montserrat"
       >
         Ferrand Sabry
       </router-link>
@@ -28,7 +28,7 @@
           <li>
             <router-link
               to="/"
-              class="text-white hover:text-gray-200 transition-colors"
+              class="text-white hover:text-gray-200 transition-colors font-montserrat"
               active-class="text-accent"
             >
               Home
@@ -37,7 +37,7 @@
           <li>
             <router-link
               to="/about"
-              class="text-white hover:text-gray-200 transition-colors"
+              class="text-white hover:text-gray-200 transition-colors font-montserrat"
               active-class="text-accent"
             >
               About
@@ -46,7 +46,7 @@
           <li>
             <router-link
               to="/skills"
-              class="text-white hover:text-gray-200 transition-colors"
+              class="text-white hover:text-gray-200 transition-colors font-montserrat"
               active-class="text-accent"
             >
               Skills
@@ -55,7 +55,7 @@
           <li>
             <router-link
               to="/contact"
-              class="text-white hover:text-gray-200 transition-colors"
+              class="text-white hover:text-gray-200 transition-colors font-montserrat"
               active-class="text-accent"
             >
               Contact
@@ -74,7 +74,7 @@
           <li>
             <router-link
               to="/"
-              class="text-white text-2xl hover:text-accent transition-colors"
+              class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
               active-class="text-accent"
               @click="closeMenu"
             >
@@ -84,7 +84,7 @@
           <li>
             <router-link
               to="/about"
-              class="text-white text-2xl hover:text-accent transition-colors"
+              class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
               active-class="text-accent"
               @click="closeMenu"
             >
@@ -94,7 +94,7 @@
           <li>
             <router-link
               to="/skills"
-              class="text-white text-2xl hover:text-accent transition-colors"
+              class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
               active-class="text-accent"
               @click="closeMenu"
             >
@@ -104,7 +104,7 @@
           <li>
             <router-link
               to="/contact"
-              class="text-white text-2xl hover:text-accent transition-colors"
+              class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
               active-class="text-accent"
               @click="closeMenu"
             >
