@@ -302,7 +302,11 @@
           src="../assets/images/home/cheer_to_you_if_see_this.png"
           alt="Portfolio mascot"
           class="absolute max-w-[200px] md:max-w-md w-full h-auto opacity-100 transition-all duration-300 z-[8] animate-fadeIn"
-          style="pointer-events: none; right: 25%; bottom: 10%"
+          :style="
+            isMobile
+              ? 'pointer-events: none; right: -9%; bottom: 30%;'
+              : 'pointer-events: none; right: 0%; bottom: 30%; margin-left: 350px;'
+          "
         />
         <div class="container mx-auto text-white slide-content md:mt-[72px]">
           <h2
