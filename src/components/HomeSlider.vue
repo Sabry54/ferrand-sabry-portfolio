@@ -327,21 +327,26 @@
                   <h3
                     class="text-base font-bold mb-1 font-limelight text-center hidden md:block"
                   >
-                    Projet 1
+                    {{ portfolioCards[0]?.title || "Portfolio" }}
                   </h3>
                   <div
                     class="aspect-square bg-white/20 rounded-lg mb-2 overflow-hidden flex items-center justify-center w-1/2 mx-auto md:w-full"
                   >
                     <img
-                      src="../assets/images/portfolio/divers/image00051.png"
-                      alt="Projet 1"
+                      :src="
+                        portfolioCards[0]?.image ||
+                        '/portfolio/divers/image00051.png'
+                      "
+                      :alt="portfolioCards[0]?.title || 'Portfolio'"
                       class="object-cover w-full h-full"
                     />
                   </div>
                   <p
                     class="text-sm text-center font-medium text-white/90 px-2 py-1 hidden md:block"
                   >
-                    Description du projet 1.
+                    {{
+                      portfolioCards[0]?.description || "Découvrez mes projets"
+                    }}
                   </p>
                 </router-link>
               </template>
