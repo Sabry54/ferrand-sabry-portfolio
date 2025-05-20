@@ -552,6 +552,24 @@ const animateSlide = () => {
     return;
   }
 
+  // Préparation des éléments pour l'animation
+  const nextSlideElement = document.querySelector(
+    `.slide:nth-child(${currentSlide.value + 1})`
+  );
+  if (nextSlideElement) {
+    // Cacher tous les éléments avant l'animation
+    gsap.set(
+      nextSlideElement.querySelectorAll("h2:not(.title-container h2), h3, p"),
+      {
+        opacity: 0,
+        x: -50,
+      }
+    );
+    gsap.set(nextSlideElement.querySelectorAll("a[href], button"), {
+      opacity: 0,
+    });
+  }
+
   if (isMobile.value) {
     // Animation verticale sur mobile
     gsap.to(track, {
@@ -559,6 +577,12 @@ const animateSlide = () => {
       x: 0,
       duration: 1,
       ease: "power3.inOut",
+      onStart: () => {
+        // Démarrer l'animation du contenu pendant la transition
+        if (nextSlideElement) {
+          animateSlideContent(nextSlideElement);
+        }
+      },
       onComplete: () => {
         isAnimating.value = false;
       },
@@ -570,11 +594,80 @@ const animateSlide = () => {
       y: 0,
       duration: 1,
       ease: "power3.inOut",
+      onStart: () => {
+        // Démarrer l'animation du contenu pendant la transition
+        if (nextSlideElement) {
+          animateSlideContent(nextSlideElement);
+        }
+      },
       onComplete: () => {
         isAnimating.value = false;
       },
     });
   }
+};
+
+const animateSlideContent = (slideElement) => {
+  if (!slideElement) return;
+
+  // Animation des titres avec effet de cascade latéral
+  const titles = slideElement.querySelectorAll(
+    "h2:not(.title-container h2), h3"
+  );
+  gsap.fromTo(
+    titles,
+    {
+      opacity: 0,
+      x: -50,
+    },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1.4,
+      stagger: {
+        amount: 0.9,
+        from: "start",
+      },
+      ease: "sine.out",
+      delay: 0.4,
+    }
+  );
+
+  // Animation des paragraphes avec effet de cascade latéral
+  const paragraphs = slideElement.querySelectorAll("p");
+  gsap.fromTo(
+    paragraphs,
+    {
+      opacity: 0,
+      x: -30,
+    },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1.2,
+      stagger: {
+        amount: 0.8,
+        from: "start",
+      },
+      ease: "sine.out",
+      delay: 0.8,
+    }
+  );
+
+  // Animation simple des boutons (fade uniquement)
+  const buttons = slideElement.querySelectorAll("a[href], button");
+  gsap.fromTo(
+    buttons,
+    {
+      opacity: 0,
+    },
+    {
+      opacity: 1,
+      duration: 0.8,
+      ease: "power1.inOut",
+      delay: 1.2,
+    }
+  );
 };
 
 const goToSlide = (index) => {
@@ -859,6 +952,26 @@ onMounted(() => {
   const track = document.getElementById("sliderTrack");
   if (track) {
     gsap.set(track, { x: 0, y: 0 });
+  }
+
+  // Animation initiale du contenu du premier slide avec un délai
+  const firstSlide = document.querySelector(".slide");
+  if (firstSlide) {
+    // Cacher uniquement les textes, titres et boutons
+    gsap.set(
+      firstSlide.querySelectorAll("h2:not(.title-container h2), h3, p"),
+      {
+        opacity: 0,
+        x: -50,
+      }
+    );
+    gsap.set(firstSlide.querySelectorAll("a[href], button"), {
+      opacity: 0,
+    });
+    // Animer le contenu avec un délai initial
+    setTimeout(() => {
+      animateSlideContent(firstSlide);
+    }, 500);
   }
 
   // Animation du titre rotatif
