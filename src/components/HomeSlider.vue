@@ -124,7 +124,7 @@
           }"
         />
         <div
-          class="container mx-auto text-white slide-content relative h-[calc(100vh-144px)] mt-[72px] flex items-center -mt-[30px] md:mt-0"
+          class="container mx-auto text-white slide-content relative h-[calc(calc(var(--vh,1vh)*100)-144px)] mt-[72px] flex items-center -mt-[30px] md:mt-0"
         >
           <div class="w-full">
             <div class="relative z-[20] mb-12">
@@ -545,10 +545,10 @@ const animateSlide = () => {
   if (isMobile.value) {
     // Animation verticale sur mobile
     gsap.to(track, {
-      y: `${-currentSlide.value * 100}vh`,
+      y: () => -currentSlide.value * window.innerHeight,
       x: 0,
       duration: 1,
-      ease: "power3.inOut",
+      ease: "power2.inOut",
       onStart: () => {
         // Démarrer l'animation du contenu pendant la transition
         if (nextSlideElement) {
@@ -562,10 +562,10 @@ const animateSlide = () => {
   } else {
     // Animation horizontale sur desktop/tablette
     gsap.to(track, {
-      x: `${-currentSlide.value * 100}vw`,
+      x: () => -currentSlide.value * window.innerWidth,
       y: 0,
       duration: 1,
-      ease: "power3.inOut",
+      ease: "power2.inOut",
       onStart: () => {
         // Démarrer l'animation du contenu pendant la transition
         if (nextSlideElement) {
@@ -1038,17 +1038,33 @@ body {
   overflow: hidden;
 }
 
+.slider-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #000;
+  z-index: 10;
+}
+
 .slider-track {
-  position: relative;
-  width: 400vw;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400vh;
   display: flex;
+  flex-direction: column;
 }
 
 .slide {
-  width: 100vw;
-  height: 100%;
-  flex-shrink: 0;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Styles pour mobile (< 768px) */
@@ -1064,18 +1080,6 @@ body {
     padding-top: 0;
     padding-bottom: 0;
   }
-  .mobile-cards-scroll {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 1.5rem;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 1rem;
-  }
-  .mobile-cards-scroll > div {
-    min-width: 80vw;
-    flex: 0 0 auto;
-  }
 }
 
 /* Styles pour desktop (>= 768px) */
@@ -1085,6 +1089,7 @@ body {
     width: 400vw;
     height: 100%;
     display: flex;
+    flex-direction: row;
   }
 
   .slide {
