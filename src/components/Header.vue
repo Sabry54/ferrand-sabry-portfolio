@@ -19,7 +19,9 @@
 
       <!-- Menu et Burger à droite -->
       <div class="flex items-end mr-[2%] relative z-10">
-        <span class="text-xs text-black" style="margin-bottom: -6%">Menu</span>
+        <span class="text-xs text-black menu-text" style="margin-bottom: -6%"
+          >menu</span
+        >
         <button
           @click="isMenuOpen = !isMenuOpen"
           class="ml-2"
@@ -365,5 +367,10 @@ nav a:hover::after {
 
 .close-icon:hover span:last-child {
   transform: rotate(135deg);
+}
+
+.menu-text {
+  font-family: "Montserrat", sans-serif;
+  text-transform: lowercase;
 }
 </style>

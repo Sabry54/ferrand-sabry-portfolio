@@ -10,7 +10,10 @@
           <div class="squares-container">
             <!-- Premier carré : Titre et texte -->
             <div class="square text-square">
-              <div class="rotating-title animate-title">
+              <div
+                class="rotating-title"
+                :class="{ 'animate-title': currentSlide === 0 }"
+              >
                 <div class="title-container">
                   <h2 class="text-4xl md:text-6xl font-sans">Curiosity</h2>
                   <h2 class="text-4xl md:text-6xl font-sans">Reflect</h2>
@@ -22,7 +25,10 @@
                   Curiosity.Reflect.Adapt.Forge.Test.
                 </div>
               </div>
-              <p class="description-text animate-text">
+              <p
+                class="description-text"
+                :class="{ 'animate-text': currentSlide === 0 }"
+              >
                 Coding as a state of mind — riding the momentum instead of
                 forcing the structure. No fixed roadmap, just curiosity and the
                 freedom to follow what feels right. Experimenting with tools,
@@ -34,7 +40,10 @@
                 into rhythm, space, and flow. Building experiences that breathe,
                 speak softly, and leave room for interpretation.
               </p>
-              <p class="quote-text animate-quote">
+              <p
+                class="quote-text"
+                :class="{ 'animate-quote': currentSlide === 0 }"
+              >
                 "You don't control the muse — you simply show up and get out of
                 the way."
                 <span class="quote-author">— Rick Rubin</span>
@@ -56,8 +65,60 @@
       <!-- Slide 2 -->
       <section class="slide" :class="{ active: currentSlide === 1 }">
         <div class="slide-content">
-          <h1>Slide 2</h1>
-          <p>Contenu du deuxième slide</p>
+          <div class="squares-container">
+            <!-- Premier carré : Titre et texte -->
+            <div class="square text-square">
+              <div
+                class="rotating-title"
+                :class="{ 'animate-title': currentSlide === 1 }"
+              >
+                <div class="title-container">
+                  <h2 class="text-4xl md:text-6xl font-sans">
+                    No Code. Just Flow.
+                  </h2>
+                  <h2 class="text-4xl md:text-6xl font-sans">Reflect</h2>
+                  <h2 class="text-4xl md:text-6xl font-sans">Adapt</h2>
+                  <h2 class="text-4xl md:text-6xl font-sans">Forge</h2>
+                  <h2 class="text-4xl md:text-6xl font-sans">Test</h2>
+                </div>
+                <div class="responsive-title">
+                  No Code. Just Flow.Reflect.Adapt.Forge.Test.
+                </div>
+              </div>
+              <p
+                class="description-text"
+                :class="{ 'animate-text': currentSlide === 1 }"
+              >
+                This project began as an experiment: What if no line of code was
+                written by hand—yet every detail was intentional? The goal
+                wasn't to bypass complexity, but to collaborate with the
+                tools—to push their limits, understand their language, and see
+                how far they could carry a creative vision without manual
+                intervention. Of course, the constraints came fast. But that was
+                part of the point. Limitations invite design. They shape the
+                outcome. And solving around them — with clarity, patience, and
+                precision — became one of the most rewarding parts of the
+                process. This isn't about shortcuts. It's about crafting with
+                systems, and building with flow.
+              </p>
+              <button
+                class="more-button"
+                :class="{ 'animate-quote': currentSlide === 1 }"
+              >
+                more
+                <span class="arrow">→</span>
+              </button>
+            </div>
+
+            <!-- Deuxième carré : Image Luffy -->
+            <div class="square">
+              <img
+                src="/images/home/luffy3d.png"
+                alt="Luffy 3D"
+                class="luffy-image"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -295,8 +356,10 @@ onMounted(() => {
   window.addEventListener("resize", updateIsMobile);
   updateIsMobile();
 
-  // Animation du titre rotatif
-  const titleContainer = document.querySelector(".title-container");
+  // Animation du titre rotatif pour slide 1
+  const titleContainer = document.querySelector(
+    ".slide:nth-child(1) .title-container"
+  );
   if (titleContainer) {
     const titles = titleContainer.querySelectorAll("h2");
     let currentIndex = 0;
@@ -325,14 +388,14 @@ onMounted(() => {
     setTimeout(animateTitles, 1500);
   }
 
-  // Animation du titre, texte et citation
-  const title = document.querySelector(".animate-title");
-  const text = document.querySelector(".animate-text");
-  const quote = document.querySelector(".animate-quote");
+  // Animation du titre, texte et citation pour slide 2
+  const title2 = document.querySelector(".slide:nth-child(2) .animate-title");
+  const text2 = document.querySelector(".slide:nth-child(2) .animate-text");
+  const quote2 = document.querySelector(".slide:nth-child(2) .animate-quote");
 
-  if (title && text && quote) {
+  if (title2 && text2 && quote2) {
     gsap.fromTo(
-      title,
+      title2,
       {
         opacity: 0,
         x: 50,
@@ -347,7 +410,7 @@ onMounted(() => {
     );
 
     gsap.fromTo(
-      text,
+      text2,
       {
         opacity: 0,
         x: 50,
@@ -362,7 +425,7 @@ onMounted(() => {
     );
 
     gsap.fromTo(
-      quote,
+      quote2,
       {
         opacity: 0,
         x: 50,
@@ -655,22 +718,44 @@ onUnmounted(() => {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .slides-container.mobile-view .slide {
+    position: relative;
+    opacity: 1 !important;
+    visibility: visible !important;
+    height: auto;
+    min-height: 80vh;
+    padding: 1rem 0;
+  }
+
   .squares-container {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
-    gap: clamp(2rem, 4vw, 6rem);
+    gap: 1rem;
     height: auto;
   }
 
   .square {
     height: auto;
     max-height: none;
-    padding: clamp(1rem, 4vw, 6rem);
+    padding: 1rem;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .text-square {
-    padding-left: clamp(1rem, 4vw, 6rem);
-    gap: clamp(2rem, 4vw, 6rem);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 1rem;
+    text-align: right;
+  }
+
+  .rotating-title,
+  .description-text,
+  .more-button,
+  .luffy-image {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
   }
 
   .rotating-title {
@@ -684,15 +769,26 @@ onUnmounted(() => {
 
   .responsive-title {
     display: block;
-  }
-
-  .title-container h2 {
-    font-size: clamp(2rem, 8vw, 8rem);
+    text-align: right;
+    margin-right: 0;
+    padding-right: 0;
   }
 
   .description-text {
     font-size: clamp(1rem, 3vw, 3rem);
     line-height: 1.4;
+    text-align: right;
+    margin-right: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
+
+  .more-button {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: 0;
+    padding-right: 0;
   }
 
   .luffy-image {
@@ -701,8 +797,21 @@ onUnmounted(() => {
     margin: 0 auto;
   }
 
-  .slide-navigation {
-    display: none;
+  /* Réinitialiser les styles pour le slide 1 */
+  .slide:nth-child(1) .text-square {
+    text-align: left;
+  }
+
+  .slide:nth-child(1) .responsive-title {
+    text-align: left;
+  }
+
+  .slide:nth-child(1) .description-text {
+    text-align: left;
+  }
+
+  .slide:nth-child(1) .more-button {
+    margin-left: 0;
   }
 }
 
@@ -719,12 +828,12 @@ onUnmounted(() => {
     padding-left: clamp(0.5rem, 2vw, 3rem);
   }
 
-  .title-container h2 {
-    font-size: clamp(1.75rem, 10vw, 10rem);
-  }
-
   .description-text {
     font-size: clamp(0.875rem, 4vw, 4rem);
+  }
+
+  .more-button {
+    font-size: 0.9rem;
   }
 
   .luffy-image {
@@ -827,5 +936,247 @@ onUnmounted(() => {
 .animate-quote {
   animation: slideInRight 1.2s ease-out forwards;
   animation-delay: 1s;
+}
+
+.slide-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.slide-2.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slide-2 .slide-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vw;
+}
+
+.slide-2 .squares-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2vw;
+  width: 90vw;
+  max-width: 1200px;
+  height: 60vh;
+}
+
+.slide-2 .square {
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2vw;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.slide-2 .text-square .slide-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: black;
+}
+
+.slide-2 .text-square .slide-subtitle {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: black;
+}
+
+.slide-2 .text-square .slide-description {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: black;
+  line-height: 1.5;
+}
+
+.slide-2 .image-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-2 .slide-image {
+  width: 100%;
+  height: auto;
+  max-width: 320px;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 900px) {
+  .slide-2 .squares-container {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4vw;
+  }
+  .slide-2 .square {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .slide-2 .slide-content {
+    padding: 1vw;
+  }
+  .slide-2 .squares-container {
+    width: 98vw;
+    max-width: 100vw;
+    gap: 2vw;
+  }
+  .slide-2 .square {
+    padding: 4vw 2vw;
+    border-radius: 1rem;
+  }
+  .slide-2 .slide-title {
+    font-size: clamp(1.5rem, 7vw, 2.5rem);
+  }
+  .slide-2 .slide-image {
+    max-width: 90vw;
+    border-radius: 1rem;
+  }
+}
+
+/* Styles pour la slide 2 */
+.slide:nth-child(2) .rotating-title,
+.slide:nth-child(2) .description-text,
+.slide:nth-child(2) .quote-text {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.slide:nth-child(2) .animate-title {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.slide:nth-child(2) .animate-text {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.slide:nth-child(2) .animate-quote {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 1s;
+}
+
+/* Styles pour les slides */
+.slide:nth-child(1) .rotating-title,
+.slide:nth-child(1) .description-text,
+.slide:nth-child(1) .quote-text,
+.slide:nth-child(2) .rotating-title,
+.slide:nth-child(2) .description-text,
+.slide:nth-child(2) .quote-text {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.slide:nth-child(1) .animate-title,
+.slide:nth-child(2) .animate-title {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.slide:nth-child(1) .animate-text,
+.slide:nth-child(2) .animate-text {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.slide:nth-child(1) .animate-quote,
+.slide:nth-child(2) .animate-quote {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 1s;
+}
+
+.more-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  color: black;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+}
+
+.more-button .arrow {
+  transition: transform 0.3s ease;
+}
+
+.more-button:hover .arrow {
+  transform: translateX(10px);
+}
+
+@media (max-width: 768px) {
+  .more-button {
+    font-size: 1rem;
+  }
+}
+
+/* Styles pour l'image du slide 2 */
+.slide:nth-child(2) .square:last-child {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.slide:nth-child(2) .luffy-image {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateX(30%);
+}
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .slide:nth-child(2) .luffy-image {
+    max-height: 100%;
+    transform: translateX(25%);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .slide:nth-child(2) .luffy-image {
+    max-height: 250px;
+    position: relative;
+    transform: none;
+  }
 }
 </style>
