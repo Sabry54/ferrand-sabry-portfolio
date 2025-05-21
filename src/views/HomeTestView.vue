@@ -31,14 +31,16 @@
               >
                 Coding as a state of mind — riding the momentum instead of
                 forcing the structure. No fixed roadmap, just curiosity and the
-                freedom to follow what feels right. Experimenting with tools,
-                ideas, and interactions to see what clicks. Creating things that
+                <span class="red-text">freedom</span> to follow what feels
+                right. Experimenting with tools, ideas, and interactions to see
+                what clicks. <span class="red-text">Creating</span> things that
                 feel natural, intentional, and quietly powerful. Letting the
                 process unfold — adapting to what emerges rather than chasing
-                control. Code becomes a language for intuition, not just
-                instruction. The goal isn't perfection, it's resonance. Tuning
-                into rhythm, space, and flow. Building experiences that breathe,
-                speak softly, and leave room for interpretation.
+                <span class="red-text">control</span>. Code becomes a language
+                for intuition, not just instruction. The goal isn't perfection,
+                it's resonance. Tuning into rhythm, space, and
+                <span class="red-text">flow</span>. Building experiences that
+                breathe, speak softly, and leave room for interpretation.
               </p>
               <p
                 class="quote-text"
@@ -67,7 +69,10 @@
         <div class="slide-content">
           <div class="squares-container">
             <!-- Premier carré : Titre et texte -->
-            <div class="square text-square">
+            <div
+              class="square text-square"
+              :class="{ 'full-width-mobile': isMobile }"
+            >
               <div
                 class="rotating-title"
                 :class="{ 'animate-title': currentSlide === 1 }"
@@ -81,9 +86,7 @@
                   <h2 class="text-4xl md:text-6xl font-sans">Forge</h2>
                   <h2 class="text-4xl md:text-6xl font-sans">Test</h2>
                 </div>
-                <div class="responsive-title">
-                  No Code. Just Flow.Reflect.Adapt.Forge.Test.
-                </div>
+                <div class="responsive-title">No Code. Just Flow.</div>
               </div>
               <p
                 class="description-text"
@@ -114,7 +117,7 @@
             </div>
 
             <!-- Deuxième carré : Image Luffy -->
-            <div class="square">
+            <div class="square" v-if="!isMobile">
               <img
                 src="/images/home/luffy3d.png"
                 alt="Luffy 3D"
@@ -147,7 +150,7 @@
                 </div>
                 <div class="responsive-title">
                   <span class="red-text">Craft</span>ed with AI. Curated by
-                  Instinct.Reflect.Adapt.Forge.Test.
+                  Instinct.
                 </div>
               </div>
               <section class="cards">
@@ -221,7 +224,7 @@
     <div class="transition-overlay"></div>
 
     <!-- Navigation -->
-    <nav class="slide-navigation">
+    <nav class="slide-navigation" :class="{ 'hidden-mobile': isMobile }">
       <button
         v-for="(_, index) in 4"
         :key="index"
@@ -975,30 +978,37 @@ onUnmounted(() => {
     opacity: 1 !important;
     visibility: visible !important;
     height: auto;
-    min-height: 80vh;
+    min-height: auto;
     padding: 1rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .slide-content {
+    padding: 1rem;
   }
 
   .squares-container {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
     gap: 1rem;
     height: auto;
+    margin-bottom: 0;
   }
 
   .square {
     height: auto;
     max-height: none;
     padding: 1rem;
-    opacity: 1 !important;
-    visibility: visible !important;
+    margin-bottom: 0;
   }
 
   .text-square {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 1rem;
     gap: 1rem;
-    text-align: right;
+  }
+
+  .more-button {
+    margin-bottom: 1rem;
   }
 
   .rotating-title,
@@ -1669,5 +1679,35 @@ onUnmounted(() => {
 
 .cards .card:nth-child(4) {
   animation-delay: 0.75s;
+}
+
+/* Ajout des styles pour masquer l'image sur mobile */
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+/* Ajout des styles pour le mode mobile */
+@media (max-width: 768px) {
+  .full-width-mobile {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide:nth-child(3) .text-square {
+    text-align: left;
+  }
+
+  .slide:nth-child(3) .responsive-title {
+    text-align: left;
+  }
+
+  .slide:nth-child(3) .more-button {
+    margin-left: 0;
+    margin-right: auto;
+  }
 }
 </style>
