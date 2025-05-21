@@ -94,12 +94,15 @@
                 wasn't to bypass complexity, but to collaborate with the
                 tools—to push their limits, understand their language, and see
                 how far they could carry a creative vision without manual
-                intervention. Of course, the constraints came fast. But that was
-                part of the point. Limitations invite design. They shape the
-                outcome. And solving around them — with clarity, patience, and
-                precision — became one of the most rewarding parts of the
-                process. This isn't about shortcuts. It's about crafting with
-                systems, and building with flow.
+                intervention.
+                <span class="red-text"
+                  >Of course, the constraints came fast.</span
+                >
+                But that was part of the point. Limitations invite design. They
+                shape the outcome. And solving around them — with clarity,
+                patience, and precision — became one of the most rewarding parts
+                of the process. This isn't about shortcuts. It's about crafting
+                with systems, and building with flow.
               </p>
               <button
                 class="more-button"
@@ -125,8 +128,83 @@
       <!-- Slide 3 -->
       <section class="slide" :class="{ active: currentSlide === 2 }">
         <div class="slide-content">
-          <h1>Slide 3</h1>
-          <p>Contenu du troisième slide</p>
+          <div class="squares-container slide-3-container">
+            <!-- Premier carré : Titre et texte -->
+            <div class="square text-square full-width">
+              <div
+                class="rotating-title"
+                :class="{ 'animate-title': currentSlide === 2 }"
+              >
+                <div class="title-container">
+                  <h2 class="text-4xl md:text-6xl font-sans">
+                    <span class="red-text">Craft</span>ed with AI. Curated by
+                    Instinct.
+                  </h2>
+                  <h2 class="text-4xl md:text-6xl font-sans">Reflect</h2>
+                  <h2 class="text-4xl md:text-6xl font-sans">Adapt</h2>
+                  <h2 class="text-4xl md:text-6xl font-sans">Forge</h2>
+                  <h2 class="text-4xl md:text-6xl font-sans">Test</h2>
+                </div>
+                <div class="responsive-title">
+                  <span class="red-text">Craft</span>ed with AI. Curated by
+                  Instinct.Reflect.Adapt.Forge.Test.
+                </div>
+              </div>
+              <section class="cards">
+                <div class="three-d-wrapper">
+                  <router-link
+                    :to="{
+                      path: '/portfolio',
+                      query: { section: portfolioCards[0]?.folder },
+                    }"
+                    class="card portfolio-1 animated"
+                    style="display: block; text-decoration: none"
+                    :style="{ '--front': `url(${portfolioCards[0]?.image})` }"
+                  ></router-link>
+                </div>
+                <div class="three-d-wrapper hidden md:block">
+                  <router-link
+                    :to="{
+                      path: '/portfolio',
+                      query: { section: portfolioCards[1]?.folder },
+                    }"
+                    class="card portfolio-2 animated"
+                    style="display: block; text-decoration: none"
+                    :style="{ '--front': `url(${portfolioCards[1]?.image})` }"
+                  ></router-link>
+                </div>
+                <div class="three-d-wrapper hidden md:block">
+                  <router-link
+                    :to="{
+                      path: '/portfolio',
+                      query: { section: portfolioCards[2]?.folder },
+                    }"
+                    class="card portfolio-3 animated"
+                    style="display: block; text-decoration: none"
+                    :style="{ '--front': `url(${portfolioCards[2]?.image})` }"
+                  ></router-link>
+                </div>
+                <div class="three-d-wrapper hidden md:block">
+                  <router-link
+                    :to="{
+                      path: '/portfolio',
+                      query: { section: portfolioCards[3]?.folder },
+                    }"
+                    class="card portfolio-4 animated"
+                    style="display: block; text-decoration: none"
+                    :style="{ '--front': `url(${portfolioCards[3]?.image})` }"
+                  ></router-link>
+                </div>
+              </section>
+              <button
+                class="more-button"
+                :class="{ 'animate-quote': currentSlide === 2 }"
+              >
+                more
+                <span class="arrow">→</span>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -158,9 +236,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 import { gsap } from "gsap";
 import Header from "../components/Header.vue";
+import { initHolographicEffect } from "../components/HolographicEffect.js";
 
 const currentSlide = ref(0);
 const isAnimating = ref(false);
@@ -169,6 +248,167 @@ const isMobile = ref(window.innerWidth <= 768);
 const mosaicCanvas = ref(null);
 const luffyImage = ref(null);
 let animationFrame = null;
+
+// Variables pour les cartes
+const portfolioCards = ref([]);
+const portfolioFolders = [
+  {
+    name: "divers",
+    title: "Divers",
+    images: [
+      "image00051.png",
+      "image00052.png",
+      "image00066.png",
+      "image00067.png",
+      "image00068.png",
+      "image00069.png",
+      "image00085.png",
+      "image00087.png",
+      "image00095.png",
+      "image00096.png",
+      "image00098.png",
+    ],
+  },
+  {
+    name: "réaliste",
+    title: "Réaliste",
+    images: [
+      "image00032.png",
+      "image00033.png",
+      "image00034.png",
+      "image00043.png",
+      "image00047.png",
+      "image00048.png",
+      "image00049.png",
+      "image00050.png",
+      "image00101.png",
+      "image00102.png",
+      "image00103.png",
+      "image00104.png",
+      "image00116.png",
+      "image00117.png",
+      "image00118.png",
+      "image00119.png",
+      "image00120.png",
+      "image00123.png",
+      "image00124.png",
+      "image00125.png",
+      "image00126.png",
+      "image00127.png",
+      "image00128.png",
+      "image00142.png",
+      "image00143.png",
+      "image00144.png",
+      "image00145.png",
+    ],
+  },
+  {
+    name: "live-action",
+    title: "Live Action",
+    images: ["image00053.png", "image00054.png", "image00055.png"],
+  },
+  {
+    name: "mangas",
+    title: "Mangas",
+    images: [
+      "0_1.webp",
+      "0_3.webp",
+      "image00001.png",
+      "image00002.png",
+      "image00003.png",
+      "image00004.png",
+      "image00005.png",
+      "image00006.png",
+      "image00007.png",
+      "image00008.png",
+      "image00009.png",
+      "image00010.png",
+      "image00011.png",
+      "image00012.png",
+      "image00013.png",
+      "image00014.png",
+      "image00015.png",
+      "image00016.png",
+      "image00017.png",
+      "image00018.png",
+      "image00019.png",
+      "image00020.png",
+      "image00021.png",
+      "image00022.png",
+      "image00023.png",
+      "image00024.png",
+      "image00025.png",
+      "image00026.png",
+      "image00027.png",
+      "image00028.png",
+      "image00029.png",
+      "image00030.png",
+      "image00031.png",
+      "image00035.png",
+      "image00036.png",
+      "image00037.png",
+      "image00039.png",
+      "image00040.png",
+      "image00041.png",
+      "image00044.png",
+      "image00045.png",
+      "image00046.png",
+      "image00081.png",
+      "image00137.png",
+      "image00138.png",
+      "image00139.png",
+      "image00140.png",
+      "image00141.png",
+      "image00146.png",
+      "image00147.png",
+      "image00148.png",
+      "image00161.png",
+      "image00162.png",
+      "image00163.png",
+      "image00164.png",
+      "image00165.png",
+      "image00166.png",
+      "image00167.png",
+      "image00168.png",
+      "image00169.png",
+      "image00170.png",
+    ],
+  },
+];
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function getRandomImage(folder) {
+  const idx = getRandomInt(folder.images.length);
+  const imageName = folder.images[idx];
+  // Vérifier si l'image est en .webp
+  const isWebp = imageName.toLowerCase().endsWith(".webp");
+  // Chemin compatible avec la structure du dossier public en production
+  return `/images/portfolio/${folder.name}/${imageName}`;
+}
+
+function getRandomPortfolioCards(count) {
+  // On clone et on mélange le tableau
+  const shuffled = [...portfolioFolders].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count).map((folder) => ({
+    title: folder.title,
+    image: getRandomImage(folder),
+    folder: folder.name,
+  }));
+}
+
+const updatePortfolioCards = () => {
+  if (window.innerWidth <= 768) {
+    portfolioCards.value = getRandomPortfolioCards(1);
+  } else {
+    portfolioCards.value = getRandomPortfolioCards(4);
+  }
+};
+
+// Intervalle pour changer les cartes
+let cardsInterval;
 
 const goToSlide = (index) => {
   if (isAnimating.value || index < 0 || index > 3) return;
@@ -356,6 +596,17 @@ onMounted(() => {
   window.addEventListener("resize", updateIsMobile);
   updateIsMobile();
 
+  // Initialiser l'effet holographique
+  initHolographicEffect();
+
+  // Initialiser les cartes
+  updatePortfolioCards();
+
+  // Changer les cartes toutes les 30 secondes
+  cardsInterval = setInterval(() => {
+    updatePortfolioCards();
+  }, 30000);
+
   // Animation du titre rotatif pour slide 1
   const titleContainer = document.querySelector(
     ".slide:nth-child(1) .title-container"
@@ -447,6 +698,7 @@ onUnmounted(() => {
   window.removeEventListener("touchmove", handleTouchMove);
   window.removeEventListener("touchend", handleTouchEnd);
   window.removeEventListener("resize", updateIsMobile);
+  clearInterval(cardsInterval);
 
   if (animationFrame) {
     cancelAnimationFrame(animationFrame);
@@ -1178,5 +1430,244 @@ onUnmounted(() => {
     position: relative;
     transform: none;
   }
+}
+
+.red-text {
+  color: #ff0000;
+}
+
+.slide-3-container {
+  grid-template-columns: 1fr;
+}
+
+.full-width {
+  width: 100%;
+  max-width: 100%;
+}
+
+.slide-3-container .rotating-title {
+  margin-top: -4rem;
+}
+
+@media (max-width: 768px) {
+  .slide-3-container .rotating-title {
+    margin-top: -2rem;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  z-index: 1;
+  margin: 2rem 0;
+}
+
+@media screen and (min-width: 600px) {
+  .cards {
+    flex-direction: row;
+  }
+}
+
+.card {
+  width: 51.48vw;
+  height: 72vw;
+  position: relative;
+  overflow: hidden;
+  margin: 20px;
+  z-index: 10;
+  touch-action: none;
+  isolation: isolate;
+  border-radius: 5% / 3.5%;
+  box-shadow: -5px -5px 5px -5px var(--color1), 5px 5px 5px -5px var(--color2),
+    -7px -7px 10px -5px transparent, 7px 7px 10px -5px transparent,
+    0 0 5px 0px rgba(255, 255, 255, 0), 0 55px 35px -20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease, box-shadow 0.2s ease;
+  will-change: transform, filter;
+  background-color: #040712;
+  background-image: var(--front);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform-style: preserve-3d;
+  display: block;
+  text-decoration: none;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: -20px -20px 30px -25px var(--color1),
+    20px 20px 30px -25px var(--color2), -7px -7px 10px -5px var(--color1),
+    7px 7px 10px -5px var(--color2), 0 0 13px 4px rgba(255, 255, 255, 0.3),
+    0 55px 35px -20px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover:before {
+  background-image: linear-gradient(
+    110deg,
+    transparent 25%,
+    var(--color1) 48%,
+    var(--color2) 52%,
+    transparent 75%
+  );
+  background-position: 50% 50%;
+  background-size: 250% 250%;
+  opacity: 0.88;
+  filter: brightness(0.66) contrast(1.33);
+}
+
+.card:hover:after {
+  filter: brightness(1) contrast(1);
+  opacity: 1;
+}
+
+.glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 3;
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .glare {
+  opacity: 1;
+}
+
+@media screen and (min-width: 600px) {
+  .card {
+    width: clamp(10.32vw, 48.8vh, 14.4vw);
+    height: clamp(14.4vw, 68vh, 20.16vw);
+  }
+}
+
+.card:before,
+.card:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  mix-blend-mode: color-dodge;
+  transition: all 0.33s ease;
+}
+
+.card:before {
+  background-position: 50% 50%;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    115deg,
+    transparent 0%,
+    var(--color1) 25%,
+    transparent 47%,
+    transparent 53%,
+    var(--color2) 75%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  filter: brightness(0.5) contrast(1);
+  z-index: 1;
+}
+
+.card:after {
+  opacity: 1;
+  background-image: url("https://assets.codepen.io/13471/sparkles.gif"),
+    url(https://assets.codepen.io/13471/holo.png),
+    linear-gradient(
+      125deg,
+      #ff008450 15%,
+      #fca40040 30%,
+      #ffff0030 40%,
+      #00ff8a20 60%,
+      #00cfff40 70%,
+      #cc4cfa50 85%
+    );
+  background-position: 50% 50%;
+  background-size: 160%;
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  transition: all 0.33s ease;
+  mix-blend-mode: color-dodge;
+  opacity: 0.75;
+}
+
+.three-d-wrapper {
+  perspective: 750px;
+  isolation: isolate;
+  transform: translate3d(0.1px, 0.1px, 0.1px);
+}
+
+.card.portfolio-1 {
+  --color1: #54a29e;
+  --color2: #a79d66;
+  --front: url("/images/portfolio/divers/image00051.png");
+}
+
+.card.portfolio-2 {
+  --color1: #efb2fb;
+  --color2: #acc6f8;
+  --front: url("/images/portfolio/réaliste/image00032.png");
+}
+
+.card.portfolio-3 {
+  --color1: #54a29e;
+  --color2: #efb2fb;
+  --front: url("/images/portfolio/live-action/image00053.png");
+}
+
+.card.portfolio-4 {
+  --color1: #a79d66;
+  --color2: #acc6f8;
+  --front: url("/images/portfolio/mangas/image00001.png");
+}
+
+@keyframes holoCard {
+  0%,
+  100% {
+    transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+  }
+  5%,
+  8% {
+    transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg);
+  }
+  13%,
+  16% {
+    transform: rotateZ(0deg) rotateX(-9deg) rotateY(32deg);
+  }
+  35%,
+  38% {
+    transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg);
+  }
+  55% {
+    transform: rotateZ(-3deg) rotateX(-12deg) rotateY(-27deg);
+  }
+}
+
+.card.animated {
+  transition: none;
+  animation: holoCard 12s ease 0s 1;
+}
+
+.cards .card:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.cards .card:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.cards .card:nth-child(4) {
+  animation-delay: 0.75s;
 }
 </style>
