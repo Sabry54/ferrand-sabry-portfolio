@@ -214,8 +214,65 @@
       <!-- Slide 4 -->
       <section class="slide" :class="{ active: currentSlide === 3 }">
         <div class="slide-content">
-          <h1>Slide 4</h1>
-          <p>Contenu du quatrième slide</p>
+          <div class="squares-container">
+            <!-- Premier carré : Titre et texte -->
+            <div class="square text-square">
+              <div
+                class="rotating-title"
+                :class="{ 'animate-title': currentSlide === 3 }"
+              >
+                <div class="title-container">
+                  <h2 class="text-4xl md:text-6xl font-sans">Let's talk.</h2>
+                </div>
+                <div class="responsive-title">Let's talk.</div>
+              </div>
+              <p
+                class="description-text"
+                :class="{ 'animate-text': currentSlide === 3 }"
+              >
+                Got a project, an idea, or just curious about the process?<br />
+                Happy to chat — over coffee, a drink, or a simple call.<br />
+                No pressure. Just a conversation.
+              </p>
+              <p
+                class="quote-text"
+                :class="{ 'animate-quote': currentSlide === 3 }"
+              >
+                Ferrand Sabry
+              </p>
+            </div>
+
+            <!-- Deuxième carré : Formulaire de contact -->
+            <div class="square">
+              <form class="contact-form" @submit="handleSubmit">
+                <div class="form-group">
+                  <label for="name">Nom</label>
+                  <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="submit-button">Envoyer</button>
+                <div class="recaptcha-container">
+                  <div
+                    class="g-recaptcha"
+                    :data-sitekey="recaptchaSiteKey"
+                    data-callback="onRecaptchaVerified"
+                  ></div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -378,6 +435,10 @@ const portfolioFolders = [
     ],
   },
 ];
+
+// Ajout des variables pour reCAPTCHA
+const recaptchaResponse = ref(null);
+const recaptchaSiteKey = "6Ld5ckMrAAAAAHR52JB9wuKjiDm76CRB3AsnVYDp";
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -589,6 +650,32 @@ const initMosaicEffect = () => {
   } else {
     img.onload = updateCanvasSize;
   }
+};
+
+// Fonction pour gérer la soumission du formulaire
+const handleSubmit = (event) => {
+  event.preventDefault();
+  if (!recaptchaResponse.value) {
+    alert("Veuillez valider le reCAPTCHA");
+    return;
+  }
+
+  const form = event.target;
+  const formData = new FormData(form);
+  formData.append("g-recaptcha-response", recaptchaResponse.value);
+
+  // Redirection vers mailto avec les données
+  const mailtoLink = `mailto:ferrandsabry@gmail.com?subject=${encodeURIComponent(
+    formData.get("name")
+  )} - ${encodeURIComponent(formData.get("email"))}&body=${encodeURIComponent(
+    formData.get("message")
+  )}`;
+  window.location.href = mailtoLink;
+};
+
+// Fonction pour le callback reCAPTCHA
+const onRecaptchaVerified = (response) => {
+  recaptchaResponse.value = response;
 };
 
 onMounted(() => {
@@ -1708,6 +1795,139 @@ onUnmounted(() => {
   .slide:nth-child(3) .more-button {
     margin-left: 0;
     margin-right: auto;
+  }
+}
+
+/* Styles pour le formulaire de contact */
+.contact-form {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: "Aladin", cursive;
+  font-size: 1.2rem;
+  color: black;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: "Aladin", cursive;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-button {
+  padding: 1rem 2rem;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: "Aladin", cursive;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.submit-button:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 1rem;
+  }
+
+  .form-group label {
+    font-size: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+  }
+}
+
+/* Styles pour le slide 4 */
+.slide:nth-child(4) .rotating-title {
+  margin-top: 2rem;
+}
+
+.slide:nth-child(4) .title-container {
+  height: auto;
+}
+
+.slide:nth-child(4) .title-container h2 {
+  position: relative;
+  transform: none;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .slide:nth-child(4) .rotating-title {
+    margin-top: 1rem;
+  }
+}
+
+/* Styles pour le slide 4 */
+.slide:nth-child(4) .text-square {
+  margin-top: -4rem;
+}
+
+@media (max-width: 768px) {
+  .slide:nth-child(4) .text-square {
+    text-align: center;
+    margin-top: -2rem;
+  }
+
+  .slide:nth-child(4) .responsive-title {
+    text-align: center;
+  }
+
+  .slide:nth-child(4) .description-text {
+    text-align: center;
+  }
+
+  .slide:nth-child(4) .quote-text {
+    text-align: center;
+  }
+}
+
+.recaptcha-container {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .recaptcha-container {
+    transform: scale(0.9);
+    transform-origin: center;
   }
 }
 </style>
