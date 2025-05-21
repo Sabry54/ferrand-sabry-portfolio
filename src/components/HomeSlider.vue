@@ -896,8 +896,11 @@ function getRandomInt(max) {
  */
 function getRandomImage(folder) {
   const idx = getRandomInt(folder.images.length);
+  const imageName = folder.images[idx];
+  // Vérifier si l'image est en .webp
+  const isWebp = imageName.toLowerCase().endsWith(".webp");
   // Chemin compatible avec la structure du dossier public en production
-  return `/images/portfolio/${folder.name}/${folder.images[idx]}`;
+  return `/images/portfolio/${folder.name}/${imageName}`;
 }
 
 /**
@@ -1503,10 +1506,11 @@ body {
   background-image: var(--front);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 50% 50%;
+  background-position: center;
   transform-style: preserve-3d;
   display: block;
   text-decoration: none;
+  object-fit: cover;
 }
 
 @media screen and (min-width: 600px) {
