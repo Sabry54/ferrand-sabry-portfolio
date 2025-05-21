@@ -4,7 +4,7 @@
     <main class="flex-1 overflow-hidden">
       <router-view />
     </main>
-    <Footer v-if="!(isMobile && route.path === '/')" class="footer-app" />
+    <Footer v-if="route.path !== '/'" class="footer-app" />
   </div>
 </template>
 

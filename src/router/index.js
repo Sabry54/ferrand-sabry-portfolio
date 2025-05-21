@@ -4,6 +4,7 @@ import About from "../pages/About.vue";
 import Portfolio from "../pages/Portfolio.vue";
 import Contact from "../pages/Contact.vue";
 import TestHolo from "../views/TestHolo.vue";
+import HomeTestView from "../views/HomeTestView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -11,6 +12,11 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
+      component: HomeTestView,
+    },
+    {
+      path: "/original",
+      name: "original",
       component: Home,
     },
     {

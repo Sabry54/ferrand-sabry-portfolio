@@ -1,114 +1,65 @@
 <!-- Header.vue -->
 <template>
   <header
-    class="fixed top-0 left-0 right-0 w-full py-4 z-[100] transition-all duration-300 bg-transparent border-transparent"
+    class="fixed top-0 left-0 w-full h-[72px] z-50 transition-transform duration-300"
+    :class="{ 'translate-y-[-72px]': isHeaderHidden }"
   >
-    <div class="container flex justify-between items-center">
+    <div class="h-full flex justify-between items-center relative">
+      <!-- Fond avec ombrage pour mobile -->
+      <div class="header-background"></div>
+
+      <!-- Logo/Nom à gauche -->
       <router-link
         to="/"
-        class="text-2xl font-bold text-white hover:text-gray-200 transition-colors font-montserrat"
+        class="text-black text-xl font-bold ml-[2%] hover:text-gray-700 transition-colors relative z-10"
       >
-        Ferrand Sabry
+        <span class="hidden md:inline">Ferrand Sabry</span>
+        <span class="md:hidden" style="margin-top: -4px">FS</span>
       </router-link>
 
-      <!-- Menu Burger -->
+      <!-- Menu et Burger à droite -->
+      <div class="flex items-end mr-[2%] relative z-10">
+        <span class="text-xs text-black" style="margin-bottom: -6%">Menu</span>
+        <button
+          @click="isMenuOpen = !isMenuOpen"
+          class="ml-2"
+          aria-label="Menu"
+        >
+          <div class="burger-icon" :class="{ open: isMenuOpen }">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div
+      v-if="isMenuOpen"
+      class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
+    >
+      <!-- Bouton de fermeture -->
       <button
-        @click="toggleMenu"
-        class="md:hidden flex flex-col justify-center items-end w-12 h-12 relative p-2 z-[200]"
-        :class="{ 'menu-open': isMenuOpen }"
+        @click="isMenuOpen = false"
+        class="absolute top-8 right-8 w-12 h-12 flex items-center justify-center"
+        aria-label="Fermer le menu"
       >
-        <span class="burger-line line-1"></span>
-        <span class="burger-line line-2"></span>
-        <span class="burger-line line-3"></span>
+        <div class="close-icon">
+          <span></span>
+          <span></span>
+        </div>
       </button>
 
-      <!-- Navigation Desktop -->
-      <nav class="hidden md:block">
-        <ul class="flex space-x-6">
-          <li>
+      <nav class="text-white text-center">
+        <ul class="space-y-8">
+          <li v-for="item in menuItems" :key="item.path">
             <router-link
-              to="/"
-              class="text-white hover:text-gray-200 transition-colors font-montserrat"
-              active-class="text-accent"
+              :to="item.path"
+              class="text-2xl hover:text-gray-300 transition-colors"
+              @click="isMenuOpen = false"
             >
-              Home
-            </router-link>
-          </li>
-          <li>
-            <router-link
-              to="/about"
-              class="text-white hover:text-gray-200 transition-colors font-montserrat"
-              active-class="text-accent"
-            >
-              About
-            </router-link>
-          </li>
-          <li>
-            <router-link
-              to="/portfolio"
-              class="text-white hover:text-gray-200 transition-colors font-montserrat"
-              active-class="text-accent"
-            >
-              Portfolio
-            </router-link>
-          </li>
-          <li>
-            <router-link
-              to="/contact"
-              class="text-white hover:text-gray-200 transition-colors font-montserrat"
-              active-class="text-accent"
-            >
-              Contact
-            </router-link>
-          </li>
-        </ul>
-      </nav>
-
-      <!-- Navigation Mobile -->
-      <nav
-        class="fixed inset-0 bg-primary bg-opacity-95 md:hidden transition-transform duration-300 ease-in-out z-[150]"
-        :class="isMenuOpen ? 'translate-x-0' : 'translate-x-full'"
-        @click="closeMenu"
-      >
-        <ul class="flex flex-col items-center justify-center h-full space-y-8">
-          <li>
-            <router-link
-              to="/"
-              class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
-              active-class="text-accent"
-              @click="closeMenu"
-            >
-              Home
-            </router-link>
-          </li>
-          <li>
-            <router-link
-              to="/about"
-              class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
-              active-class="text-accent"
-              @click="closeMenu"
-            >
-              About
-            </router-link>
-          </li>
-          <li>
-            <router-link
-              to="/portfolio"
-              class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
-              active-class="text-accent"
-              @click="closeMenu"
-            >
-              Portfolio
-            </router-link>
-          </li>
-          <li>
-            <router-link
-              to="/contact"
-              class="text-white text-2xl hover:text-accent transition-colors font-montserrat"
-              active-class="text-accent"
-              @click="closeMenu"
-            >
-              Contact
+              {{ item.name }}
             </router-link>
           </li>
         </ul>
@@ -118,86 +69,301 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const isMenuOpen = ref(false);
+const isHeaderHidden = ref(false);
+let lastScrollY = 0;
+let ticking = false;
 
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-  document.body.style.overflow = isMenuOpen.value ? "hidden" : "";
+const menuItems = [
+  { name: "Accueil", path: "/" },
+  { name: "Original", path: "/original" },
+  { name: "À propos", path: "/about" },
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Contact", path: "/contact" },
+];
+
+const handleScroll = () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const currentScrollY = window.scrollY;
+
+      // Ne masquer le header que sur mobile
+      if (window.innerWidth <= 768) {
+        if (currentScrollY > lastScrollY && currentScrollY > 72) {
+          // Scroll vers le bas
+          isHeaderHidden.value = true;
+        } else {
+          // Scroll vers le haut
+          isHeaderHidden.value = false;
+        }
+      } else {
+        isHeaderHidden.value = false;
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    });
+
+    ticking = true;
+  }
 };
 
-const closeMenu = () => {
-  isMenuOpen.value = false;
-  document.body.style.overflow = "";
-};
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <style scoped>
-/* Ajout d'une hauteur fixe pour le header */
 header {
-  height: 72px;
-  mix-blend-mode: normal;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  transition: all 0.3s ease;
 }
 
-.burger-line {
-  height: 3px;
-  background-color: white;
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: "Aladin", cursive;
+  font-size: 2rem;
+  color: black;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+nav a:hover {
+  transform: translateY(-2px);
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobile-menu-button span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: black;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-button {
+    display: block;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.3s ease;
+    gap: 2rem;
+    box-shadow: none;
+  }
+
+  nav.active {
+    right: 0;
+  }
+
+  .mobile-menu-button.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .mobile-menu-button.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-button.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+}
+
+.header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header-background {
+    display: block;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.3s ease;
+    gap: 2rem;
+    box-shadow: none;
+  }
+
+  nav.active {
+    right: 0;
+  }
+}
+
+.burger-icon {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  cursor: pointer;
+}
+
+.burger-icon span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: black;
   transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center;
-  position: absolute;
-  right: 8px;
 }
 
-.menu-open .burger-line {
-  background-color: white;
-  height: 3px;
+.burger-icon span:first-child {
+  top: 0;
 }
 
-.line-1 {
-  width: 32px;
-  top: 12px;
+.burger-icon span:nth-child(2) {
+  top: 8px;
 }
 
-.line-2 {
-  width: 24px;
-  top: 20px;
-  right: 12px;
+.burger-icon span:last-child {
+  top: 16px;
 }
 
-.line-3 {
-  width: 28px;
-  top: 28px;
-  right: 10px;
+/* Animation à l'ouverture */
+.burger-icon.open span:first-child {
+  transform: translateY(8px) rotate(45deg);
+  width: 100%;
 }
 
-.menu-open .line-1 {
-  width: 32px;
-  top: 20px;
-  right: 8px;
-  transform: rotate(45deg);
-  background-color: white;
-}
-
-.menu-open .line-2 {
-  width: 0;
+.burger-icon.open span:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
 
-.menu-open .line-3 {
+.burger-icon.open span:last-child {
+  transform: translateY(-8px) rotate(-45deg);
+  width: 100%;
+}
+
+/* Animation au survol */
+.burger-icon:hover span:first-child {
+  transform: translateY(-2px);
+}
+
+.burger-icon:hover span:last-child {
+  transform: translateY(2px);
+}
+
+.burger-icon.open:hover span:first-child,
+.burger-icon.open:hover span:last-child {
+  transform: none;
+}
+
+/* Styles pour la croix de fermeture */
+.close-icon {
   width: 32px;
-  top: 20px;
-  right: 8px;
+  height: 32px;
+  position: relative;
+  cursor: pointer;
+}
+
+.close-icon span {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: black;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  transform-origin: center;
+}
+
+.close-icon span:first-child {
+  transform: rotate(45deg);
+}
+
+.close-icon span:last-child {
   transform: rotate(-45deg);
-  background-color: white;
 }
 
-/* Animation d'entrée et de sortie du menu mobile */
-.translate-x-full {
-  transform: translateX(100%);
+/* Animation au survol de la croix */
+.close-icon:hover span:first-child {
+  transform: rotate(225deg);
 }
 
-.translate-x-0 {
-  transform: translateX(0);
+.close-icon:hover span:last-child {
+  transform: rotate(135deg);
 }
 </style>
