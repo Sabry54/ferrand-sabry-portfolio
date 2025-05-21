@@ -312,30 +312,46 @@
           <section class="cards">
             <div class="three-d-wrapper">
               <router-link
-                :to="{ path: '/portfolio', query: { section: 'divers' } }"
+                :to="{
+                  path: '/portfolio',
+                  query: { section: portfolioCards[0]?.folder },
+                }"
                 class="card portfolio-1 animated"
                 style="display: block; text-decoration: none"
+                :style="{ '--front': `url(${portfolioCards[0]?.image})` }"
               ></router-link>
             </div>
             <div class="three-d-wrapper hidden md:block">
               <router-link
-                :to="{ path: '/portfolio', query: { section: 'réaliste' } }"
+                :to="{
+                  path: '/portfolio',
+                  query: { section: portfolioCards[1]?.folder },
+                }"
                 class="card portfolio-2 animated"
                 style="display: block; text-decoration: none"
+                :style="{ '--front': `url(${portfolioCards[1]?.image})` }"
               ></router-link>
             </div>
             <div class="three-d-wrapper hidden md:block">
               <router-link
-                :to="{ path: '/portfolio', query: { section: 'live-action' } }"
+                :to="{
+                  path: '/portfolio',
+                  query: { section: portfolioCards[2]?.folder },
+                }"
                 class="card portfolio-3 animated"
                 style="display: block; text-decoration: none"
+                :style="{ '--front': `url(${portfolioCards[2]?.image})` }"
               ></router-link>
             </div>
             <div class="three-d-wrapper hidden md:block">
               <router-link
-                :to="{ path: '/portfolio', query: { section: 'mangas' } }"
+                :to="{
+                  path: '/portfolio',
+                  query: { section: portfolioCards[3]?.folder },
+                }"
                 class="card portfolio-4 animated"
                 style="display: block; text-decoration: none"
+                :style="{ '--front': `url(${portfolioCards[3]?.image})` }"
               ></router-link>
             </div>
           </section>
@@ -906,17 +922,27 @@ const updatePortfolioCards = () => {
   if (window.innerWidth <= 768) {
     portfolioCards.value = getRandomPortfolioCards(1);
   } else {
-    portfolioCards.value = getRandomPortfolioCards(3);
+    portfolioCards.value = getRandomPortfolioCards(4);
   }
 };
+
+// Ajout d'un intervalle pour changer les cartes toutes les 30 secondes
+let cardsInterval;
 
 onMounted(() => {
   updatePortfolioCards();
   window.addEventListener("resize", updatePortfolioCards);
   initHolographicEffect();
+
+  // Changer les cartes toutes les 30 secondes
+  cardsInterval = setInterval(() => {
+    updatePortfolioCards();
+  }, 30000);
 });
+
 onUnmounted(() => {
   window.removeEventListener("resize", updatePortfolioCards);
+  clearInterval(cardsInterval);
 });
 // --- Fin logique encarts portfolio dynamiques ---
 
