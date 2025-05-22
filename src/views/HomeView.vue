@@ -1,5 +1,6 @@
 <template>
   <div class="home-test" :class="`bg-slide-${currentSlide + 1}`">
+    <div class="cursor"></div>
     <Header />
 
     <!-- Container des slides -->
@@ -297,6 +298,7 @@ import { initHolographicEffect } from "../components/HolographicEffect.js";
 const currentSlide = ref(0);
 const isAnimating = ref(false);
 const isMobile = ref(window.innerWidth <= 768);
+const cursor = ref(null);
 
 const mosaicCanvas = ref(null);
 const luffyImage = ref(null);
@@ -657,12 +659,23 @@ const handleSubmit = (event) => {
   window.location.href = mailtoLink;
 };
 
+// Gestion du curseur personnalisé
+const handleMouseMove = (e) => {
+  if (isMobile.value) return;
+  const cursorEl = document.querySelector(".cursor");
+  if (cursorEl) {
+    cursorEl.style.left = e.clientX + "px";
+    cursorEl.style.top = e.clientY + "px";
+  }
+};
+
 onMounted(() => {
   window.addEventListener("wheel", handleWheel, { passive: false });
   window.addEventListener("touchstart", handleTouchStart);
   window.addEventListener("touchmove", handleTouchMove, { passive: false });
   window.addEventListener("touchend", handleTouchEnd);
   window.addEventListener("resize", updateIsMobile);
+  window.addEventListener("mousemove", handleMouseMove);
   updateIsMobile();
 
   // Initialiser l'effet holographique
@@ -767,6 +780,7 @@ onUnmounted(() => {
   window.removeEventListener("touchmove", handleTouchMove);
   window.removeEventListener("touchend", handleTouchEnd);
   window.removeEventListener("resize", updateIsMobile);
+  window.removeEventListener("mousemove", handleMouseMove);
   clearInterval(cardsInterval);
 
   if (animationFrame) {
@@ -777,6 +791,24 @@ onUnmounted(() => {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Aladin&display=swap");
+
+/* Style global pour le curseur */
+:root {
+  cursor: none;
+}
+
+.cursor {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+}
 
 .home-test {
   width: 100%;
