@@ -468,43 +468,59 @@ let cardsInterval;
 const goToSlide = (index) => {
   if (isAnimating.value || index < 0 || index > 3) return;
 
-  // Mettre à jour le slide actuel
-  currentSlide.value = index;
+  const direction = index - currentSlide.value;
+  isAnimating.value = true;
 
-  // Animer la transition du slide
-  const currentSlideEl = document.querySelector(
-    `.slide:nth-child(${currentSlide.value + 1})`
-  );
-  const nextSlideEl = document.querySelector(`.slide:nth-child(${index + 1})`);
+  // Récupérer tous les slides
+  const slides = document.querySelectorAll(".slide");
+  const currentSlideEl = slides[currentSlide.value];
+  const nextSlideEl = slides[index];
 
   if (currentSlideEl && nextSlideEl) {
-    isAnimating.value = true;
-
+    // Créer une timeline GSAP pour une animation plus fluide
     const timeline = gsap.timeline({
       onComplete: () => {
         isAnimating.value = false;
       },
     });
 
-    timeline
-      .to(currentSlideEl, {
+    // Animation du slide actuel (inverse de l'animation d'arrivée)
+    timeline.to(currentSlideEl, {
+      opacity: 0,
+      x: direction > 0 ? -100 : 100,
+      rotationY: direction > 0 ? 30 : -30,
+      scale: 1.05,
+      duration: 1.2,
+      ease: "power2.inOut",
+      transformPerspective: 2000,
+      boxShadow: "0 0 50px rgba(0, 0, 0, 0.5)",
+    });
+
+    // Animation du prochain slide
+    timeline.fromTo(
+      nextSlideEl,
+      {
         opacity: 0,
-        x: -30,
-        duration: 0.8,
-        ease: "power3.out",
-      })
-      .fromTo(
-        nextSlideEl,
-        { opacity: 0, x: 30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          clearProps: "all",
-        },
-        "-=0.6"
-      );
+        x: direction > 0 ? 100 : -100,
+        rotationY: direction > 0 ? -30 : 30,
+        scale: 1.05,
+        boxShadow: "0 0 50px rgba(0, 0, 0, 0.5)",
+      },
+      {
+        opacity: 1,
+        x: 0,
+        rotationY: 0,
+        scale: 1,
+        duration: 1.2,
+        ease: "power2.inOut",
+        transformPerspective: 2000,
+        boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
+      },
+      "-=1.2"
+    );
+
+    // Mettre à jour le slide actuel
+    currentSlide.value = index;
   }
 };
 
@@ -866,6 +882,8 @@ onUnmounted(() => {
   height: calc(100vh - 72px);
   margin-top: 72px;
   overflow: hidden;
+  perspective: 2000px;
+  transform-style: preserve-3d;
 }
 
 .slides-container.mobile-view {
@@ -886,20 +904,20 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   will-change: transform, opacity;
-}
-
-.slides-container.mobile-view .slide {
-  position: relative;
-  opacity: 1;
-  visibility: visible;
-  height: auto;
-  min-height: 100vh;
-  padding: 2rem 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: box-shadow 0.3s ease;
 }
 
 .slide.active {
   opacity: 1;
   visibility: visible;
+}
+
+/* Suppression de l'effet de survol */
+.slide::after {
+  display: none;
 }
 
 .slide-content {
