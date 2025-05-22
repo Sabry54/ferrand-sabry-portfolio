@@ -937,23 +937,30 @@ onUnmounted(() => {
 }
 
 .nav-dot {
-  width: clamp(8px, 1vw, 16px);
-  height: clamp(8px, 1vw, 16px);
+  width: clamp(6px, 0.8vw, 12px);
+  height: clamp(6px, 0.8vw, 12px);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: clamp(1px, 0.2vw, 2px) solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  border: 1px solid black;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
 }
 
-.nav-dot.active {
-  background: white;
-  border-color: white;
-  transform: scale(1.2);
+.nav-dot.active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  background: black;
+  border-radius: 50%;
 }
 
-.nav-dot:hover {
-  background: rgba(255, 255, 255, 0.5);
+.nav-dot:hover:not(.active) {
+  border-color: black;
 }
 
 .sr-only {
@@ -1512,6 +1519,33 @@ onUnmounted(() => {
   background: black;
   transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center;
+}
+
+.nav-dot {
+  width: clamp(6px, 0.8vw, 12px);
+  height: clamp(6px, 0.8vw, 12px);
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid black;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-dot.active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  background: black;
+  border-radius: 50%;
+}
+
+.nav-dot:hover:not(.active) {
+  border-color: black;
 }
 
 @media (max-width: 768px) {
