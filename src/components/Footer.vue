@@ -46,14 +46,22 @@
   left: 0;
   right: 0;
   padding: 2rem 0;
-  background: transparent;
-  z-index: 40;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 9999;
   pointer-events: auto;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 @media (max-width: 768px) {
   .footer-overlay {
-    padding: 0.5rem 0;
+    padding: 1rem 0;
+    background: rgba(255, 255, 255, 0.95);
   }
 }
 </style>

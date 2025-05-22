@@ -1,6 +1,5 @@
-la page la, pour le scroll !!!
 <template>
-  <div class="home" :class="`bg-slide-${currentSlide + 1}`">
+  <div class="home-test" :class="`bg-slide-${currentSlide + 1}`">
     <Header />
 
     <!-- Container des slides -->
@@ -109,11 +108,11 @@ la page la, pour le scroll !!!
                 with systems, and building with flow.
               </p>
               <button
-                class="more-button"
+                class="fs-slide-button"
                 :class="{ 'animate-quote': currentSlide === 1 }"
               >
                 more
-                <span class="arrow">→</span>
+                <span class="fs-slide-arrow">→</span>
               </button>
             </div>
 
@@ -201,11 +200,11 @@ la page la, pour le scroll !!!
                 </div>
               </section>
               <button
-                class="more-button"
+                class="fs-slide-button font-light"
                 :class="{ 'animate-quote': currentSlide === 2 }"
               >
                 more
-                <span class="arrow">→</span>
+                <span class="fs-slide-arrow font-light">→</span>
               </button>
             </div>
           </div>
@@ -264,46 +263,12 @@ la page la, pour le scroll !!!
                   ></textarea>
                 </div>
                 <button type="submit" class="submit-button">Envoyer</button>
-                <div class="recaptcha-container">
-                  <div
-                    class="g-recaptcha"
-                    :data-sitekey="recaptchaSiteKey"
-                    data-callback="onRecaptchaVerified"
-                  ></div>
-                </div>
               </form>
-              <!-- Footer mobile intégré dans le formulaire -->
-              <div class="mobile-footer" v-if="isMobile">
-                <div class="footer-content">
-                  <p class="footer-text">
-                    © 2025 Ferrand Sabry. Tous droits réservés.
-                  </p>
-                  <div class="footer-links">
-                    <a href="/mentions-legales" class="footer-link"
-                      >Legal Notice</a
-                    >
-                    <a href="/privacy-policy" class="footer-link"
-                      >Privacy Policy</a
-                    >
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
     </div>
-
-    <!-- Footer desktop -->
-    <footer class="transparent-footer" v-if="currentSlide === 3 && !isMobile">
-      <div class="footer-content">
-        <p class="footer-text">© 2025 Ferrand Sabry. Tous droits réservés.</p>
-        <div class="footer-links">
-          <a href="/mentions-legales" class="footer-link">Legal Notice</a>
-          <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-        </div>
-      </div>
-    </footer>
 
     <!-- Overlay pour l'animation -->
     <div class="transition-overlay"></div>
@@ -464,10 +429,6 @@ const portfolioFolders = [
   },
 ];
 
-// Ajout des variables pour reCAPTCHA
-const recaptchaResponse = ref(null);
-const recaptchaSiteKey = "6Ld5ckMrAAAAAHR52JB9wuKjiDm76CRB3AsnVYDp";
-
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -505,108 +466,43 @@ let cardsInterval;
 const goToSlide = (index) => {
   if (isAnimating.value || index < 0 || index > 3) return;
 
-  // Si on est sur mobile, on change simplement le slide sans animation
-  if (isMobile.value) {
-    currentSlide.value = index;
-    return;
-  }
+  // Mettre à jour le slide actuel
+  currentSlide.value = index;
 
-  isAnimating.value = true;
+  // Animer la transition du slide
   const currentSlideEl = document.querySelector(
     `.slide:nth-child(${currentSlide.value + 1})`
   );
   const nextSlideEl = document.querySelector(`.slide:nth-child(${index + 1})`);
 
   if (currentSlideEl && nextSlideEl) {
-    const direction = index > currentSlide.value ? 1 : -1;
+    isAnimating.value = true;
 
-    // Animation du slide actuel
-    gsap.to(currentSlideEl, {
-      x: -200 * direction,
-      rotateY: 45 * direction,
-      scale: 0.9,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power3.inOut",
+    const timeline = gsap.timeline({
       onComplete: () => {
-        currentSlideEl.style.visibility = "hidden";
+        isAnimating.value = false;
       },
     });
 
-    // Animation du nouveau slide avec délai
-    nextSlideEl.style.visibility = "visible";
-    gsap.fromTo(
-      nextSlideEl,
-      {
-        x: 200 * direction,
-        rotateY: -45 * direction,
-        scale: 0.9,
+    timeline
+      .to(currentSlideEl, {
         opacity: 0,
-        z: -100,
-      },
-      {
-        x: 0,
-        rotateY: 0,
-        scale: 1,
-        opacity: 1,
-        z: 0,
-        duration: 1.5,
-        ease: "power3.inOut",
-        delay: 0.2,
-        onComplete: () => {
-          isAnimating.value = false;
+        x: -30,
+        duration: 0.8,
+        ease: "power3.out",
+      })
+      .fromTo(
+        nextSlideEl,
+        { opacity: 0, x: 30 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          clearProps: "all",
         },
-      }
-    );
-
-    // Animation des éléments du nouveau slide avec délais ajustés
-    const title = nextSlideEl.querySelector(".animate-title");
-    const text = nextSlideEl.querySelector(".animate-text");
-    const quote = nextSlideEl.querySelector(".animate-quote");
-
-    if (title) {
-      gsap.fromTo(
-        title,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          delay: 0.5,
-        }
+        "-=0.6"
       );
-    }
-
-    if (text) {
-      gsap.fromTo(
-        text,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          delay: 0.7,
-        }
-      );
-    }
-
-    if (quote) {
-      gsap.fromTo(
-        quote,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          delay: 0.9,
-        }
-      );
-    }
-
-    currentSlide.value = index;
   }
 };
 
@@ -746,47 +642,19 @@ const initMosaicEffect = () => {
 };
 
 // Fonction pour gérer la soumission du formulaire
-const handleSubmit = async (event) => {
+const handleSubmit = (event) => {
   event.preventDefault();
-  if (!recaptchaResponse.value) {
-    alert("Veuillez valider le reCAPTCHA");
-    return;
-  }
 
-  try {
-    // Vérification du reCAPTCHA
-    const verifyResponse = await fetch("/api/verify-recaptcha", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token: recaptchaResponse.value }),
-    });
+  const form = event.target;
+  const formData = new FormData(form);
 
-    if (!verifyResponse.ok) {
-      alert("Erreur de vérification reCAPTCHA. Veuillez réessayer.");
-      return;
-    }
-
-    const form = event.target;
-    const formData = new FormData(form);
-
-    // Redirection vers mailto avec les données
-    const mailtoLink = `mailto:ferrandsabry@gmail.com?subject=${encodeURIComponent(
-      formData.get("name")
-    )} - ${encodeURIComponent(formData.get("email"))}&body=${encodeURIComponent(
-      formData.get("message")
-    )}`;
-    window.location.href = mailtoLink;
-  } catch (error) {
-    console.error("Erreur lors de la vérification:", error);
-    alert("Une erreur est survenue. Veuillez réessayer.");
-  }
-};
-
-// Fonction pour le callback reCAPTCHA
-const onRecaptchaVerified = (response) => {
-  recaptchaResponse.value = response;
+  // Redirection vers mailto avec les données
+  const mailtoLink = `mailto:ferrandsabry@gmail.com?subject=${encodeURIComponent(
+    formData.get("name")
+  )} - ${encodeURIComponent(formData.get("email"))}&body=${encodeURIComponent(
+    formData.get("message")
+  )}`;
+  window.location.href = mailtoLink;
 };
 
 onMounted(() => {
@@ -797,21 +665,15 @@ onMounted(() => {
   window.addEventListener("resize", updateIsMobile);
   updateIsMobile();
 
+  // Initialiser l'effet holographique
+  initHolographicEffect();
+
   // Initialiser les cartes
   updatePortfolioCards();
-
-  // Attendre que les cartes soient rendues avant d'initialiser l'effet
-  setTimeout(() => {
-    initHolographicEffect();
-  }, 100);
 
   // Changer les cartes toutes les 30 secondes
   cardsInterval = setInterval(() => {
     updatePortfolioCards();
-    // Réinitialiser l'effet après le changement des cartes
-    setTimeout(() => {
-      initHolographicEffect();
-    }, 100);
   }, 30000);
 
   // Animation du titre rotatif pour slide 1
@@ -915,9 +777,8 @@ onUnmounted(() => {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Aladin&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
-.home {
+.home-test {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -973,8 +834,6 @@ onUnmounted(() => {
   height: calc(100vh - 72px);
   margin-top: 72px;
   overflow: hidden;
-  perspective: 3000px;
-  transform-style: preserve-3d;
 }
 
 .slides-container.mobile-view {
@@ -995,11 +854,6 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   will-change: transform, opacity;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  transform-origin: center center;
-  background: #f2f2f2;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
 .slides-container.mobile-view .slide {
@@ -1014,7 +868,6 @@ onUnmounted(() => {
 .slide.active {
   opacity: 1;
   visibility: visible;
-  transform: translateX(0) translateZ(0);
 }
 
 .slide-content {
@@ -1051,28 +904,24 @@ onUnmounted(() => {
   z-index: 50;
 }
 
-.hidden-mobile {
-  display: none !important;
-}
-
 .nav-dot {
-  width: clamp(6px, 0.8vw, 12px);
-  height: clamp(6px, 0.8vw, 12px);
+  width: clamp(8px, 1vw, 16px);
+  height: clamp(8px, 1vw, 16px);
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.3);
-  border: clamp(1px, 0.15vw, 1.5px) solid rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.3);
+  border: clamp(1px, 0.2vw, 2px) solid rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .nav-dot.active {
-  background: rgba(0, 0, 0, 0.7);
-  border-color: rgba(0, 0, 0, 0.7);
+  background: white;
+  border-color: white;
   transform: scale(1.2);
 }
 
 .nav-dot:hover {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .sr-only {
@@ -1198,8 +1047,6 @@ onUnmounted(() => {
     min-height: auto;
     padding: 1rem 0;
     margin-bottom: 2rem;
-    transform: none !important;
-    transition: none !important;
   }
 
   .slide-content {
@@ -1237,8 +1084,6 @@ onUnmounted(() => {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
-    animation: none !important;
-    transition: none !important;
   }
 
   .rotating-title {
@@ -1278,6 +1123,23 @@ onUnmounted(() => {
     max-height: 250px;
     width: auto;
     margin: 0 auto;
+  }
+
+  /* Réinitialiser les styles pour le slide 1 */
+  .slide:nth-child(1) .text-square {
+    text-align: left;
+  }
+
+  .slide:nth-child(1) .responsive-title {
+    text-align: left;
+  }
+
+  .slide:nth-child(1) .description-text {
+    text-align: left;
+  }
+
+  .slide:nth-child(1) .more-button {
+    margin-left: 0;
   }
 }
 
@@ -1576,9 +1438,8 @@ onUnmounted(() => {
   animation-delay: 1s;
 }
 
-.more-button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.2rem;
+.fs-slide-button {
+  font-size: 1.5rem !important;
   color: black;
   background: none;
   border: none;
@@ -1589,14 +1450,36 @@ onUnmounted(() => {
   gap: 0.5rem;
   margin-top: 2rem;
   transition: all 0.3s ease;
+  font-weight: 300 !important;
+  letter-spacing: 0.5px;
+  text-align: left;
+  align-self: flex-start;
 }
 
-.more-button .arrow {
+.fs-slide-arrow {
   transition: transform 0.3s ease;
+  font-weight: 300 !important;
+  letter-spacing: 0.5px;
 }
 
-.more-button:hover .arrow {
+.fs-slide-button:hover .fs-slide-arrow {
   transform: translateX(10px);
+}
+
+.menu-text {
+  font-family: "Montserrat", sans-serif;
+  text-transform: lowercase;
+  font-weight: 300;
+}
+
+.burger-icon span {
+  display: block;
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background: black;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  transform-origin: center;
 }
 
 @media (max-width: 768px) {
@@ -1885,6 +1768,44 @@ onUnmounted(() => {
   animation-delay: 0.75s;
 }
 
+/* Ajout des styles pour masquer l'image sur mobile */
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+/* Ajout des styles pour le mode mobile */
+@media (max-width: 768px) {
+  .full-width-mobile {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide:nth-child(3) .text-square {
+    text-align: left !important;
+  }
+
+  .slide:nth-child(3) .fs-slide-button {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    font-size: 1.5rem !important;
+    text-align: left !important;
+    align-self: flex-start !important;
+    width: auto !important;
+    display: inline-flex !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 300 !important;
+  }
+
+  .slide:nth-child(3) .fs-slide-arrow {
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 300 !important;
+  }
+}
+
 /* Styles pour le formulaire de contact */
 .contact-form {
   width: 100%;
@@ -1901,10 +1822,9 @@ onUnmounted(() => {
 }
 
 .form-group label {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Aladin", cursive;
   font-size: 1.2rem;
   color: black;
-  font-weight: 500;
 }
 
 .form-group input,
@@ -1912,10 +1832,9 @@ onUnmounted(() => {
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Aladin", cursive;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.9);
-  font-weight: 400;
 }
 
 .form-group textarea {
@@ -1929,12 +1848,11 @@ onUnmounted(() => {
   color: white;
   border: none;
   border-radius: 4px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Aladin", cursive;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   align-self: flex-start;
-  font-weight: 600;
 }
 
 .submit-button:hover {
@@ -1964,35 +1882,14 @@ onUnmounted(() => {
 }
 
 /* Styles pour le slide 4 */
-.slide:nth-child(4) .rotating-title {
-  margin-top: 2rem;
-}
-
-.slide:nth-child(4) .title-container {
-  height: auto;
-}
-
-.slide:nth-child(4) .title-container h2 {
-  position: relative;
-  transform: none;
-  opacity: 1;
-}
-
-@media (max-width: 768px) {
-  .slide:nth-child(4) .rotating-title {
-    margin-top: 1rem;
-  }
-}
-
-/* Styles pour le slide 4 */
 .slide:nth-child(4) .text-square {
-  margin-top: -4rem;
+  margin-top: -12rem;
 }
 
 @media (max-width: 768px) {
   .slide:nth-child(4) .text-square {
     text-align: center;
-    margin-top: -2rem;
+    margin-top: 0;
   }
 
   .slide:nth-child(4) .responsive-title {
@@ -2005,134 +1902,6 @@ onUnmounted(() => {
 
   .slide:nth-child(4) .quote-text {
     text-align: center;
-  }
-}
-
-.recaptcha-container {
-  margin: 20px 0;
-  display: flex;
-  justify-content: center;
-}
-
-@media (max-width: 768px) {
-  .recaptcha-container {
-    transform: scale(0.9);
-    transform-origin: center;
-  }
-}
-
-/* Styles pour le footer desktop */
-.transparent-footer {
-  position: relative;
-  width: 100%;
-  height: 72px;
-  background: transparent;
-  font-family: "Montserrat", sans-serif;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.footer-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2%;
-}
-
-.footer-text {
-  font-size: 0.875rem;
-  color: #333;
-  font-weight: 400;
-}
-
-.footer-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.footer-link {
-  color: #333;
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-  color: #666;
-}
-
-/* Styles pour le footer mobile */
-.mobile-footer {
-  width: 100%;
-  padding: 1rem 0;
-  margin-top: 2rem;
-  background: transparent;
-  font-family: "Montserrat", sans-serif;
-}
-
-.footer-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2%;
-}
-
-.footer-text {
-  font-size: 0.875rem;
-  color: #333;
-  font-weight: 400;
-}
-
-.footer-links {
-  display: flex;
-  gap: 2rem;
-}
-
-.footer-link {
-  color: #333;
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-  color: #666;
-}
-
-/* Media queries */
-@media (max-width: 768px) {
-  .transparent-footer {
-    display: none;
-  }
-
-  .mobile-footer {
-    padding: 1rem 0;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-  }
-
-  .footer-text {
-    font-size: 0.75rem;
-  }
-
-  .footer-links {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .footer-link {
-    font-size: 0.75rem;
   }
 }
 </style>

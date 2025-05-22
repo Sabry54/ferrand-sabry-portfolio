@@ -19,15 +19,13 @@
 
       <!-- Menu et Burger à droite -->
       <div class="flex items-end mr-[2%] relative z-10">
-        <span class="text-xs text-black menu-text" style="margin-bottom: -6%"
-          >menu</span
-        >
+        <span class="fs-menu-text" style="margin-bottom: -6%">menu</span>
         <button
           @click="isMenuOpen = !isMenuOpen"
           class="ml-2"
           aria-label="Menu"
         >
-          <div class="burger-icon" :class="{ open: isMenuOpen }">
+          <div class="fs-burger-icon" :class="{ open: isMenuOpen }">
             <span></span>
             <span></span>
             <span></span>
@@ -79,9 +77,8 @@ let lastScrollY = 0;
 let ticking = false;
 
 const menuItems = [
-  { name: "Accueil", path: "/" },
-  { name: "Original", path: "/original" },
-  { name: "À propos", path: "/about" },
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
   { name: "Portfolio", path: "/portfolio" },
   { name: "Contact", path: "/contact" },
 ];
@@ -275,62 +272,62 @@ nav a:hover::after {
   }
 }
 
-.burger-icon {
+.fs-burger-icon {
   width: 24px;
   height: 18px;
   position: relative;
   cursor: pointer;
 }
 
-.burger-icon span {
+.fs-burger-icon span {
   display: block;
   position: absolute;
-  height: 2px;
+  height: 1px;
   width: 100%;
   background: black;
   transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center;
 }
 
-.burger-icon span:first-child {
+.fs-burger-icon span:first-child {
   top: 0;
 }
 
-.burger-icon span:nth-child(2) {
+.fs-burger-icon span:nth-child(2) {
   top: 8px;
 }
 
-.burger-icon span:last-child {
+.fs-burger-icon span:last-child {
   top: 16px;
 }
 
 /* Animation à l'ouverture */
-.burger-icon.open span:first-child {
+.fs-burger-icon.open span:first-child {
   transform: translateY(8px) rotate(45deg);
   width: 100%;
 }
 
-.burger-icon.open span:nth-child(2) {
+.fs-burger-icon.open span:nth-child(2) {
   opacity: 0;
   transform: scaleX(0);
 }
 
-.burger-icon.open span:last-child {
+.fs-burger-icon.open span:last-child {
   transform: translateY(-8px) rotate(-45deg);
   width: 100%;
 }
 
 /* Animation au survol */
-.burger-icon:hover span:first-child {
+.fs-burger-icon:hover span:first-child {
   transform: translateY(-2px);
 }
 
-.burger-icon:hover span:last-child {
+.fs-burger-icon:hover span:last-child {
   transform: translateY(2px);
 }
 
-.burger-icon.open:hover span:first-child,
-.burger-icon.open:hover span:last-child {
+.fs-burger-icon.open:hover span:first-child,
+.fs-burger-icon.open:hover span:last-child {
   transform: none;
 }
 
@@ -369,8 +366,11 @@ nav a:hover::after {
   transform: rotate(135deg);
 }
 
-.menu-text {
-  font-family: "Montserrat", sans-serif;
+.fs-menu-text {
+  font-size: 0.875rem;
+  color: black;
   text-transform: lowercase;
+  font-weight: 300 !important;
+  letter-spacing: 0.5px;
 }
 </style>
