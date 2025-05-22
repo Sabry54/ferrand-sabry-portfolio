@@ -263,13 +263,6 @@
                   ></textarea>
                 </div>
                 <button type="submit" class="submit-button">Envoyer</button>
-                <div class="recaptcha-container">
-                  <div
-                    class="g-recaptcha"
-                    :data-sitekey="recaptchaSiteKey"
-                    data-callback="onRecaptchaVerified"
-                  ></div>
-                </div>
               </form>
             </div>
           </div>
@@ -1919,7 +1912,7 @@ onUnmounted(() => {
 }
 
 .recaptcha-container {
-  margin: 1rem 0;
+  margin: 20px 0;
   display: flex;
   justify-content: center;
 }

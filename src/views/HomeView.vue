@@ -763,9 +763,7 @@ const handleSubmit = async (event) => {
       body: JSON.stringify({ token: recaptchaResponse.value }),
     });
 
-    const verifyData = await verifyResponse.json();
-
-    if (!verifyData.success) {
+    if (!verifyResponse.ok) {
       alert("Erreur de vérification reCAPTCHA. Veuillez réessayer.");
       return;
     }
@@ -799,15 +797,21 @@ onMounted(() => {
   window.addEventListener("resize", updateIsMobile);
   updateIsMobile();
 
-  // Initialiser l'effet holographique
-  initHolographicEffect();
-
   // Initialiser les cartes
   updatePortfolioCards();
+
+  // Attendre que les cartes soient rendues avant d'initialiser l'effet
+  setTimeout(() => {
+    initHolographicEffect();
+  }, 100);
 
   // Changer les cartes toutes les 30 secondes
   cardsInterval = setInterval(() => {
     updatePortfolioCards();
+    // Réinitialiser l'effet après le changement des cartes
+    setTimeout(() => {
+      initHolographicEffect();
+    }, 100);
   }, 30000);
 
   // Animation du titre rotatif pour slide 1
@@ -2005,7 +2009,7 @@ onUnmounted(() => {
 }
 
 .recaptcha-container {
-  margin: 1rem 0;
+  margin: 20px 0;
   display: flex;
   justify-content: center;
 }

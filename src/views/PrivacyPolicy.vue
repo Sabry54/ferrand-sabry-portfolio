@@ -9,8 +9,7 @@
         <ul>
           <li>Submit a message through a contact form</li>
           <li>
-            Accept cookies or third-party tools (such as Google reCAPTCHA or
-            Google Analytics)
+            Accept cookies or third-party tools (such as Google Analytics)
           </li>
         </ul>
         <p>
@@ -25,7 +24,6 @@
         <ul>
           <li>Responding to contact messages</li>
           <li>Website analytics (via Google Analytics)</li>
-          <li>Security (via Google reCAPTCHA)</li>
         </ul>
       </section>
 
