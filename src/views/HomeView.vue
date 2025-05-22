@@ -477,14 +477,25 @@ const goToSlide = (index) => {
   const nextSlideEl = slides[index];
 
   if (currentSlideEl && nextSlideEl) {
-    // Créer une timeline GSAP pour une animation plus fluide
+    // Sur mobile, on change juste le slide actif sans animation
+    if (isMobile.value) {
+      currentSlideEl.style.opacity = "0";
+      currentSlideEl.style.visibility = "hidden";
+      nextSlideEl.style.opacity = "1";
+      nextSlideEl.style.visibility = "visible";
+      currentSlide.value = index;
+      isAnimating.value = false;
+      return;
+    }
+
+    // Sur desktop, on utilise GSAP pour l'animation
     const timeline = gsap.timeline({
       onComplete: () => {
         isAnimating.value = false;
       },
     });
 
-    // Animation du slide actuel (inverse de l'animation d'arrivée)
+    // Animation du slide actuel
     timeline.to(currentSlideEl, {
       opacity: 0,
       x: direction > 0 ? -100 : 100,
