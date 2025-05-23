@@ -5,6 +5,7 @@
       <router-view />
     </main>
     <Footer v-if="route.path !== '/'" class="footer-app" />
+    <ScrollToTop />
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import ScrollToTop from "./components/ScrollToTop.vue";
 
 const isDesktop = ref(window.innerWidth > 1024);
 const isMobile = ref(window.innerWidth <= 768);
