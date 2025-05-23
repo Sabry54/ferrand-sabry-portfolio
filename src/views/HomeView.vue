@@ -295,8 +295,12 @@
       <div class="footer-content">
         <p class="footer-text">© 2025 Ferrand Sabry. Tous droits réservés.</p>
         <div class="footer-links">
-          <a href="/legal-notice" class="footer-link">Legal Notice</a>
-          <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+          <router-link to="/legal-notice" class="footer-link"
+            >Legal Notice</router-link
+          >
+          <router-link to="/privacy-policy" class="footer-link"
+            >Privacy Policy</router-link
+          >
         </div>
       </div>
     </footer>

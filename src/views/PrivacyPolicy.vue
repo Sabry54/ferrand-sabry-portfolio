@@ -65,17 +65,6 @@
         </p>
       </section>
     </div>
-
-    <!-- Footer -->
-    <footer class="legal-footer">
-      <div class="footer-content">
-        <p class="footer-text">© 2025 Ferrand Sabry. Tous droits réservés.</p>
-        <div class="footer-links">
-          <a href="/mentions-legales" class="footer-link">Legal Notice</a>
-          <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 

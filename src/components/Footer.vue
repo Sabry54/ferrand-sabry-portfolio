@@ -1,35 +1,15 @@
 <!-- Footer.vue -->
 <template>
-  <footer class="footer-overlay">
-    <div class="container">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="text-center">
-          <p
-            class="text-xs md:text-base text-white hover:text-accent transition-colors cursor-pointer"
-          >
-            © {{ new Date().getFullYear() }} Ferrand Sabry. All rights reserved.
-          </p>
-        </div>
-        <nav>
-          <ul class="flex space-x-3 md:space-x-6">
-            <li>
-              <a
-                href="/mentions-legales"
-                class="text-xs md:text-base text-white hover:text-accent transition-colors"
-              >
-                Mentions légales
-              </a>
-            </li>
-            <li>
-              <a
-                href="/politique-confidentialite"
-                class="text-xs md:text-base text-white hover:text-accent transition-colors"
-              >
-                Politique de confidentialité
-              </a>
-            </li>
-          </ul>
-        </nav>
+  <footer class="legal-footer">
+    <div class="footer-content">
+      <p class="footer-text">© 2025 Ferrand Sabry. Tous droits réservés.</p>
+      <div class="footer-links">
+        <router-link to="/legal-notice" class="footer-link"
+          >Legal Notice</router-link
+        >
+        <router-link to="/privacy-policy" class="footer-link"
+          >Privacy Policy</router-link
+        >
       </div>
     </div>
   </footer>
@@ -40,28 +20,74 @@
 </script>
 
 <style scoped>
-.footer-overlay {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem 0;
-  background: rgba(255, 255, 255, 0.9);
-  z-index: 9999;
-  pointer-events: auto;
+.legal-footer {
+  position: relative;
   width: 100%;
+  height: 72px;
+  background: transparent;
+  font-family: "Montserrat", sans-serif;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+.footer-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2%;
+}
+
+.footer-text {
+  font-size: 0.875rem;
+  color: #333;
+  font-weight: 400;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #666;
 }
 
 @media (max-width: 768px) {
-  .footer-overlay {
+  .legal-footer {
+    height: auto;
     padding: 1rem 0;
-    background: rgba(255, 255, 255, 0.95);
+    margin-top: 1rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .footer-text {
+    font-size: 0.75rem;
+  }
+
+  .footer-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-link {
+    font-size: 0.75rem;
   }
 }
 </style>
