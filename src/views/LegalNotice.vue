@@ -1,41 +1,39 @@
 <template>
-  <div class="mentions-legales">
-    <h1>Legal Notice</h1>
-    <div class="legal-content">
-      <h2>Site Owner</h2>
-      <p>Name: Ferrand Sabry</p>
-      <p>Email: ferrandsabry@gmail.com</p>
-      <p>Publishing Director: Ferrand Sabry</p>
+  <h1>Legal Notice</h1>
+  <div class="legal-content">
+    <h2>Site Owner</h2>
+    <p>Name: Ferrand Sabry</p>
+    <p>Email: ferrandsabry@gmail.com</p>
+    <p>Publishing Director: Ferrand Sabry</p>
 
-      <h2>Hosting & Domain</h2>
-      <p>Domain registrar: IONOS</p>
-      <p>
-        Web hosting provider:
-        <a href="https://vercel.com" target="_blank" rel="noopener noreferrer"
-          >Vercel</a
-        >
-      </p>
-      <p>Address: 440 N Barranca Ave #4133, Covina, CA 91723, USA</p>
+    <h2>Hosting & Domain</h2>
+    <p>Domain registrar: IONOS</p>
+    <p>
+      Web hosting provider:
+      <a href="https://vercel.com" target="_blank" rel="noopener noreferrer"
+        >Vercel</a
+      >
+    </p>
+    <p>Address: 440 N Barranca Ave #4133, Covina, CA 91723, USA</p>
 
-      <h2>Intellectual Property</h2>
-      <p>
-        All content on this site (texts, images, graphics, logos, icons, etc.)
-        is protected by copyright. Any reproduction or representation, in whole
-        or in part, without prior permission is prohibited.
-      </p>
+    <h2>Intellectual Property</h2>
+    <p>
+      All content on this site (texts, images, graphics, logos, icons, etc.) is
+      protected by copyright. Any reproduction or representation, in whole or in
+      part, without prior permission is prohibited.
+    </p>
 
-      <h2>Liability</h2>
-      <p>
-        The site owner cannot be held responsible for errors, omissions, or any
-        use or interpretation of the information provided on this website.
-      </p>
+    <h2>Liability</h2>
+    <p>
+      The site owner cannot be held responsible for errors, omissions, or any
+      use or interpretation of the information provided on this website.
+    </p>
 
-      <h2>Contact</h2>
-      <p>
-        For any inquiry, please contact:
-        <a href="mailto:ferrandsabry@gmail.com">ferrandsabry@gmail.com</a>
-      </p>
-    </div>
+    <h2>Contact</h2>
+    <p>
+      For any inquiry, please contact:
+      <a href="mailto:ferrandsabry@gmail.com">ferrandsabry@gmail.com</a>
+    </p>
   </div>
 </template>
 
@@ -44,15 +42,17 @@
 </script>
 
 <style scoped>
-.mentions-legales {
-  min-height: 100vh;
+.legal-content {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 2rem;
+  margin-top: 72px;
   background-color: #f2f2f2;
   font-family: "Montserrat", sans-serif;
   color: #333;
-  max-width: 800px;
-  margin: 0 auto;
-  margin-top: 72px;
+  min-height: calc(
+    100vh - 72px - 200px
+  ); /* Hauteur minimale pour éviter que le footer ne remonte */
 }
 
 h1 {
@@ -89,7 +89,7 @@ a:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .mentions-legales {
+  .legal-content {
     padding: 1rem;
   }
 
@@ -122,5 +122,23 @@ a:hover {
   p {
     font-size: 0.85rem;
   }
+}
+
+/* Styles pour la barre de défilement */
+:deep(::-webkit-scrollbar) {
+  width: 8px;
+}
+
+:deep(::-webkit-scrollbar-track) {
+  background: #f1f1f1;
+}
+
+:deep(::-webkit-scrollbar-thumb) {
+  background: #888;
+  border-radius: 4px;
+}
+
+:deep(::-webkit-scrollbar-thumb:hover) {
+  background: #555;
 }
 </style>

@@ -9,7 +9,6 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    overflow-y: hidden;
   }
 
   /* Masquer la barre de défilement pour tous les éléments */
@@ -31,6 +30,13 @@
   .app-container {
     overflow: visible !important;
   }
+}
+
+/* Styles spécifiques pour les pages de mentions légales et politique de confidentialité */
+.legal-content,
+.privacy-content {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
 @layer components {

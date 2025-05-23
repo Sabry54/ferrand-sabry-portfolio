@@ -1,7 +1,6 @@
 <template>
-  <div class="privacy-policy">
-    <h1>Privacy Policy</h1>
-
+  <h1>Privacy Policy</h1>
+  <div class="privacy-content">
     <section>
       <h2>Data Collection</h2>
       <p>This site may collect personal data when you:</p>
@@ -71,15 +70,17 @@
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
-.privacy-policy {
-  min-height: 100vh;
-  background-color: #f2f2f2;
-  color: #333;
-  font-family: "Montserrat", sans-serif;
-  padding: 2rem;
+.privacy-content {
   max-width: 800px;
   margin: 0 auto;
+  padding: 2rem;
   margin-top: 72px;
+  background-color: #f2f2f2;
+  font-family: "Montserrat", sans-serif;
+  color: #333;
+  min-height: calc(
+    100vh - 72px - 200px
+  ); /* Hauteur minimale pour éviter que le footer ne remonte */
 }
 
 h1 {
@@ -123,7 +124,7 @@ li {
 
 /* Responsive styles */
 @media (max-width: 768px) {
-  .privacy-policy {
+  .privacy-content {
     padding: 1rem;
   }
 
@@ -154,5 +155,23 @@ li {
   li {
     font-size: 0.85rem;
   }
+}
+
+/* Styles pour la barre de défilement */
+:deep(::-webkit-scrollbar) {
+  width: 8px;
+}
+
+:deep(::-webkit-scrollbar-track) {
+  background: #f1f1f1;
+}
+
+:deep(::-webkit-scrollbar-thumb) {
+  background: #888;
+  border-radius: 4px;
+}
+
+:deep(::-webkit-scrollbar-thumb:hover) {
+  background: #555;
 }
 </style>
