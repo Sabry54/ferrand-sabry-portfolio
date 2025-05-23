@@ -108,13 +108,14 @@
                 of the process. This isn't about shortcuts. It's about crafting
                 with systems, and building with flow.
               </p>
-              <button
+              <router-link
+                to="/about"
                 class="fs-slide-button"
                 :class="{ 'animate-quote': currentSlide === 1 }"
               >
                 more
                 <span class="fs-slide-arrow">→</span>
-              </button>
+              </router-link>
             </div>
 
             <!-- Deuxième carré : Image Luffy -->
@@ -200,13 +201,14 @@
                   ></router-link>
                 </div>
               </section>
-              <button
+              <router-link
+                to="/portfolio"
                 class="fs-slide-button font-light"
                 :class="{ 'animate-quote': currentSlide === 2 }"
               >
                 more
                 <span class="fs-slide-arrow font-light">→</span>
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
