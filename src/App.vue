@@ -16,7 +16,7 @@ import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import ScrollToTop from "./components/ScrollToTop.vue";
 
-const isDesktop = ref(window.innerWidth > 1024);
+const isDesktop = ref(window.innerWidth > 768);
 const isMobile = ref(window.innerWidth <= 768);
 const route = useRoute();
 
@@ -107,7 +107,7 @@ function createCursor() {
 }
 
 function updateCursor() {
-  isDesktop.value = window.innerWidth > 1024;
+  isDesktop.value = window.innerWidth > 768;
   if (!isDesktop.value) {
     const cursors = document.querySelectorAll(".cursor");
     cursors.forEach((cursor) => cursor.remove());
@@ -162,7 +162,7 @@ body {
 }
 
 /* Curseur personnalisé - uniquement sur desktop */
-@media (min-width: 1024px) {
+@media (min-width: 769px) {
   body {
     cursor: none !important;
   }
@@ -208,17 +208,15 @@ body {
   }
 }
 
-/* Curseur normal sur mobile et tablette */
-@media (max-width: 1023px) {
+/* Curseur normal sur mobile */
+@media (max-width: 768px) {
   body,
   a,
   button,
   .clickable {
     cursor: auto !important;
   }
-}
 
-@media (max-width: 768px) {
   .hide-footer-mobile ~ .footer-app {
     display: none !important;
   }
