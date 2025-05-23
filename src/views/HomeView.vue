@@ -288,11 +288,14 @@
     </nav>
 
     <!-- Footer en dehors des slides -->
-    <footer class="legal-footer" :class="{ 'show-footer': currentSlide === 3 }">
+    <footer
+      class="legal-footer"
+      :class="{ 'show-footer': currentSlide === 3, mobile1: isMobile }"
+    >
       <div class="footer-content">
         <p class="footer-text">© 2025 Ferrand Sabry. Tous droits réservés.</p>
         <div class="footer-links">
-          <a href="/mentions-legales" class="footer-link">Legal Notice</a>
+          <a href="/legal-notice" class="footer-link">Legal Notice</a>
           <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
         </div>
       </div>
@@ -2073,32 +2076,43 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
-  .legal-footer {
-    height: 100px;
+  .legal-footer.mobile1 {
+    position: relative;
+    height: auto;
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+    opacity: 1;
+    visibility: visible;
+    background: rgba(255, 255, 255, 0.95);
   }
 
-  .footer-content {
+  .legal-footer.mobile1 .footer-content {
     flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-  }
-
-  .footer-text {
-    font-size: 0.75rem;
-  }
-
-  .footer-links {
     gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    text-align: center;
+    padding: 0;
   }
 
-  .footer-link {
-    font-size: 0.75rem;
+  .legal-footer.mobile1 .footer-text {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .legal-footer.mobile1 .footer-links {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .legal-footer.mobile1 .footer-link {
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
   }
 
   .slide:nth-child(4) {
-    padding-bottom: 100px;
+    padding-bottom: 0;
   }
 }
 </style>
