@@ -37,12 +37,15 @@
     <!-- Menu mobile -->
     <div
       v-if="isMenuOpen"
-      class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
+      class="fixed inset-0 z-50 flex items-center justify-center"
     >
+      <!-- Fond du menu avec effet de flou -->
+      <div class="menu-background"></div>
+
       <!-- Bouton de fermeture -->
       <button
         @click="isMenuOpen = false"
-        class="absolute top-8 right-8 w-12 h-12 flex items-center justify-center"
+        class="absolute top-8 right-8 w-12 h-12 flex items-center justify-center z-10"
         aria-label="Fermer le menu"
       >
         <div class="close-icon">
@@ -51,12 +54,13 @@
         </div>
       </button>
 
-      <nav class="text-white text-center">
-        <ul class="space-y-8">
+      <!-- Menu -->
+      <nav class="menu-container text-black text-center z-10">
+        <ul class="menu-list">
           <li v-for="item in menuItems" :key="item.path">
             <router-link
               :to="item.path"
-              class="text-2xl hover:text-gray-300 transition-colors"
+              class="menu-link"
               @click="isMenuOpen = false"
             >
               {{ item.name }}
@@ -331,12 +335,92 @@ nav a:hover::after {
   transform: none;
 }
 
+/* Styles pour le menu */
+.menu-container {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: menuAppear 0.3s ease forwards;
+  max-width: 90%;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.menu-link {
+  font-size: 1.5rem;
+  color: black;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  display: block;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.menu-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateX(5px);
+}
+
+@keyframes menuAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ajustement du fond du menu */
+.menu-background {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Styles pour la croix de fermeture */
 .close-icon {
   width: 32px;
   height: 32px;
   position: relative;
   cursor: pointer;
+  z-index: 60;
 }
 
 .close-icon span {
@@ -372,5 +456,68 @@ nav a:hover::after {
   text-transform: lowercase;
   font-weight: 300 !important;
   letter-spacing: 0.5px;
+}
+
+/* Media queries pour le responsive */
+@media (max-width: 768px) {
+  .menu-container {
+    width: 100%;
+    height: 100vh;
+    max-width: none;
+    border-radius: 0;
+    padding: 6rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.98);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: none;
+    z-index: 50;
+  }
+
+  .menu-list {
+    width: 100%;
+    max-width: none;
+    gap: 2.5rem;
+  }
+
+  .menu-link {
+    font-size: 2rem;
+    padding: 1.5rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.02);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  /* Ajustement du bouton de fermeture en mobile */
+  button[aria-label="Fermer le menu"] {
+    top: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .close-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-container {
+    padding: 5rem 1.5rem;
+  }
+
+  .menu-link {
+    font-size: 1.75rem;
+    padding: 1.25rem;
+  }
 }
 </style>
