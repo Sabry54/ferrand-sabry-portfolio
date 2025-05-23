@@ -2,7 +2,10 @@
 <template>
   <header
     class="fixed top-0 left-0 w-full h-[72px] z-50 transition-transform duration-300"
-    :class="{ 'translate-y-[-72px]': isHeaderHidden }"
+    :class="{
+      'translate-y-[-72px]': isHeaderHidden,
+      'text-white': $route.path === '/about' && isOverHero,
+    }"
   >
     <div class="h-full flex justify-between items-center relative">
       <!-- Fond avec ombrage pour mobile -->
@@ -11,7 +14,11 @@
       <!-- Logo/Nom à gauche -->
       <router-link
         to="/"
-        class="text-black text-xl font-bold ml-[2%] hover:text-gray-700 transition-colors relative z-10"
+        class="text-xl font-bold ml-[2%] hover:text-gray-700 transition-colors relative z-10"
+        :class="{
+          'text-white hover:text-gray-300':
+            $route.path === '/about' && isOverHero,
+        }"
       >
         <span class="hidden md:inline">Ferrand Sabry</span>
         <span class="md:hidden" style="margin-top: -4px">FS</span>
@@ -19,13 +26,24 @@
 
       <!-- Menu et Burger à droite -->
       <div class="flex items-end mr-[2%] relative z-10">
-        <span class="fs-menu-text" style="margin-bottom: -6%">menu</span>
+        <span
+          class="fs-menu-text"
+          :class="{ 'text-white': $route.path === '/about' && isOverHero }"
+          style="margin-bottom: -6%"
+          >menu</span
+        >
         <button
           @click="isMenuOpen = !isMenuOpen"
           class="ml-2"
           aria-label="Menu"
         >
-          <div class="fs-burger-icon" :class="{ open: isMenuOpen }">
+          <div
+            class="fs-burger-icon"
+            :class="{
+              open: isMenuOpen,
+              'text-white': $route.path === '/about' && isOverHero,
+            }"
+          >
             <span></span>
             <span></span>
             <span></span>
@@ -48,14 +66,20 @@
         class="absolute top-8 right-8 w-12 h-12 flex items-center justify-center z-10"
         aria-label="Fermer le menu"
       >
-        <div class="close-icon">
+        <div
+          class="close-icon"
+          :class="{ 'text-white': $route.path === '/about' && isOverHero }"
+        >
           <span></span>
           <span></span>
         </div>
       </button>
 
       <!-- Menu -->
-      <nav class="menu-container text-black text-center z-10">
+      <nav
+        class="menu-container text-center z-10"
+        :class="{ 'text-white': $route.path === '/about' && isOverHero }"
+      >
         <ul class="menu-list">
           <li v-for="item in menuItems" :key="item.path">
             <router-link
@@ -77,6 +101,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 const isMenuOpen = ref(false);
 const isHeaderHidden = ref(false);
+const isOverHero = ref(false);
 let lastScrollY = 0;
 let ticking = false;
 
@@ -91,6 +116,11 @@ const handleScroll = () => {
   if (!ticking) {
     window.requestAnimationFrame(() => {
       const currentScrollY = window.scrollY;
+
+      // Vérifier si on est sur la page About et dans la section hero
+      if (window.location.pathname === "/about") {
+        isOverHero.value = currentScrollY < window.innerHeight;
+      }
 
       // Ne masquer le header que sur mobile
       if (window.innerWidth <= 768) {
@@ -115,6 +145,8 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
+  // Vérifier la position initiale
+  handleScroll();
 });
 
 onUnmounted(() => {
@@ -315,7 +347,7 @@ nav a:hover::after {
   position: absolute;
   height: 1px;
   width: 100%;
-  background: black;
+  background: currentColor;
   transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center;
 }
@@ -455,7 +487,7 @@ nav a:hover::after {
   position: absolute;
   width: 100%;
   height: 2px;
-  background: black;
+  background: currentColor;
   transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center;
 }
@@ -479,10 +511,11 @@ nav a:hover::after {
 
 .fs-menu-text {
   font-size: 0.875rem;
-  color: black;
+  color: currentColor;
   text-transform: lowercase;
   font-weight: 300 !important;
   letter-spacing: 0.5px;
+  transition: color 0.3s ease;
 }
 
 /* Media queries pour le responsive */
