@@ -1,6 +1,6 @@
 <template>
-  <h1>Legal Notice</h1>
   <div class="legal-content">
+    <h1>Legal Notice</h1>
     <h2>Site Owner</h2>
     <p>Name: Ferrand Sabry</p>
     <p>Email: ferrandsabry@gmail.com</p>
@@ -50,9 +50,7 @@
   background-color: #f2f2f2;
   font-family: "Montserrat", sans-serif;
   color: #333;
-  min-height: calc(
-    100vh - 72px - 200px
-  ); /* Hauteur minimale pour éviter que le footer ne remonte */
+  min-height: calc(100vh - 72px - 200px);
 }
 
 h1 {

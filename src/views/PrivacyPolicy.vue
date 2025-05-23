@@ -1,6 +1,6 @@
 <template>
-  <h1>Privacy Policy</h1>
   <div class="privacy-content">
+    <h1>Privacy Policy</h1>
     <section>
       <h2>Data Collection</h2>
       <p>This site may collect personal data when you:</p>
