@@ -94,4 +94,4 @@ vercel
 
 ## Licence
 
-© 2025 Ferrand Sabry. Tous droits réservés.
+© 2025 Ferrand Sabry. All rights reserved.

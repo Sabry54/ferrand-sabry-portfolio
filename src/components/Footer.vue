@@ -2,7 +2,7 @@
 <template>
   <footer class="legal-footer">
     <div class="footer-content">
-      <p class="footer-text">© 2025 Ferrand Sabry. Tous droits réservés.</p>
+      <p class="footer-text">© 2025 Ferrand Sabry. All rights reserved.</p>
       <div class="footer-links">
         <router-link to="/legal-notice" class="footer-link"
           >Legal Notice</router-link

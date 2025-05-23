@@ -247,7 +247,11 @@
 
             <!-- Deuxième carré : Formulaire de contact -->
             <div class="square">
-              <form class="contact-form" @submit="handleSubmit">
+              <form
+                id="vraiformulaire"
+                class="contact-form"
+                @submit="handleSubmit"
+              >
                 <div class="form-group">
                   <label for="name">Nom</label>
                   <input type="text" id="name" name="name" required />
@@ -295,7 +299,7 @@
       :class="{ 'show-footer': currentSlide === 3, mobile1: isMobile }"
     >
       <div class="footer-content">
-        <p class="footer-text">© 2025 Ferrand Sabry. Tous droits réservés.</p>
+        <p class="footer-text">© 2025 Ferrand Sabry. All rights reserved.</p>
         <div class="footer-links">
           <router-link to="/legal-notice" class="footer-link"
             >Legal Notice</router-link
@@ -315,6 +319,7 @@ import { gsap } from "gsap";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import { initHolographicEffect } from "../components/HolographicEffect.js";
+import { useRoute } from "vue-router";
 
 const currentSlide = ref(0);
 const isAnimating = ref(false);
@@ -717,7 +722,18 @@ const handleMouseMove = (e) => {
   }
 };
 
+const route = useRoute();
+
+// Gérer le paramètre slide dans l'URL
 onMounted(() => {
+  const slideParam = route.query.slide;
+  if (slideParam) {
+    const slideIndex = parseInt(slideParam);
+    if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex <= 3) {
+      goToSlide(slideIndex);
+    }
+  }
+
   window.addEventListener("wheel", handleWheel, { passive: false });
   window.addEventListener("touchstart", handleTouchStart);
   window.addEventListener("touchmove", handleTouchMove, { passive: false });

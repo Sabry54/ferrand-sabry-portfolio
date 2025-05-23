@@ -398,7 +398,7 @@
                 Ready to bring your project to life? Contact me to discuss it.
               </p>
               <router-link
-                to="/contact"
+                to="/#vraiformulaire"
                 class="inline-block px-8 py-4 bg-white text-primary rounded-lg font-bold hover:bg-opacity-90 transition-all"
               >
                 Contact Me
@@ -669,6 +669,16 @@ const goToSlide = (index) => {
   isAnimating.value = true;
   currentSlide.value = index;
   animateSlide();
+
+  // Si on va vers le formulaire de contact (slide 3), on scroll vers le formulaire
+  if (index === 3) {
+    setTimeout(() => {
+      const form = document.getElementById("vraiformulaire");
+      if (form) {
+        form.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 1000); // Attendre que l'animation du slide soit terminée
+  }
 };
 
 // Affichage différé du footer mobile sur le dernier slide
