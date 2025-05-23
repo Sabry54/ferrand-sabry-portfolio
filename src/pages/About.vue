@@ -15,14 +15,12 @@
 
       <div class="relative z-10 text-center px-4">
         <h1
-          class="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tight glitch-title"
+          class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight glitch-title whitespace-nowrap"
         >
-          <span class="glitch-text" data-text="About">About</span>
-          <span class="glitch-text" data-text="Me">Me</span>
+          <span class="glitch-text" data-text="About this project"
+            >About this project</span
+          >
         </h1>
-        <p class="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
       </div>
     </div>
 
@@ -42,31 +40,37 @@
               <div
                 class="relative bg-white/10 backdrop-blur-sm p-8 rounded-2xl transform hover:rotate-1 transition-transform"
               >
-                <h2 class="text-4xl font-bold text-black mb-6">My Journey</h2>
-                <p class="text-lg text-black/80 mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                  enim ad minim veniam.
+                <h2 class="text-4xl font-bold text-black mb-6 font-montserrat">
+                  Why ?
+                </h2>
+                <p class="text-lg text-black/80 mb-6 font-montserrat">
+                  The idea for this project came from a video on Twitter that
+                  mentioned vibecoding—a concept that immediately caught my
+                  attention because of the benefits it highlighted. I wanted to
+                  take the idea further: to explore what could be created
+                  without writing a single line of code by hand, purely by
+                  collaborating with tools like ChatGPT, Cursor, Claude, and
+                  other AI systems. This wasn't just a technical curiosity—it
+                  was a real experiment to test their limits, their
+                  understanding, and their ability to turn a creative vision
+                  into a tangible result, all without relying on heavy technical
+                  knowledge. The challenge was clear from the start: not to type
+                  a single line of code manually, and still aim for the
+                  cleanest, most polished outcome possible. My mindset evolved
+                  throughout the project—from initial hesitation, to curiosity,
+                  to the genuine fun of experimentation. There were
+                  surprises—some good, some frustrating—but that's what made the
+                  process feel alive. In the end, it became a double
+                  exploration: the limits of vibecoding, and the boundaries of
+                  what AI can achieve in a creative, ambitious project.
                 </p>
-                <div class="flex items-center space-x-4">
-                  <div
-                    class="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center"
-                  >
-                    <span class="text-2xl">🎯</span>
-                  </div>
-                  <div>
-                    <h3 class="text-xl font-semibold text-black">
-                      Design First
-                    </h3>
-                    <p class="text-black/70">Creating beautiful interfaces</p>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="relative">
               <img
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=60"
-                alt="Coding setup"
-                class="w-full h-[500px] object-cover rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
+                src="/images/about/aboutwhy.png"
+                alt="About Why"
+                class="w-full h-[500px] object-cover shadow-2xl transform hover:scale-105 transition-transform"
               />
               <div
                 class="absolute -bottom-6 -right-6 w-32 h-32 bg-black/10 rounded-full blur-2xl"
@@ -80,7 +84,7 @@
       <div class="py-32 bg-black/5">
         <div class="container mx-auto px-4">
           <h2 class="text-5xl font-bold text-black mb-16 text-center">
-            Skills & Expertise
+            My approach
           </h2>
           <div class="grid md:grid-cols-3 gap-8">
             <div class="group relative">
@@ -96,10 +100,14 @@
                   <span class="text-3xl">💻</span>
                 </div>
                 <h3 class="text-2xl font-bold text-black mb-4">
-                  Frontend Development
+                  Tool-driven Creation
                 </h3>
                 <p class="text-black/80">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  I built everything using tools like ChatGPT, Cursor, Claude,
+                  and other AI platforms. The idea wasn't to skip the hard work,
+                  but to see how far these tools could be pushed to execute a
+                  creative vision. Learning how to "speak" their language became
+                  part of the craft.
                 </p>
               </div>
             </div>
@@ -115,9 +123,14 @@
                 >
                   <span class="text-3xl">🎨</span>
                 </div>
-                <h3 class="text-2xl font-bold text-black mb-4">UI/UX Design</h3>
+                <h3 class="text-2xl font-bold text-black mb-4">
+                  Design by Constraint
+                </h3>
                 <p class="text-black/80">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  No manual coding. That was the rule. Every decision had to
+                  work within this limit — and instead of seeing it as a block,
+                  I used it as a guide. The constraint shaped the outcome and
+                  taught me how creativity often thrives with clear boundaries.
                 </p>
               </div>
             </div>
@@ -133,9 +146,15 @@
                 >
                   <span class="text-3xl">🚀</span>
                 </div>
-                <h3 class="text-2xl font-bold text-black mb-4">Performance</h3>
+                <h3 class="text-2xl font-bold text-black mb-4">
+                  Learning in Public
+                </h3>
                 <p class="text-black/80">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  This wasn't about showing off mastery — it was about learning
+                  out loud. I entered this with curiosity, not certainty. I
+                  documented the missteps, surprises, and insights along the
+                  way. It's a process-first mindset, where progress matters more
+                  than polish.
                 </p>
               </div>
             </div>
@@ -159,15 +178,21 @@
                   class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-black rounded-full"
                 ></div>
                 <div class="w-1/2 pr-12 text-right">
-                  <h3 class="text-2xl font-bold text-black mb-2">Discovery</h3>
+                  <h3 class="text-2xl font-bold text-black mb-2">
+                    Talk, Don't Dictate
+                  </h3>
                   <p class="text-black/80">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Every step began as a conversation with the tools. I wasn't
+                    issuing commands — I was exploring, adjusting, listening.
+                    The goal was to understand how the AI thinks, how it
+                    responds, and how to guide it without forcing it. It wasn't
+                    about control, but about collaboration and subtle influence.
                   </p>
                 </div>
                 <div class="w-1/2 pl-12">
                   <img
-                    src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&auto=format&fit=crop&q=60"
-                    alt="Discovery"
+                    src="/images/about/aboutprocess1.png"
+                    alt="Talk, Don't Dictate"
                     class="w-full h-48 object-cover rounded-xl shadow-lg"
                   />
                 </div>
@@ -178,15 +203,21 @@
                 ></div>
                 <div class="w-1/2 pr-12">
                   <img
-                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=60"
-                    alt="Design"
+                    src="/images/about/aboutprocess3.jpg"
+                    alt="Steer Without a Keyboard"
                     class="w-full h-48 object-cover rounded-xl shadow-lg"
                   />
                 </div>
                 <div class="w-1/2 pl-12">
-                  <h3 class="text-2xl font-bold text-black mb-2">Design</h3>
+                  <h3 class="text-2xl font-bold text-black mb-2">
+                    Steer Without a Keyboard
+                  </h3>
                   <p class="text-black/80">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nothing was written by hand, but nothing was random either.
+                    I iterated with intention — tweaking, refining, sometimes
+                    rewriting entire chunks prompt by prompt. Not to code, but
+                    to shape. The AI moved fast, and I slowed down just enough
+                    to keep it on track.
                   </p>
                 </div>
               </div>
@@ -205,19 +236,22 @@
           />
           <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
         </div>
-        <div class="relative container mx-auto px-4 text-center">
-          <h2 class="text-5xl font-bold text-white mb-8">
-            Let's Work Together
+        <div
+          class="relative container mx-auto px-4 text-center flex flex-col items-center"
+        >
+          <h2 class="text-5xl font-bold text-white mb-8 glitch-title">
+            <span class="glitch-text" data-text="Let's Work Together"
+              >Let's Work Together</span
+            >
           </h2>
-          <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
-          <router-link
-            to="/contact"
-            class="inline-block px-12 py-6 bg-white text-black rounded-full text-xl font-bold hover:bg-white/90 transition-colors transform hover:scale-105 transition-transform"
-          >
-            Get in Touch
-          </router-link>
+          <div class="mt-8">
+            <router-link
+              to="/#slide-4"
+              class="inline-block px-12 py-6 bg-white text-black rounded-full text-xl font-bold hover:bg-white/90 transition-colors transform hover:scale-105 transition-transform"
+            >
+              Get in Touch
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -474,13 +508,13 @@ main {
   }
 
   .glitch-text {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .glitch-text {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 </style>
