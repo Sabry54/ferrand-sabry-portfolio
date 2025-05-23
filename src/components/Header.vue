@@ -237,6 +237,33 @@ nav a:hover::after {
   .mobile-menu-button.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -7px);
   }
+
+  /* Ajustement du bouton de fermeture en mobile */
+  button[aria-label="Fermer le menu"] {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: none;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-icon {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    z-index: 101;
+  }
+
+  .close-icon span {
+    background: black;
+  }
 }
 
 .header-background {
@@ -495,18 +522,29 @@ nav a:hover::after {
 
   /* Ajustement du bouton de fermeture en mobile */
   button[aria-label="Fermer le menu"] {
+    position: fixed;
     top: 2rem;
     right: 2rem;
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.9);
+    background: transparent;
     border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .close-icon {
     width: 28px;
     height: 28px;
+    position: relative;
+    z-index: 101;
+  }
+
+  .close-icon span {
+    background: black;
   }
 }
 
