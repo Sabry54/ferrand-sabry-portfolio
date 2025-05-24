@@ -5,6 +5,7 @@ import TestHolo from "../views/TestHolo.vue";
 import HomeView from "../views/HomeView.vue";
 import LegalNotice from "../views/LegalNotice.vue";
 import PrivacyPolicy from "../views/PrivacyPolicy.vue";
+import Contact from "../pages/Contact.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -23,6 +24,11 @@ const router = createRouter({
       path: "/portfolio",
       name: "portfolio",
       component: Portfolio,
+    },
+    {
+      path: "/contact",
+      name: "contact",
+      component: Contact,
     },
     {
       path: "/test-holo",

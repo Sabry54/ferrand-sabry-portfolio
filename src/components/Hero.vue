@@ -11,7 +11,7 @@
           idées en interfaces élégantes et fonctionnelles, en mettant l'accent
           sur l'utilisateur et les dernières tendances du design.
         </p>
-        <a href="#contact" class="btn"> Contactez-moi </a>
+        <a href="/contact" class="btn"> Contactez-moi </a>
       </div>
     </div>
   </section>

@@ -109,7 +109,7 @@ const menuItems = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Portfolio", path: "/portfolio" },
-  { name: "Contact", path: "/?slide=3" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const handleScroll = () => {
