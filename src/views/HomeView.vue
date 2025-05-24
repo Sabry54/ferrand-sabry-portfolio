@@ -25,14 +25,6 @@
                 into rhythm, space, and flow. Building experiences that breathe,
                 speak softly, and leave room for interpretation.
               </p>
-              <p
-                class="quote-text"
-                :class="{ 'animate-quote': currentSlide === 0 }"
-              >
-                "You don't control the muse — you simply show up and get out of
-                the way."
-                <span class="quote-author">— Rick Rubin</span>
-              </p>
             </div>
 
             <!-- Deuxième carré : Image Luffy -->
@@ -1001,11 +993,15 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .text-square {
   gap: clamp(1rem, 2vw, 3rem);
   padding-left: clamp(1rem, 2vw, 3rem);
+  position: relative;
+  z-index: 10;
 }
 
 /* Styles pour le titre rotatif */
@@ -1060,7 +1056,7 @@ onUnmounted(() => {
   text-align: left;
   margin-top: clamp(0.5rem, 1vw, 1.5rem);
   overflow-wrap: break-word;
-  font-family: "Aladin", cursive;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
 }
 
@@ -2079,13 +2075,12 @@ onUnmounted(() => {
 }
 
 .slide3-title {
-  font-family: "Aladin", cursive;
   font-size: clamp(1.5rem, 4vw, 4rem);
   line-height: 1.1;
   margin-bottom: 1rem;
   color: black;
   text-align: left;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
@@ -2096,13 +2091,12 @@ onUnmounted(() => {
 }
 
 .slide4-title {
-  font-family: "Aladin", cursive;
   font-size: clamp(1.5rem, 4vw, 4rem);
   line-height: 1.1;
   margin-bottom: 1rem;
   color: black;
   text-align: left;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
@@ -2113,13 +2107,13 @@ onUnmounted(() => {
 }
 
 .slide2-title {
-  font-family: "Aladin", cursive;
   font-size: clamp(1.5rem, 4vw, 4rem);
   line-height: 1.1;
   margin-bottom: 1rem;
   color: black;
   text-align: left;
-  font-weight: 400;
+  font-weight: 700;
+  font-family: inherit;
 }
 
 @media (max-width: 768px) {
@@ -2130,13 +2124,12 @@ onUnmounted(() => {
 }
 
 .slide1-title {
-  font-family: "Aladin", cursive;
   font-size: clamp(1.5rem, 4vw, 4rem);
   line-height: 1.1;
   margin-bottom: 1rem;
   color: black;
   text-align: left;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
