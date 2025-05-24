@@ -98,13 +98,74 @@
       <div class="relative max-w-7xl w-full h-full" @click.stop>
         <div class="w-full h-full overflow-auto">
           <div
-            class="min-h-full min-w-full flex items-center justify-center p-8"
+            class="min-h-full min-w-full flex items-center justify-center p-8 relative"
           >
             <img
               :src="selectedImage.path"
               :alt="selectedImage.title"
               class="w-auto h-auto"
             />
+            <!-- Bouton de fermeture pour mobile -->
+            <button
+              @click="closeModal"
+              class="md:hidden fixed top-4 right-4 w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <!-- Boutons de navigation -->
+            <button
+              v-if="currentImageIndex > 0"
+              @click="previousImage"
+              class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+            <button
+              v-if="currentImageIndex < sliderImages.length - 1"
+              @click="nextImage"
+              class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -117,15 +178,15 @@
           <h2 class="text-4xl font-bold mb-8">Let's Talk!</h2>
           <p class="text-xl text-gray-700 mb-12">
             If you already have a clear idea of what you need, you can write to
-            us directly indicating the type of project, desired publication date
+            me directly indicating the type of project, desired publication date
             and budget.
           </p>
-          <a
-            href="mailto:contact@example.com"
+          <router-link
+            to="/contact"
             class="inline-block px-8 py-4 bg-black text-white font-bold hover:bg-gray-800 transition-colors"
           >
             Get in touch
-          </a>
+          </router-link>
         </div>
       </div>
     </section>
@@ -133,7 +194,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 
 const projects = ref([
   {
@@ -164,14 +225,7 @@ const projects = ref([
   },
 ]);
 
-const genres = ref([
-  "curious",
-  "mangas",
-  "live-action",
-  "réaliste",
-  "ghibli",
-  "divers",
-]);
+const genres = ref(["curious", "mangas", "live-action", "realistic", "ghibli"]);
 const currentGenre = ref("curious");
 
 interface GalleryImage {
@@ -181,15 +235,59 @@ interface GalleryImage {
 }
 
 const selectedImage = ref<GalleryImage | null>(null);
+const currentImageIndex = ref(0);
+const shuffledImages = ref<GalleryImage[]>([]);
+
+// Nouveau computed pour le slider qui retourne toujours toutes les images
+const sliderImages = computed(() => {
+  return galleryImages.value.filter((img) => img.genre === currentGenre.value);
+});
+
+const filteredGallery = computed(() => {
+  const images = sliderImages.value;
+  if (window.innerWidth < 768) {
+    // Pour mobile
+    // Si les images n'ont pas encore été mélangées, on les mélange une fois
+    if (shuffledImages.value.length === 0) {
+      shuffledImages.value = [...images].sort(() => Math.random() - 0.5);
+    }
+    return shuffledImages.value.slice(0, 3);
+  }
+  return images;
+});
+
+// Réinitialiser les images mélangées quand on change de genre
+watch(currentGenre, () => {
+  shuffledImages.value = [];
+});
 
 const openModal = (image: GalleryImage) => {
   selectedImage.value = image;
+  // Utiliser sliderImages au lieu de filteredGallery pour avoir toutes les images
+  currentImageIndex.value = sliderImages.value.findIndex(
+    (img) => img.path === image.path
+  );
   document.body.style.overflow = "hidden";
 };
 
 const closeModal = () => {
   selectedImage.value = null;
+  currentImageIndex.value = 0;
   document.body.style.overflow = "auto";
+};
+
+const previousImage = () => {
+  if (currentImageIndex.value > 0) {
+    currentImageIndex.value--;
+    selectedImage.value = sliderImages.value[currentImageIndex.value];
+  }
+};
+
+const nextImage = () => {
+  if (currentImageIndex.value < sliderImages.value.length - 1) {
+    currentImageIndex.value++;
+    selectedImage.value = sliderImages.value[currentImageIndex.value];
+  }
 };
 
 const centerImage = () => {
@@ -243,6 +341,62 @@ const galleryImages = ref([
   {
     title: "Curious Art 6",
     path: "/images/portfolio/curious/image00150.png",
+    genre: "curious",
+  },
+  // Ajout des images de divers dans curious
+  {
+    title: "Curious Art 7",
+    path: "/images/portfolio/divers/image00051.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 8",
+    path: "/images/portfolio/divers/image00052.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 9",
+    path: "/images/portfolio/divers/image00066.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 10",
+    path: "/images/portfolio/divers/image00067.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 11",
+    path: "/images/portfolio/divers/image00068.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 12",
+    path: "/images/portfolio/divers/image00069.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 13",
+    path: "/images/portfolio/divers/image00085.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 14",
+    path: "/images/portfolio/divers/image00087.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 15",
+    path: "/images/portfolio/divers/image00095.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 16",
+    path: "/images/portfolio/divers/image00096.png",
+    genre: "curious",
+  },
+  {
+    title: "Curious Art 17",
+    path: "/images/portfolio/divers/image00098.png",
     genre: "curious",
   },
   // Mangas
@@ -496,137 +650,137 @@ const galleryImages = ref([
   {
     title: "Realistic Art 1",
     path: "/images/portfolio/réaliste/image00032.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 2",
     path: "/images/portfolio/réaliste/image00033.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 3",
     path: "/images/portfolio/réaliste/image00034.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 4",
     path: "/images/portfolio/réaliste/image00043.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 5",
     path: "/images/portfolio/réaliste/image00047.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 6",
     path: "/images/portfolio/réaliste/image00048.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 7",
     path: "/images/portfolio/réaliste/image00049.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 8",
     path: "/images/portfolio/réaliste/image00050.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 9",
     path: "/images/portfolio/réaliste/image00101.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 10",
     path: "/images/portfolio/réaliste/image00102.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 11",
     path: "/images/portfolio/réaliste/image00103.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 12",
     path: "/images/portfolio/réaliste/image00104.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 13",
     path: "/images/portfolio/réaliste/image00116.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 14",
     path: "/images/portfolio/réaliste/image00117.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 15",
     path: "/images/portfolio/réaliste/image00118.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 16",
     path: "/images/portfolio/réaliste/image00119.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 17",
     path: "/images/portfolio/réaliste/image00120.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 18",
     path: "/images/portfolio/réaliste/image00123.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 19",
     path: "/images/portfolio/réaliste/image00124.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 20",
     path: "/images/portfolio/réaliste/image00125.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 21",
     path: "/images/portfolio/réaliste/image00126.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 22",
     path: "/images/portfolio/réaliste/image00127.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 23",
     path: "/images/portfolio/réaliste/image00128.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 24",
     path: "/images/portfolio/réaliste/image00142.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 25",
     path: "/images/portfolio/réaliste/image00143.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 26",
     path: "/images/portfolio/réaliste/image00144.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   {
     title: "Realistic Art 27",
     path: "/images/portfolio/réaliste/image00145.png",
-    genre: "réaliste",
+    genre: "realistic",
   },
   // Ghibli
   {
@@ -659,67 +813,35 @@ const galleryImages = ref([
     path: "/images/portfolio/ghibli/0_1 (1).png",
     genre: "ghibli",
   },
-  // Divers
-  {
-    title: "Divers Art 1",
-    path: "/images/portfolio/divers/image00051.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 2",
-    path: "/images/portfolio/divers/image00052.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 3",
-    path: "/images/portfolio/divers/image00066.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 4",
-    path: "/images/portfolio/divers/image00067.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 5",
-    path: "/images/portfolio/divers/image00068.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 6",
-    path: "/images/portfolio/divers/image00069.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 7",
-    path: "/images/portfolio/divers/image00085.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 8",
-    path: "/images/portfolio/divers/image00087.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 9",
-    path: "/images/portfolio/divers/image00095.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 10",
-    path: "/images/portfolio/divers/image00096.png",
-    genre: "divers",
-  },
-  {
-    title: "Divers Art 11",
-    path: "/images/portfolio/divers/image00098.png",
-    genre: "divers",
-  },
 ]);
 
-const filteredGallery = computed(() => {
-  return galleryImages.value.filter((img) => img.genre === currentGenre.value);
+// Ajout d'un écouteur de redimensionnement
+onMounted(() => {
+  window.addEventListener("resize", () => {
+    // Force la mise à jour du computed
+    filteredGallery.value;
+  });
+  window.addEventListener("keydown", handleKeyDown);
 });
+
+onUnmounted(() => {
+  window.removeEventListener("resize", () => {
+    filteredGallery.value;
+  });
+  window.removeEventListener("keydown", handleKeyDown);
+});
+
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (!selectedImage.value) return;
+
+  if (e.key === "ArrowLeft") {
+    previousImage();
+  } else if (e.key === "ArrowRight") {
+    nextImage();
+  } else if (e.key === "Escape") {
+    closeModal();
+  }
+};
 </script>
 
 <style scoped>
