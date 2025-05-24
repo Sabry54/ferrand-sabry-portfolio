@@ -16,7 +16,7 @@
       <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
         <div class="flex items-center space-x-4">
           <span class="text-sm text-gray-600"
-            >FRANCE, 2024 — A SOLO CREATIVE JOURNEY.</span
+            >FRANCE, 2025 — A SOLO CREATIVE JOURNEY.</span
           >
         </div>
       </div>
