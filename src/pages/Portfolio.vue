@@ -1,5 +1,6 @@
 <template>
   <main class="min-h-screen bg-white/5 text-black">
+    <BackToTop />
     <!-- Hero Section -->
     <section class="hero h-screen flex items-center justify-center relative">
       <div class="container mx-auto px-4">
@@ -195,6 +196,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import BackToTop from "../components/BackToTop.vue";
 
 const projects = ref([
   {

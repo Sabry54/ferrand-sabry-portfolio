@@ -1,5 +1,6 @@
 <template>
   <main class="min-h-[calc(100vh+200px)] home-test bg-slide-1">
+    <BackToTop />
     <!-- Hero Section avec effet de parallaxe -->
     <div
       class="relative h-screen flex items-center justify-center overflow-hidden"
@@ -257,6 +258,10 @@
     </div>
   </main>
 </template>
+
+<script setup>
+import BackToTop from "../components/BackToTop.vue";
+</script>
 
 <style scoped>
 main {
