@@ -247,10 +247,10 @@
           </h2>
           <div class="mt-8">
             <router-link
-              to="/?slide=3"
+              to="/contact"
               class="inline-block px-12 py-6 bg-white text-black rounded-full text-xl font-bold hover:bg-white/90 transition-colors transform hover:scale-105 transition-transform"
             >
-              Contact
+              Get in touch
             </router-link>
           </div>
         </div>

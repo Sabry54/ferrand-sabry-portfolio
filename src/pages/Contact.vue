@@ -3,12 +3,18 @@
     <div class="contact-container">
       <div class="contact-content">
         <div class="contact-text">
-          <h1>Contact</h1>
+          <h1
+            class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight glitch-title whitespace-nowrap"
+          >
+            <span class="glitch-text" data-text="Get in touch"
+              >Get in touch</span
+            >
+          </h1>
           <p>Have a project in mind? Feel free to contact me to discuss it.</p>
           <p>I'm always open to new collaborations.</p>
           <div class="contact-info">
-            <p class="email">ferrandsabry@gmail.com</p>
-            <p class="signature">Ferrand Sabry</p>
+            <p class="email">email: ferrandsabry@gmail.com</p>
+            <p class="quote-text">Ferrand Sabry</p>
           </div>
         </div>
 
@@ -98,10 +104,12 @@ const sendEmail = () => {
 }
 
 .contact-text h1 {
-  font-family: "Aladin", cursive;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  color: #333;
-  margin-bottom: 20px;
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: black;
+  text-align: left;
+  font-weight: 700;
 }
 
 .contact-text p {
@@ -208,9 +216,15 @@ button:hover {
   margin-bottom: 0.5rem;
 }
 
-.contact-info .signature {
+.contact-info .quote-text {
+  font-size: clamp(0.65rem, 1vw, 1.2rem);
+  line-height: 1.4;
+  color: black;
+  max-width: min(60rem, 90%);
+  text-align: left;
+  margin-top: clamp(1.5rem, 2vw, 3rem);
+  font-family: "Aladin", cursive;
+  font-weight: 400;
   font-style: italic;
-  color: #666;
-  font-size: 1rem;
 }
 </style>
