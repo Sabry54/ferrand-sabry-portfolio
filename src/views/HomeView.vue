@@ -1256,8 +1256,8 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .luffy-image {
     max-height: 250px;
-    width: auto;
-    margin: 0 auto;
+    position: relative;
+    transform: none;
   }
 }
 
@@ -2043,7 +2043,6 @@ onUnmounted(() => {
     position: relative;
     height: auto;
     padding: 1.5rem 1rem;
-    margin-top: 2rem;
     opacity: 1;
     visibility: visible;
     background: rgba(255, 255, 255, 0.95);

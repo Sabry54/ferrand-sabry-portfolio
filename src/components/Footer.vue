@@ -23,17 +23,17 @@
 .legal-footer {
   position: relative;
   width: 100%;
-  height: 72px;
+  height: 40px;
   background: transparent;
   font-family: "Montserrat", sans-serif;
   z-index: 100;
   display: flex;
   align-items: center;
-  margin-top: 2rem;
 }
 
 .footer-content {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -66,14 +66,15 @@
 @media (max-width: 768px) {
   .legal-footer {
     height: auto;
-    padding: 1rem 0;
-    margin-top: 1rem;
+    min-height: 40px;
+    padding: 0.5rem 0;
   }
 
   .footer-content {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.25rem;
     text-align: center;
+    padding: 0.25rem 0;
   }
 
   .footer-text {
