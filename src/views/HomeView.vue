@@ -1,8 +1,6 @@
 <template>
   <div class="home-test" :class="`bg-slide-${currentSlide + 1}`">
     <div class="cursor"></div>
-    <Header />
-
     <!-- Container des slides -->
     <div class="slides-container" :class="{ 'mobile-view': isMobile }">
       <!-- Slide 1 -->
@@ -11,37 +9,21 @@
           <div class="squares-container">
             <!-- Premier carré : Titre et texte -->
             <div class="square text-square">
-              <div
-                class="rotating-title"
-                :class="{ 'animate-title': currentSlide === 0 }"
-              >
-                <div class="title-container">
-                  <h2 class="text-4xl md:text-6xl font-sans">Curiosity</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Reflect</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Adapt</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Forge</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Test</h2>
-                </div>
-                <div class="responsive-title">
-                  Curiosity.Reflect.Adapt.Forge.Test.
-                </div>
-              </div>
+              <h2 class="slide1-title">Curiosity.Reflect.Adapt.Forge.Test.</h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 0 }"
               >
                 Coding as a state of mind — riding the momentum instead of
                 forcing the structure. No fixed roadmap, just curiosity and the
-                <span class="red-text">freedom</span> to follow what feels
-                right. Experimenting with tools, ideas, and interactions to see
-                what clicks. <span class="red-text">Creating</span> things that
+                freedom to follow what feels right. Experimenting with tools,
+                ideas, and interactions to see what clicks. Creating things that
                 feel natural, intentional, and quietly powerful. Letting the
                 process unfold — adapting to what emerges rather than chasing
-                <span class="red-text">control</span>. Code becomes a language
-                for intuition, not just instruction. The goal isn't perfection,
-                it's resonance. Tuning into rhythm, space, and
-                <span class="red-text">flow</span>. Building experiences that
-                breathe, speak softly, and leave room for interpretation.
+                control. Code becomes a language for intuition, not just
+                instruction. The goal isn't perfection, it's resonance. Tuning
+                into rhythm, space, and flow. Building experiences that breathe,
+                speak softly, and leave room for interpretation.
               </p>
               <p
                 class="quote-text"
@@ -74,21 +56,7 @@
               class="square text-square"
               :class="{ 'full-width-mobile': isMobile }"
             >
-              <div
-                class="rotating-title"
-                :class="{ 'animate-title': currentSlide === 1 }"
-              >
-                <div class="title-container">
-                  <h2 class="text-4xl md:text-6xl font-sans">
-                    No Code. Just Flow.
-                  </h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Reflect</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Adapt</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Forge</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Test</h2>
-                </div>
-                <div class="responsive-title">No Code. Just Flow.</div>
-              </div>
+              <h2 class="slide2-title">No Code. Just Flow.</h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 1 }"
@@ -98,15 +66,12 @@
                 wasn't to bypass complexity, but to collaborate with the
                 tools—to push their limits, understand their language, and see
                 how far they could carry a creative vision without manual
-                intervention.
-                <span class="red-text"
-                  >Of course, the constraints came fast.</span
-                >
-                But that was part of the point. Limitations invite design. They
-                shape the outcome. And solving around them — with clarity,
-                patience, and precision — became one of the most rewarding parts
-                of the process. This isn't about shortcuts. It's about crafting
-                with systems, and building with flow.
+                intervention. Of course, the constraints came fast. But that was
+                part of the point. Limitations invite design. They shape the
+                outcome. And solving around them — with clarity, patience, and
+                precision — became one of the most rewarding parts of the
+                process. This isn't about shortcuts. It's about crafting with
+                systems, and building with flow.
               </p>
               <router-link
                 to="/about"
@@ -136,25 +101,9 @@
           <div class="squares-container slide-3-container">
             <!-- Premier carré : Titre et texte -->
             <div class="square text-square full-width">
-              <div
-                class="rotating-title"
-                :class="{ 'animate-title': currentSlide === 2 }"
-              >
-                <div class="title-container">
-                  <h2 class="text-4xl md:text-6xl font-sans">
-                    <span class="red-text">Craft</span>ed with AI. Curated by
-                    Instinct.
-                  </h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Reflect</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Adapt</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Forge</h2>
-                  <h2 class="text-4xl md:text-6xl font-sans">Test</h2>
-                </div>
-                <div class="responsive-title">
-                  <span class="red-text">Craft</span>ed with AI. Curated by
-                  Instinct.
-                </div>
-              </div>
+              <h2 class="slide3-title">
+                Crafted with AI. Curated by Instinct.
+              </h2>
               <section class="cards">
                 <div class="three-d-wrapper">
                   <router-link
@@ -220,15 +169,7 @@
           <div class="squares-container">
             <!-- Premier carré : Titre et texte -->
             <div class="square text-square">
-              <div
-                class="rotating-title"
-                :class="{ 'animate-title': currentSlide === 3 }"
-              >
-                <div class="title-container">
-                  <h2 class="text-4xl md:text-6xl font-sans">Let's talk.</h2>
-                </div>
-                <div class="responsive-title">Let's talk.</div>
-              </div>
+              <h2 class="slide4-title">Let's talk.</h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 3 }"
@@ -316,7 +257,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { gsap } from "gsap";
-import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import { initHolographicEffect } from "../components/HolographicEffect.js";
 import { useRoute } from "vue-router";
@@ -1101,7 +1041,7 @@ onUnmounted(() => {
   line-height: 1.1;
   color: black;
   text-align: left;
-  font-size: clamp(1.5rem, 6vw, 6rem);
+  font-size: clamp(1rem, 4vw, 6rem);
   white-space: nowrap;
   font-family: "Aladin", cursive;
   font-weight: 400;
@@ -1113,8 +1053,8 @@ onUnmounted(() => {
 }
 
 .description-text {
-  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
-  line-height: 1.5;
+  font-size: clamp(0.75rem, 1.2vw, 1.5rem);
+  line-height: 1.4;
   color: black;
   max-width: min(60rem, 90%);
   text-align: left;
@@ -1125,8 +1065,8 @@ onUnmounted(() => {
 }
 
 .quote-text {
-  font-size: clamp(0.75rem, 1.2vw, 1.2rem);
-  line-height: 1.5;
+  font-size: clamp(0.65rem, 1vw, 1.2rem);
+  line-height: 1.4;
   color: black;
   max-width: min(60rem, 90%);
   text-align: left;
@@ -1262,7 +1202,8 @@ onUnmounted(() => {
   }
 
   .description-text {
-    font-size: clamp(0.875rem, 4vw, 4rem);
+    font-size: clamp(0.7rem, 1vw, 1.2rem);
+    line-height: 1.3;
   }
 
   .more-button {
@@ -2135,6 +2076,74 @@ onUnmounted(() => {
 
   .slide:nth-child(4) {
     padding-bottom: 0;
+  }
+}
+
+.slide3-title {
+  font-family: "Aladin", cursive;
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: black;
+  text-align: left;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .slide3-title {
+    font-size: clamp(1.2rem, 3vw, 3rem);
+    margin-bottom: 0.5rem;
+  }
+}
+
+.slide4-title {
+  font-family: "Aladin", cursive;
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: black;
+  text-align: left;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .slide4-title {
+    font-size: clamp(1.2rem, 3vw, 3rem);
+    margin-bottom: 0.5rem;
+  }
+}
+
+.slide2-title {
+  font-family: "Aladin", cursive;
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: black;
+  text-align: left;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .slide2-title {
+    font-size: clamp(1.2rem, 3vw, 3rem);
+    margin-bottom: 0.5rem;
+  }
+}
+
+.slide1-title {
+  font-family: "Aladin", cursive;
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: black;
+  text-align: left;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .slide1-title {
+    font-size: clamp(1.2rem, 3vw, 3rem);
+    margin-bottom: 0.5rem;
   }
 }
 </style>
