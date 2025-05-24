@@ -19,6 +19,7 @@
           'text-white hover:text-gray-300':
             $route.path === '/about' && isOverHero,
         }"
+        @click="scrollToTop"
       >
         <span class="hidden md:inline">Ferrand Sabry</span>
         <span class="md:hidden" style="margin-top: -4px">FS</span>
@@ -85,7 +86,7 @@
             <router-link
               :to="item.path"
               class="menu-link"
-              @click="isMenuOpen = false"
+              @click="handleNavigation(item.path)"
             >
               {{ item.name }}
             </router-link>
@@ -97,8 +98,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
+const route = useRoute();
+const router = useRouter();
 const isMenuOpen = ref(false);
 const isHeaderHidden = ref(false);
 const isOverHero = ref(false);
@@ -142,6 +146,30 @@ const handleScroll = () => {
     ticking = true;
   }
 };
+
+// Fonction pour remonter en haut de la page
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "instant",
+  });
+};
+
+// Gérer la navigation
+const handleNavigation = (path) => {
+  scrollToTop();
+  isMenuOpen.value = false;
+  router.push(path);
+};
+
+// Surveiller les changements de route
+watch(
+  () => route.path,
+  () => {
+    scrollToTop();
+    isMenuOpen.value = false;
+  }
+);
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);

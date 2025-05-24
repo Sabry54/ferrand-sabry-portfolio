@@ -9,7 +9,12 @@
           <div class="squares-container">
             <!-- Premier carré : Titre et texte -->
             <div class="square text-square">
-              <h2 class="slide1-title">Curiosity.Reflect.Adapt.Forge.Test.</h2>
+              <h2
+                class="slide1-title"
+                :class="{ 'animate-text': currentSlide === 0 }"
+              >
+                Curiosity.Reflect.Adapt.Forge.Test.
+              </h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 0 }"
@@ -48,7 +53,12 @@
               class="square text-square"
               :class="{ 'full-width-mobile': isMobile }"
             >
-              <h2 class="slide2-title">No Code. Just Flow.</h2>
+              <h2
+                class="slide2-title"
+                :class="{ 'animate-text': currentSlide === 1 }"
+              >
+                No Code. Just Flow.
+              </h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 1 }"
@@ -75,11 +85,11 @@
               </router-link>
             </div>
 
-            <!-- Deuxième carré : Image Luffy -->
-            <div class="square" v-if="!isMobile">
+            <!-- Deuxième carré : Image Sanji -->
+            <div class="square">
               <img
-                src="/images/home/luffy3d.png"
-                alt="Luffy 3D"
+                src="../assets/images/home/sanji-smoke.png"
+                alt="Sanji"
                 class="luffy-image"
               />
             </div>
@@ -93,7 +103,10 @@
           <div class="squares-container slide-3-container">
             <!-- Premier carré : Titre et texte -->
             <div class="square text-square full-width">
-              <h2 class="slide3-title">
+              <h2
+                class="slide3-title"
+                :class="{ 'animate-text': currentSlide === 2 }"
+              >
                 Crafted with AI. Curated by Instinct.
               </h2>
               <section class="cards">
@@ -161,7 +174,12 @@
           <div class="squares-container">
             <!-- Premier carré : Titre et texte -->
             <div class="square text-square">
-              <h2 class="slide4-title">Let's talk.</h2>
+              <h2
+                class="slide4-title"
+                :class="{ 'animate-text': currentSlide === 3 }"
+              >
+                Let's talk.
+              </h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 3 }"
@@ -169,6 +187,12 @@
                 Got a project, an idea, or just curious about the process?<br />
                 Happy to chat — over coffee, a drink, or a simple call.<br />
                 No pressure. Just a conversation.
+              </p>
+              <p
+                class="description-text"
+                :class="{ 'animate-text': currentSlide === 3 }"
+              >
+                email: ferrandsabry@gmail.com
               </p>
               <p
                 class="quote-text"
@@ -186,7 +210,7 @@
                 @submit="handleSubmit"
               >
                 <div class="form-group">
-                  <label for="name">Nom</label>
+                  <label for="name">Name</label>
                   <input type="text" id="name" name="name" required />
                 </div>
                 <div class="form-group">
@@ -202,7 +226,7 @@
                     required
                   ></textarea>
                 </div>
-                <button type="submit" class="submit-button">Envoyer</button>
+                <button type="submit" class="submit-button">Send</button>
               </form>
             </div>
           </div>
@@ -247,11 +271,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import { ref, onMounted, onUnmounted, computed, watch } from "vue";
 import { gsap } from "gsap";
 import Footer from "../components/Footer.vue";
 import { initHolographicEffect } from "../components/HolographicEffect.js";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const currentSlide = ref(0);
 const isAnimating = ref(false);
@@ -655,9 +679,13 @@ const handleMouseMove = (e) => {
 };
 
 const route = useRoute();
+const router = useRouter();
 
 // Gérer le paramètre slide dans l'URL
 onMounted(() => {
+  // Remonter en haut de la page
+  window.scrollTo(0, 0);
+
   const slideParam = route.query.slide;
   if (slideParam) {
     const slideIndex = parseInt(slideParam);
@@ -769,6 +797,14 @@ onMounted(() => {
     );
   }
 });
+
+// Surveiller les changements de route
+watch(
+  () => route.path,
+  () => {
+    window.scrollTo(0, 0);
+  }
+);
 
 onUnmounted(() => {
   window.removeEventListener("wheel", handleWheel);
@@ -1560,7 +1596,7 @@ onUnmounted(() => {
 /* Styles pour l'image du slide 2 */
 .slide:nth-child(2) .square:last-child {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   padding: 0;
   margin: 0;
@@ -1569,23 +1605,21 @@ onUnmounted(() => {
 
 .slide:nth-child(2) .luffy-image {
   width: 100%;
-  height: auto;
-  max-height: 100%;
+  height: 100%;
   object-fit: contain;
-  object-position: bottom;
+  object-position: center;
   margin: 0;
   padding: 0;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translateX(30%);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  transition: all 0.3s ease;
 }
 
 /* Tablette */
 @media (max-width: 1024px) {
   .slide:nth-child(2) .luffy-image {
-    max-height: 100%;
-    transform: translateX(25%);
+    max-height: 400px;
+    width: auto;
+    margin: 0 auto;
   }
 }
 
@@ -1595,6 +1629,15 @@ onUnmounted(() => {
     max-height: 250px;
     position: relative;
     transform: none;
+  }
+}
+
+/* Petit mobile */
+@media (max-width: 480px) {
+  .slide:nth-child(2) .luffy-image {
+    max-height: 180px;
+    width: auto;
+    margin: 0 auto;
   }
 }
 
@@ -1891,9 +1934,10 @@ onUnmounted(() => {
 }
 
 .form-group label {
-  font-family: "Aladin", cursive;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;
   color: black;
+  font-weight: 400;
 }
 
 .form-group input,
@@ -1901,7 +1945,7 @@ onUnmounted(() => {
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-family: "Aladin", cursive;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.9);
 }
@@ -1917,8 +1961,9 @@ onUnmounted(() => {
   color: white;
   border: none;
   border-radius: 4px;
-  font-family: "Aladin", cursive;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.3s ease;
   align-self: flex-start;
@@ -2081,13 +2126,8 @@ onUnmounted(() => {
   color: black;
   text-align: left;
   font-weight: 700;
-}
-
-@media (max-width: 768px) {
-  .slide3-title {
-    font-size: clamp(1.2rem, 3vw, 3rem);
-    margin-bottom: 0.5rem;
-  }
+  opacity: 0;
+  transform: translateX(50px);
 }
 
 .slide4-title {
@@ -2097,13 +2137,8 @@ onUnmounted(() => {
   color: black;
   text-align: left;
   font-weight: 700;
-}
-
-@media (max-width: 768px) {
-  .slide4-title {
-    font-size: clamp(1.2rem, 3vw, 3rem);
-    margin-bottom: 0.5rem;
-  }
+  opacity: 0;
+  transform: translateX(50px);
 }
 
 .slide2-title {
@@ -2114,13 +2149,8 @@ onUnmounted(() => {
   text-align: left;
   font-weight: 700;
   font-family: inherit;
-}
-
-@media (max-width: 768px) {
-  .slide2-title {
-    font-size: clamp(1.2rem, 3vw, 3rem);
-    margin-bottom: 0.5rem;
-  }
+  opacity: 0;
+  transform: translateX(50px);
 }
 
 .slide1-title {
@@ -2130,6 +2160,25 @@ onUnmounted(() => {
   color: black;
   text-align: left;
   font-weight: 700;
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.slide1-title.animate-text {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.description-text.animate-text {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.slide2-title.animate-text,
+.slide3-title.animate-text,
+.slide4-title.animate-text {
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 0.2s;
 }
 
 @media (max-width: 768px) {
