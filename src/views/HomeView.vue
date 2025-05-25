@@ -1172,17 +1172,26 @@ onUnmounted(() => {
     display: none;
   }
 
-  .responsive-title {
-    display: block;
-    text-align: right;
-    margin-right: 0;
-    padding-right: 0;
+  .slide1-title,
+  .slide2-title,
+  .slide3-title,
+  .slide4-title {
+    display: block !important;
+    font-size: clamp(1.2rem, 3vw, 2.5rem) !important;
+    line-height: 1.2 !important;
+    text-align: left !important;
+    margin-bottom: 1rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    white-space: normal !important;
+    font-weight: 700 !important;
   }
 
   .description-text {
-    font-size: clamp(1rem, 3vw, 3rem);
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
     line-height: 1.4;
-    text-align: right;
+    text-align: left;
     margin-right: 0;
     padding-right: 0;
     max-width: 100%;
@@ -1191,7 +1200,7 @@ onUnmounted(() => {
   .more-button {
     font-size: 1rem;
     margin-top: 1.5rem;
-    margin-left: auto;
+    margin-left: 0;
     margin-right: 0;
     padding-right: 0;
   }
@@ -1204,10 +1213,6 @@ onUnmounted(() => {
 
   /* Réinitialiser les styles pour le slide 1 */
   .slide:nth-child(1) .text-square {
-    text-align: left;
-  }
-
-  .slide:nth-child(1) .responsive-title {
     text-align: left;
   }
 
@@ -2183,7 +2188,7 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .slide1-title {
-    font-size: clamp(1.2rem, 3vw, 3rem);
+    font-size: clamp(1.2rem, 3vw, 2.5rem);
     margin-bottom: 0.5rem;
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <button
-    v-show="isVisible"
+    v-show="isVisible && !isMobile"
     @click="scrollToTop"
     class="fixed right-8 top-1/2 -translate-y-1/2 z-50 bg-black/10 hover:bg-black/20 text-black p-3 rounded-full transition-all duration-300"
   >
@@ -25,6 +25,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 const isVisible = ref(false);
+const isMobile = ref(window.innerWidth <= 768);
 
 const checkScroll = () => {
   isVisible.value = window.scrollY > 300;
@@ -37,13 +38,20 @@ const scrollToTop = () => {
   });
 };
 
+const updateIsMobile = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
 onMounted(() => {
   window.addEventListener("scroll", checkScroll);
+  window.addEventListener("resize", updateIsMobile);
   checkScroll();
+  updateIsMobile();
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", checkScroll);
+  window.removeEventListener("resize", updateIsMobile);
 });
 </script>
 
