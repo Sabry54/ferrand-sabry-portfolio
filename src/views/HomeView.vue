@@ -1350,6 +1350,10 @@ onUnmounted(() => {
 
 /* Mobile */
 @media (max-width: 768px) {
+  /* Slide 1 image bigger on mobile */
+  .slide:nth-child(1) .luffy-image {
+    max-height: 320px !important;
+  }
   .luffy-image {
     max-height: 250px;
     position: relative;
@@ -1359,6 +1363,10 @@ onUnmounted(() => {
 
 /* Petit mobile */
 @media (max-width: 480px) {
+  /* Slide 1 image bigger on small mobile as well */
+  .slide:nth-child(1) .luffy-image {
+    max-height: 240px !important;
+  }
   .luffy-image {
     max-height: 180px;
     width: auto;
@@ -1712,7 +1720,7 @@ onUnmounted(() => {
 /* Mobile */
 @media (max-width: 768px) {
   .slide:nth-child(2) .luffy-image {
-    max-height: 250px;
+    max-height: 320px !important;
     position: relative;
     transform: none;
   }
@@ -1721,7 +1729,7 @@ onUnmounted(() => {
 /* Petit mobile */
 @media (max-width: 480px) {
   .slide:nth-child(2) .luffy-image {
-    max-height: 180px;
+    max-height: 240px !important;
     width: auto;
     margin: 0 auto;
   }
