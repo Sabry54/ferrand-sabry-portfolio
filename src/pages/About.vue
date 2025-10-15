@@ -18,8 +18,8 @@
         <h1
           class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight glitch-title whitespace-nowrap"
         >
-          <span class="glitch-text" data-text="About this project"
-            >About this project</span
+          <span class="glitch-text" data-text="À propos de moi"
+            >À propos de moi</span
           >
         </h1>
       </div>
@@ -42,28 +42,17 @@
                 class="relative bg-white/10 backdrop-blur-sm p-8 rounded-2xl transform hover:rotate-1 transition-transform"
               >
                 <h2 class="text-4xl font-bold text-black mb-6 font-montserrat">
-                  Why ?
+                  Mon parcours
                 </h2>
                 <p class="text-lg text-black/80 mb-6 font-montserrat">
-                  The idea for this project came from a video on Twitter that
-                  mentioned vibecoding—a concept that immediately caught my
-                  attention because of the benefits it highlighted. I wanted to
-                  take the idea further: to explore what could be created
-                  without writing a single line of code by hand, purely by
-                  collaborating with tools like ChatGPT, Cursor, Claude, and
-                  other AI systems. This wasn't just a technical curiosity—it
-                  was a real experiment to test their limits, their
-                  understanding, and their ability to turn a creative vision
-                  into a tangible result, all without relying on heavy technical
-                  knowledge. The challenge was clear from the start: not to type
-                  a single line of code manually, and still aim for the
-                  cleanest, most polished outcome possible. My mindset evolved
-                  throughout the project—from initial hesitation, to curiosity,
-                  to the genuine fun of experimentation. There were
-                  surprises—some good, some frustrating—but that's what made the
-                  process feel alive. In the end, it became a double
-                  exploration: the limits of vibecoding, and the boundaries of
-                  what AI can achieve in a creative, ambitious project.
+                  Passionné par la création visuelle depuis toujours, j'ai
+                  développé au fil des années une expertise polyvalente dans le
+                  domaine du design. Mon approche se base sur l'écoute attentive
+                  des besoins clients et la recherche constante de solutions
+                  créatives et innovantes. Chaque projet est pour moi une
+                  opportunité d'explorer de nouveaux horizons créatifs, en
+                  alliant technique et intuition pour créer des visuels qui
+                  marquent et racontent des histoires authentiques.
                 </p>
               </div>
             </div>
@@ -85,7 +74,7 @@
       <div class="py-32 bg-black/5">
         <div class="container mx-auto px-4">
           <h2 class="text-5xl font-bold text-black mb-16 text-center">
-            My approach
+            Mon approche
           </h2>
           <div class="grid md:grid-cols-3 gap-8">
             <div class="group relative">
@@ -101,14 +90,13 @@
                   <span class="text-3xl">💻</span>
                 </div>
                 <h3 class="text-2xl font-bold text-black mb-4">
-                  Tool-driven Creation
+                  Design & Identité visuelle
                 </h3>
                 <p class="text-black/80">
-                  I built everything using tools like ChatGPT, Cursor, Claude,
-                  and other AI platforms. The idea wasn't to skip the hard work,
-                  but to see how far these tools could be pushed to execute a
-                  creative vision. Learning how to "speak" their language became
-                  part of the craft.
+                  Création de logos, chartes graphiques et identités visuelles
+                  complètes. Je conçois des systèmes visuels cohérents qui
+                  reflètent l'essence de chaque marque, en combinant créativité
+                  et stratégie pour des résultats impactants et mémorables.
                 </p>
               </div>
             </div>
@@ -125,13 +113,14 @@
                   <span class="text-3xl">🎨</span>
                 </div>
                 <h3 class="text-2xl font-bold text-black mb-4">
-                  Design by Constraint
+                  Web & Digital
                 </h3>
                 <p class="text-black/80">
-                  No manual coding. That was the rule. Every decision had to
-                  work within this limit — and instead of seeing it as a block,
-                  I used it as a guide. The constraint shaped the outcome and
-                  taught me how creativity often thrives with clear boundaries.
+                  Webdesign, interfaces utilisateur et contenus pour réseaux
+                  sociaux. Je crée des expériences digitales engageantes qui
+                  captent l'attention et communiquent efficacement votre
+                  message, en adaptant chaque création aux spécificités de
+                  chaque plateforme.
                 </p>
               </div>
             </div>
@@ -148,14 +137,13 @@
                   <span class="text-3xl">🚀</span>
                 </div>
                 <h3 class="text-2xl font-bold text-black mb-4">
-                  Learning in Public
+                  Photo & Vidéo
                 </h3>
                 <p class="text-black/80">
-                  This wasn't about showing off mastery — it was about learning
-                  out loud. I entered this with curiosity, not certainty. I
-                  documented the missteps, surprises, and insights along the
-                  way. It's a process-first mindset, where progress matters more
-                  than polish.
+                  Photographie, retouche d'images, montage vidéo et effets
+                  motion. Je capture et transforme vos moments en contenus
+                  visuels percutants, en maîtrisant les techniques de
+                  post-production pour des résultats professionnels et créatifs.
                 </p>
               </div>
             </div>
@@ -167,7 +155,7 @@
       <div class="py-32">
         <div class="container mx-auto px-4">
           <h2 class="text-5xl font-bold text-black mb-16 text-center">
-            My Process
+            Ma méthode
           </h2>
           <div class="relative">
             <div
@@ -180,14 +168,14 @@
                 ></div>
                 <div class="w-1/2 pr-12 text-right">
                   <h3 class="text-2xl font-bold text-black mb-2">
-                    Talk, Don't Dictate
+                    Écoute & Compréhension
                   </h3>
                   <p class="text-black/80">
-                    Every step began as a conversation with the tools. I wasn't
-                    issuing commands — I was exploring, adjusting, listening.
-                    The goal was to understand how the AI thinks, how it
-                    responds, and how to guide it without forcing it. It wasn't
-                    about control, but about collaboration and subtle influence.
+                    Chaque projet commence par une écoute attentive de vos
+                    besoins et de votre vision. Je prends le temps de comprendre
+                    votre univers, vos objectifs et vos contraintes pour créer
+                    des solutions sur-mesure qui résonnent avec votre identité
+                    et vos valeurs.
                   </p>
                 </div>
                 <div class="w-1/2 pl-12">
@@ -211,14 +199,14 @@
                 </div>
                 <div class="w-1/2 pl-12">
                   <h3 class="text-2xl font-bold text-black mb-2">
-                    Steer Without a Keyboard
+                    Création & Réalisation
                   </h3>
                   <p class="text-black/80">
-                    Nothing was written by hand, but nothing was random either.
-                    I iterated with intention — tweaking, refining, sometimes
-                    rewriting entire chunks prompt by prompt. Not to code, but
-                    to shape. The AI moved fast, and I slowed down just enough
-                    to keep it on track.
+                    Une fois la direction définie, je passe à la création en
+                    alliant technique et intuition. Chaque élément est pensé et
+                    affiné pour créer des visuels qui marquent et racontent
+                    votre histoire, avec une attention particulière aux détails
+                    et à la cohérence globale.
                   </p>
                 </div>
               </div>
@@ -241,8 +229,8 @@
           class="relative container mx-auto px-4 text-center flex flex-col items-center"
         >
           <h2 class="text-5xl font-bold text-white mb-8 glitch-title">
-            <span class="glitch-text" data-text="Let's Work Together"
-              >Let's Work Together</span
+            <span class="glitch-text" data-text="Travaillons ensemble"
+              >Travaillons ensemble</span
             >
           </h2>
           <div class="mt-8">
@@ -250,7 +238,7 @@
               to="/contact"
               class="inline-block px-12 py-6 bg-white text-black rounded-full text-xl font-bold hover:bg-white/90 transition-colors transform hover:scale-105 transition-transform"
             >
-              Get in touch
+              Prendre contact
             </router-link>
           </div>
         </div>

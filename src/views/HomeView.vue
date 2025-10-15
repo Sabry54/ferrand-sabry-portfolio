@@ -13,31 +13,34 @@
                 class="slide1-title"
                 :class="{ 'animate-text': currentSlide === 0 }"
               >
-                Curiosity.Reflect.Adapt.Forge.Test.
+                Imaginer, concevoir, révéler vos idées en images
               </h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 0 }"
               >
-                Coding as a state of mind — riding the momentum instead of
-                forcing the structure. No fixed roadmap, just curiosity and the
-                freedom to follow what feels right. Experimenting with tools,
-                ideas, and interactions to see what clicks. Creating things that
-                feel natural, intentional, and quietly powerful. Letting the
-                process unfold — adapting to what emerges rather than chasing
-                control. Code becomes a language for intuition, not just
-                instruction. The goal isn't perfection, it's resonance. Tuning
-                into rhythm, space, and flow. Building experiences that breathe,
-                speak softly, and leave room for interpretation.
+                Graphisme, web, identité visuelle, logo, photographie, print et
+                digital : mon métier, c'est de donner forme et sens à vos
+                projets, quel que soit le support. Curieux et à l'écoute,
+                j'explore chaque univers créatif pour façonner des visuels
+                distinctifs qui parlent autant qu'ils séduisent. Du brief à la
+                réalisation, j'accompagne les marques et entrepreneurs dans
+                leurs démarches visuelles : interfaces web, identité graphique,
+                création de logos, supports de communication, photos et contenus
+                pour réseaux sociaux. Mon approche : mêler technique et
+                intuition, pour des résultats personnalisés et percutants,
+                pensés pour créer de l'émotion et capter l'attention, en ligne
+                comme sur papier.
               </p>
             </div>
 
             <!-- Deuxième carré : Image Luffy -->
             <div class="square">
               <img
-                src="../assets/images/home/luffy-unicorn.png"
-                alt="Luffy Unicorn"
-                class="luffy-image"
+                src="../assets/images/home/002.png"
+                alt="Image principale"
+                class="luffy-image clickable-image"
+                @click="openImageModal(image002)"
               />
             </div>
           </div>
@@ -57,39 +60,36 @@
                 class="slide2-title"
                 :class="{ 'animate-text': currentSlide === 1 }"
               >
-                No Code. Just Flow.
+                Mes compétences
               </h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 1 }"
               >
-                This project began as an experiment: What if no line of code was
-                written by hand—yet every detail was intentional? The goal
-                wasn't to bypass complexity, but to collaborate with the
-                tools—to push their limits, understand their language, and see
-                how far they could carry a creative vision without manual
-                intervention. Of course, the constraints came fast. But that was
-                part of the point. Limitations invite design. They shape the
-                outcome. And solving around them — with clarity, patience, and
-                precision — became one of the most rewarding parts of the
-                process. This isn't about shortcuts. It's about crafting with
-                systems, and building with flow.
+                Je maîtrise un large éventail de techniques créatives : identité
+                visuelle, création de logos, webdesign, supports print comme
+                affiches et flyers, photographie, retouche d'images, montage
+                vidéo et effets motion, ainsi que la création de contenus
+                visuels pour réseaux sociaux. Ces compétences me permettent de
+                concevoir des visuels qui attirent, marquent et racontent des
+                histoires, en alliant technique et intuition selon les besoins
+                de chaque projet.
               </p>
               <router-link
                 to="/about"
                 class="fs-slide-button"
                 :class="{ 'animate-quote': currentSlide === 1 }"
               >
-                more
+                découvrir
                 <span class="fs-slide-arrow">→</span>
               </router-link>
             </div>
 
-            <!-- Deuxième carré : Image Sanji -->
+            <!-- Deuxième carré : Image Moisite -->
             <div class="square">
               <img
-                src="../assets/images/home/sanji-smoke.png"
-                alt="Sanji"
+                src="../assets/images/home/moisite.png"
+                alt="Moisite"
                 class="luffy-image"
               />
             </div>
@@ -267,6 +267,20 @@
         </div>
       </div>
     </footer>
+
+    <!-- Modal pour afficher l'image en grand -->
+    <div v-if="showImageModal" class="image-modal" @click="closeImageModal">
+      <div class="modal-content" @click.stop>
+        <button
+          class="close-button"
+          @click="closeImageModal"
+          aria-label="Fermer"
+        >
+          <span>&times;</span>
+        </button>
+        <img :src="modalImageSrc" alt="Image agrandie" class="modal-image" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -276,11 +290,16 @@ import { gsap } from "gsap";
 import Footer from "../components/Footer.vue";
 import { initHolographicEffect } from "../components/HolographicEffect.js";
 import { useRoute, useRouter } from "vue-router";
+import image002 from "../assets/images/home/002.png";
 
 const currentSlide = ref(0);
 const isAnimating = ref(false);
 const isMobile = ref(window.innerWidth <= 768);
 const cursor = ref(null);
+
+// Variables pour la modal d'image
+const showImageModal = ref(false);
+const modalImageSrc = ref("");
 
 const mosaicCanvas = ref(null);
 const luffyImage = ref(null);
@@ -666,6 +685,21 @@ const handleSubmit = (event) => {
     formData.get("message")
   )}`;
   window.location.href = mailtoLink;
+};
+
+// Fonctions pour la modal d'image
+const openImageModal = (imageSrc) => {
+  modalImageSrc.value = imageSrc;
+  showImageModal.value = true;
+  // Empêcher le scroll du body quand la modal est ouverte
+  document.body.style.overflow = "hidden";
+};
+
+const closeImageModal = () => {
+  showImageModal.value = false;
+  modalImageSrc.value = "";
+  // Restaurer le scroll du body
+  document.body.style.overflow = "auto";
 };
 
 // Gestion du curseur personnalisé
@@ -2190,6 +2224,110 @@ onUnmounted(() => {
   .slide1-title {
     font-size: clamp(1.2rem, 3vw, 2.5rem);
     margin-bottom: 0.5rem;
+  }
+}
+
+/* Styles pour la modal d'image */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  cursor: pointer;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.close-button {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+  transition: all 0.3s ease;
+  z-index: 10001;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.clickable-image {
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.clickable-image:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+/* Responsive pour la modal */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+    padding: 20px;
+  }
+
+  .close-button {
+    top: -30px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+
+  .modal-image {
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    max-width: 98vw;
+    max-height: 98vh;
+    padding: 10px;
+  }
+
+  .close-button {
+    top: -25px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
   }
 }
 </style>

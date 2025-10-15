@@ -6,6 +6,7 @@ import HomeView from "../views/HomeView.vue";
 import LegalNotice from "../views/LegalNotice.vue";
 import PrivacyPolicy from "../views/PrivacyPolicy.vue";
 import Contact from "../pages/Contact.vue";
+import CV from "../pages/CV.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -44,6 +45,14 @@ const router = createRouter({
       path: "/privacy-policy",
       name: "privacy-policy",
       component: PrivacyPolicy,
+    },
+    {
+      path: "/cv",
+      name: "cv",
+      component: CV,
+      meta: {
+        hideInNav: true, // Cette métadonnée indique que la page ne doit pas apparaître dans la navigation
+      },
     },
   ],
 });
