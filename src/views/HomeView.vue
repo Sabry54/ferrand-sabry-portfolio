@@ -77,11 +77,12 @@
               </p>
               <router-link
                 to="/about"
-                class="fs-slide-button"
+                class="fs-slide-button font-light desktop-only"
                 :class="{ 'animate-quote': currentSlide === 1 }"
+                v-if="!isMobile"
               >
                 découvrir
-                <span class="fs-slide-arrow">→</span>
+                <span class="fs-slide-arrow font-light">→</span>
               </router-link>
             </div>
 
@@ -92,6 +93,16 @@
                 alt="Moisite"
                 class="luffy-image"
               />
+              <router-link
+                to="/about"
+                class="fs-slide-button font-light mobile-only"
+                :class="{ 'animate-quote': currentSlide === 1 }"
+                style="margin-top: 16px"
+                v-if="isMobile"
+              >
+                découvrir
+                <span class="fs-slide-arrow font-light">→</span>
+              </router-link>
             </div>
           </div>
         </div>
@@ -107,7 +118,7 @@
                 class="slide3-title"
                 :class="{ 'animate-text': currentSlide === 2 }"
               >
-                Crafted with AI. Curated by Instinct.
+                Présentation de mes capacités créatives et techniques
               </h2>
               <section class="cards">
                 <div class="three-d-wrapper">
@@ -160,7 +171,7 @@
                 class="fs-slide-button font-light"
                 :class="{ 'animate-quote': currentSlide === 2 }"
               >
-                more
+                découvrir
                 <span class="fs-slide-arrow font-light">→</span>
               </router-link>
             </div>
@@ -1150,6 +1161,20 @@ onUnmounted(() => {
 
 /* Responsive */
 @media (max-width: 768px) {
+  /* Slide 2: aligner le titre à droite en mobile */
+  .slide:nth-child(2) .slide2-title {
+    text-align: right !important;
+  }
+  /* Slide 2: aligner le paragraphe et le bouton à droite en mobile */
+  .slide:nth-child(2) .description-text {
+    text-align: right !important;
+  }
+  .slide:nth-child(2) .fs-slide-button {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    text-align: right !important;
+    display: inline-flex !important;
+  }
   .slides-container.mobile-view .slide {
     position: relative;
     opacity: 1 !important;
@@ -1632,6 +1657,28 @@ onUnmounted(() => {
   }
 }
 
+/* Harmoniser le bouton du slide 2 avec celui du slide 3 (toutes tailles) */
+.slide:nth-child(2) .fs-slide-button {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  font-size: 1.5rem !important;
+  font-weight: 300 !important;
+  text-align: left !important;
+}
+.slide:nth-child(2) .fs-slide-arrow {
+  font-weight: 300 !important;
+}
+
+/* Override mobile alignment for slide 2 button with higher specificity */
+@media (max-width: 768px) {
+  .slides-container.mobile-view .slide:nth-child(2) .fs-slide-button {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    text-align: right !important;
+    display: inline-flex !important;
+  }
+}
+
 /* Styles pour l'image du slide 2 */
 .slide:nth-child(2) .square:last-child {
   display: flex;
@@ -1952,6 +1999,24 @@ onUnmounted(() => {
   }
 
   .slide:nth-child(3) .fs-slide-arrow {
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 300 !important;
+  }
+
+  /* Appliquer exactement le même style au bouton du slide 2 en mobile */
+  .slide:nth-child(2) .fs-slide-button {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    font-size: 1.5rem !important;
+    text-align: left !important;
+    align-self: flex-start !important;
+    width: auto !important;
+    display: inline-flex !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 300 !important;
+  }
+
+  .slide:nth-child(2) .fs-slide-arrow {
     font-family: "Montserrat", sans-serif !important;
     font-weight: 300 !important;
   }
@@ -2292,6 +2357,24 @@ onUnmounted(() => {
 .clickable-image:hover {
   transform: scale(1.02);
   opacity: 0.9;
+}
+
+/* Responsive visibility helpers for slide buttons */
+.desktop-only {
+  display: inline-block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: inline-block !important;
+  }
 }
 
 /* Responsive pour la modal */

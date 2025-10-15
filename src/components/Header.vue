@@ -110,8 +110,8 @@ let lastScrollY = 0;
 let ticking = false;
 
 const menuItems = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
+  { name: "Accueil", path: "/" },
+  { name: "À propos", path: "/about" },
   { name: "Portfolio", path: "/portfolio" },
   { name: "Contact", path: "/contact" },
 ];
