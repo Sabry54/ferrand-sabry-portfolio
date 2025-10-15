@@ -1,37 +1,39 @@
 <template>
   <div class="legal-content">
-    <h1>Legal Notice</h1>
-    <h2>Site Owner</h2>
-    <p>Name: Ferrand Sabry</p>
-    <p>Email: ferrandsabry@gmail.com</p>
-    <p>Publishing Director: Ferrand Sabry</p>
+    <h1>Mentions légales</h1>
+    <h2>Propriétaire du site</h2>
+    <p>Nom : Ferrand Sabry</p>
+    <p>Email : ferrandsabry@gmail.com</p>
+    <p>Directeur de la publication : Ferrand Sabry</p>
 
-    <h2>Hosting & Domain</h2>
-    <p>Domain registrar: IONOS</p>
+    <h2>Hébergement & Nom de domaine</h2>
+    <p>Bureau d'enregistrement du domaine : IONOS</p>
     <p>
-      Web hosting provider:
+      Hébergeur web :
       <a href="https://vercel.com" target="_blank" rel="noopener noreferrer"
         >Vercel</a
       >
     </p>
-    <p>Address: 440 N Barranca Ave #4133, Covina, CA 91723, USA</p>
+    <p>Adresse : 440 N Barranca Ave #4133, Covina, CA 91723, USA</p>
 
-    <h2>Intellectual Property</h2>
+    <h2>Propriété intellectuelle</h2>
     <p>
-      All content on this site (texts, images, graphics, logos, icons, etc.) is
-      protected by copyright. Any reproduction or representation, in whole or in
-      part, without prior permission is prohibited.
+      L'ensemble du contenu de ce site (textes, images, graphismes, logos,
+      icônes, etc.) est protégé par le droit d'auteur. Toute reproduction ou
+      représentation, totale ou partielle, sans autorisation préalable est
+      interdite.
     </p>
 
-    <h2>Liability</h2>
+    <h2>Responsabilité</h2>
     <p>
-      The site owner cannot be held responsible for errors, omissions, or any
-      use or interpretation of the information provided on this website.
+      Le propriétaire du site ne saurait être tenu responsable des erreurs,
+      omissions, ou de toute utilisation ou interprétation des informations
+      présentes sur ce site.
     </p>
 
     <h2>Contact</h2>
     <p>
-      For any inquiry, please contact:
+      Pour toute demande, veuillez contacter :
       <a href="mailto:ferrandsabry@gmail.com">ferrandsabry@gmail.com</a>
     </p>
   </div>

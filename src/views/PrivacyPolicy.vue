@@ -1,62 +1,70 @@
 <template>
   <div class="privacy-content">
-    <h1>Privacy Policy</h1>
+    <h1>Politique de confidentialité</h1>
     <section>
-      <h2>Data Collection</h2>
-      <p>This site may collect personal data when you:</p>
+      <h2>Collecte des données</h2>
+      <p>Ce site peut collecter des données personnelles lorsque vous :</p>
       <ul>
-        <li>Submit a message through a contact form</li>
-        <li>Accept cookies or third-party tools (such as Google Analytics)</li>
+        <li>Soumettez un message via un formulaire de contact</li>
+        <li>
+          Acceptez des cookies ou des outils tiers (comme Google Analytics)
+        </li>
       </ul>
       <p>
-        Collected data may include: your IP address, browser type, name, email
-        address, or any information you voluntarily provide.
+        Les données collectées peuvent inclure : votre adresse IP, le type de
+        navigateur, votre nom, votre adresse e‑mail, ou toute information que
+        vous fournissez volontairement.
       </p>
     </section>
 
     <section>
-      <h2>Use of Data</h2>
-      <p>Data is only used for the following purposes:</p>
+      <h2>Utilisation des données</h2>
+      <p>
+        Les données sont utilisées uniquement pour les finalités suivantes :
+      </p>
       <ul>
-        <li>Responding to contact messages</li>
-        <li>Website analytics (via Google Analytics)</li>
+        <li>Répondre aux messages de contact</li>
+        <li>Analyser l’audience du site (via Google Analytics)</li>
       </ul>
     </section>
 
     <section>
       <h2>Cookies</h2>
       <p>
-        This website uses cookies to improve your experience and analyze site
-        traffic.
+        Ce site utilise des cookies pour améliorer votre expérience et analyser
+        le trafic.
       </p>
     </section>
 
     <section>
-      <h2>Data Hosting</h2>
-      <p>All data collected via this website is hosted on Vercel servers.</p>
-    </section>
-
-    <section>
-      <h2>Data Retention</h2>
+      <h2>Hébergement des données</h2>
       <p>
-        Your data is only stored for as long as necessary to fulfill the
-        purposes listed above.
+        Toutes les données collectées via ce site sont hébergées sur les
+        serveurs de Vercel.
       </p>
     </section>
 
     <section>
-      <h2>Your Rights</h2>
+      <h2>Durée de conservation</h2>
       <p>
-        According to the GDPR, you have the right to access, correct, or delete
-        your personal data.
+        Vos données sont conservées uniquement le temps nécessaire pour répondre
+        aux finalités indiquées ci‑dessus.
       </p>
-      <p>To exercise these rights, contact: ferrandsabry@gmail.com</p>
+    </section>
+
+    <section>
+      <h2>Vos droits</h2>
+      <p>
+        Conformément au RGPD, vous disposez d’un droit d’accès, de rectification
+        et de suppression de vos données personnelles.
+      </p>
+      <p>Pour exercer ces droits, contactez : ferrandsabry@gmail.com</p>
     </section>
 
     <section>
       <h2>Contact</h2>
       <p>
-        If you have any privacy-related questions, please email:
+        Pour toute question relative à la confidentialité, veuillez écrire à :
         ferrandsabry@gmail.com
       </p>
     </section>

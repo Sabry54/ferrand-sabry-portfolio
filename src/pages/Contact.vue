@@ -6,12 +6,13 @@
           <h1
             class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight glitch-title whitespace-nowrap"
           >
-            <span class="glitch-text" data-text="Get in touch"
-              >Get in touch</span
-            >
+            <span class="glitch-text" data-text="Contact">Contact</span>
           </h1>
-          <p>Have a project in mind? Feel free to contact me to discuss it.</p>
-          <p>I'm always open to new collaborations.</p>
+          <p>
+            Vous avez un projet en tête ? N'hésitez pas à me contacter pour en
+            discuter.
+          </p>
+          <p>Je suis toujours ouvert aux nouvelles collaborations.</p>
           <div class="contact-info">
             <p class="email">email: ferrandsabry@gmail.com</p>
             <p class="quote-text">Ferrand Sabry</p>
@@ -20,13 +21,13 @@
 
         <form @submit.prevent="sendEmail" class="contact-form">
           <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name">Nom</label>
             <input
               type="text"
               id="name"
               v-model="formData.name"
               required
-              placeholder="Your name"
+              placeholder="Votre nom"
             />
           </div>
 
@@ -37,7 +38,7 @@
               id="email"
               v-model="formData.email"
               required
-              placeholder="Your email"
+              placeholder="Votre email"
             />
           </div>
 
@@ -47,12 +48,12 @@
               id="message"
               v-model="formData.message"
               required
-              placeholder="Your message"
+              placeholder="Votre message"
               rows="5"
             ></textarea>
           </div>
 
-          <button type="submit">Send</button>
+          <button type="submit">Envoyer</button>
         </form>
       </div>
     </div>

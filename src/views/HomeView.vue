@@ -118,8 +118,15 @@
                 class="slide3-title"
                 :class="{ 'animate-text': currentSlide === 2 }"
               >
-                Présentation de mes capacités créatives et techniques
+                Présentation de quelques projets
               </h2>
+              <p
+                class="fs-slide-button font-light"
+                :class="{ 'animate-quote': currentSlide === 2 }"
+                style="margin-top: 0.5rem"
+              >
+                exemple de projets midjourney
+              </p>
               <section class="cards">
                 <div class="three-d-wrapper">
                   <router-link
@@ -189,56 +196,74 @@
                 class="slide4-title"
                 :class="{ 'animate-text': currentSlide === 3 }"
               >
-                Let's talk.
+                Discutons
               </h2>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 3 }"
               >
-                Got a project, an idea, or just curious about the process?<br />
-                Happy to chat — over coffee, a drink, or a simple call.<br />
-                No pressure. Just a conversation.
+                Vous avez un projet, une idée ou souhaitez en savoir plus sur
+                mon approche ?<br />
+                Je suis disponible pour échanger, que ce soit autour d’un café,
+                d’un verre ou lors d’un simple appel.<br />
+                Sans engagement, juste une conversation sincère pour explorer
+                comment je peux apporter ma créativité et mon expertise à votre
+                équipe.
               </p>
               <p
                 class="description-text"
                 :class="{ 'animate-text': currentSlide === 3 }"
-              >
-                email: ferrandsabry@gmail.com
-              </p>
-              <p
-                class="quote-text"
-                :class="{ 'animate-quote': currentSlide === 3 }"
-              >
-                Ferrand Sabry
-              </p>
+              ></p>
             </div>
 
-            <!-- Deuxième carré : Formulaire de contact -->
-            <div class="square">
-              <form
-                id="vraiformulaire"
-                class="contact-form"
-                @submit="handleSubmit"
+            <!-- Deuxième carré : Coordonnées à droite -->
+            <div class="square flex flex-col items-center justify-center gap-4">
+              <a
+                href="mailto:ferrandsabry@gmail.com"
+                class="contact-email"
+                aria-label="Envoyer un e‑mail à ferrandsabry@gmail.com"
               >
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" id="name" name="name" required />
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" required />
-                </div>
-                <div class="form-group">
-                  <label for="message">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    required
-                  ></textarea>
-                </div>
-                <button type="submit" class="submit-button">Send</button>
-              </form>
+                ferrandsabry@gmail.com
+              </a>
+              <a
+                href="https://www.instagram.com/brica_brac54/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link instagram-link"
+                aria-label="Instagram @brica_brac54"
+              >
+                <svg
+                  class="instagram-icon"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-3.25a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"
+                  />
+                </svg>
+                <span class="instagram-handle">@brica_brac54</span>
+              </a>
+              <a
+                href="https://www.youtube.com/@SF-vm8nk/featured"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link youtube-link"
+                aria-label="YouTube les videos"
+              >
+                <svg
+                  class="youtube-icon"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <!-- YouTube logo -->
+                  <path
+                    d="M23.498 6.186a3.004 3.004 0 0 0-2.116-2.123C19.804 3.5 12 3.5 12 3.5s-7.804 0-9.382.563A3.004 3.004 0 0 0 .502 6.186C0 7.77 0 12 0 12s0 4.23.502 5.814a3.004 3.004 0 0 0 2.116 2.123C4.196 20.5 12 20.5 12 20.5s7.804 0 9.382-.563a3.004 3.004 0 0 0 2.116-2.123C24 16.23 24 12 24 12s0-4.23-.502-5.814zM9.75 15.5v-7l6 3.5-6 3.5z"
+                  />
+                </svg>
+                <span class="youtube-handle">les videos</span>
+              </a>
             </div>
           </div>
         </div>
@@ -270,10 +295,10 @@
         <p class="footer-text">© 2025 Ferrand Sabry. All rights reserved.</p>
         <div class="footer-links">
           <router-link to="/legal-notice" class="footer-link"
-            >Legal Notice</router-link
+            >Mentions légales</router-link
           >
           <router-link to="/privacy-policy" class="footer-link"
-            >Privacy Policy</router-link
+            >Politique de confidentialité</router-link
           >
         </div>
       </div>
@@ -2086,6 +2111,40 @@ onUnmounted(() => {
   transform: translateY(-2px);
 }
 
+/* Mise en évidence de l'e-mail et style lien social */
+.contact-email {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: black;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.social-link:hover .instagram-handle {
+  text-decoration: underline;
+}
+
+.instagram-icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* YouTube style aligné avec Instagram */
+.youtube-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.social-link:hover .youtube-handle {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .contact-form {
     padding: 1rem;
@@ -2109,7 +2168,7 @@ onUnmounted(() => {
 
 /* Styles pour le slide 4 */
 .slide:nth-child(4) .text-square {
-  margin-top: -12rem;
+  margin-top: 0;
 }
 
 @media (max-width: 768px) {
@@ -2294,9 +2353,13 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
-  .slide1-title {
-    font-size: clamp(1.2rem, 3vw, 2.5rem);
+  .slide1-title,
+  .slide2-title,
+  .slide3-title,
+  .slide4-title {
+    font-size: clamp(2.4rem, 6vw, 5rem) !important; /* double approx */
     margin-bottom: 0.5rem;
+    line-height: 1.1;
   }
 }
 
