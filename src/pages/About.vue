@@ -215,6 +215,166 @@
         </div>
       </div>
 
+      <!-- Section Outils & Logiciels -->
+      <div class="py-32 bg-black/5">
+        <div class="container mx-auto px-4">
+          <h2 class="text-5xl font-bold text-black mb-16 text-center">
+            Outils & logiciels
+          </h2>
+
+          <div class="grid gap-10 md:grid-cols-2">
+            <!-- Bloc Adobe -->
+            <div
+              class="relative bg-white/10 backdrop-blur-sm p-10 rounded-2xl h-full shadow-sm"
+            >
+              <h3
+                class="text-3xl font-bold text-black mb-6 flex items-center gap-3"
+              >
+                <span class="text-3xl">🅰️</span> Suite Adobe
+              </h3>
+              <ul class="grid grid-cols-2 gap-3 text-black/90 text-lg">
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🎨</span> Photoshop
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">✒️</span> Illustrator
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">📘</span> InDesign
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🎬</span> Premiere Pro
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">✨</span> After Effects
+                </li>
+              </ul>
+            </div>
+
+            <!-- Bloc Design -->
+            <div
+              class="relative bg-white/10 backdrop-blur-sm p-10 rounded-2xl h-full shadow-sm"
+            >
+              <h3
+                class="text-3xl font-bold text-black mb-6 flex items-center gap-3"
+              >
+                <span class="text-3xl">🎛️</span> Design & prototypage
+              </h3>
+              <ul class="grid grid-cols-2 gap-3 text-black/90 text-lg">
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🧩</span> Figma
+                </li>
+              </ul>
+            </div>
+
+            <!-- Bloc IA -->
+            <div
+              class="relative bg-white/10 backdrop-blur-sm p-10 rounded-2xl h-full shadow-sm"
+            >
+              <h3
+                class="text-3xl font-bold text-black mb-6 flex items-center gap-3"
+              >
+                <span class="text-3xl">🤖</span> IA & assistants
+              </h3>
+              <ul class="grid grid-cols-2 gap-3 text-black/90 text-lg">
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🤖</span> ChatGPT
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🎨</span> Midjourney
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">⌨️</span> Cursor
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🧠</span> Claude
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🎬</span> Sora
+                </li>
+              </ul>
+            </div>
+
+            <!-- Bloc Dev & Déploiement -->
+            <div
+              class="relative bg-white/10 backdrop-blur-sm p-10 rounded-2xl h-full shadow-sm"
+            >
+              <h3
+                class="text-3xl font-bold text-black mb-6 flex items-center gap-3"
+              >
+                <span class="text-3xl">⚙️</span> Dev & déploiement
+              </h3>
+              <ul class="grid grid-cols-2 gap-3 text-black/90 text-lg">
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🐙</span> GitHub
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">▲</span> Vercel
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-2xl">🌐</span> WordPress
+                </li>
+              </ul>
+            </div>
+
+            <!-- Bloc Langages & Stack -->
+            <div
+              class="relative bg-white/10 backdrop-blur-sm p-10 rounded-2xl h-full shadow-sm md:col-span-2"
+            >
+              <h3
+                class="text-3xl font-bold text-black mb-6 text-center flex items-center justify-center gap-3"
+              >
+                <span class="text-3xl">🧰</span> Langages & stack du projet
+              </h3>
+              <ul
+                class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-black/90 text-lg max-w-5xl mx-auto"
+              >
+                <li
+                  class="flex items-center gap-3 justify-center sm:justify-start"
+                >
+                  <span class="text-2xl">🟧</span> HTML5
+                </li>
+                <li
+                  class="flex items-center gap-3 justify-center sm:justify-start"
+                >
+                  <span class="text-2xl">🟦</span> CSS3
+                </li>
+                <li
+                  class="flex items-center gap-3 justify-center sm:justify-start"
+                >
+                  <span class="text-2xl">🟨</span> JavaScript
+                </li>
+                <li
+                  class="flex items-center gap-3 justify-center sm:justify-start"
+                >
+                  <span class="text-2xl">🟢</span> Vue 3
+                </li>
+                <li
+                  class="flex items-center gap-3 justify-center sm:justify-start"
+                >
+                  <span class="text-2xl">⚡</span> Vite
+                </li>
+                <li
+                  class="flex items-center gap-3 justify-center sm:justify-start"
+                >
+                  <span class="text-2xl">💠</span> Tailwind CSS
+                </li>
+                <li
+                  class="flex items-center gap-3 justify-center sm:justify-start"
+                >
+                  <span class="text-2xl">🌀</span> GSAP
+                </li>
+                <li
+                  class="flex items-center gap-3 justify-center sm:justify-start"
+                >
+                  <span class="text-2xl">🧭</span> Vue Router
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- CTA Section avec effet de parallaxe -->
       <div class="relative py-32 overflow-hidden">
         <div class="absolute inset-0">
