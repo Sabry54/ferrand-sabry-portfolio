@@ -3,7 +3,7 @@
     class="min-h-screen bg-[#0f1115] text-white font-['Inter','Montserrat',system-ui,sans-serif]"
   >
     <!-- Hero / En-tête CV -->
-    <section class="relative pt-10 md:pt-12 pb-8 md:pb-12">
+    <section class="relative pt-40 md:pt-48 pb-8 md:pb-12">
       <div
         class="absolute inset-0 -z-10 opacity-40 bg-[radial-gradient(ellipse_at_top_right,rgba(34,211,238,0.20),transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(139,92,246,0.20),transparent_45%)]"
       ></div>
@@ -18,7 +18,7 @@
             class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-gradient-to-tr from-[#8b5cf6]/40 via-[#ec4899]/30 to-[#22d3ee]/30 blur-2xl"
           ></div>
           <img
-            src="/images/home/luffy3d.png"
+            src="/images/cv/photocv.JPG?url"
             alt="Photo de profil"
             class="relative w-28 h-28 md:w-32 md:h-32 rounded-full object-cover ring-4 ring-white/10 shadow-lg mx-auto"
           />
@@ -68,13 +68,119 @@
         <div class="space-y-6">
           <div class="rounded-2xl bg-white/5 border border-white/10 p-6">
             <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">
-              Assistant commercial & administratif
+              Intégrateur front / webdesigner junior
             </h2>
-            <p class="mt-3 text-white/80 leading-relaxed">
-              Autonome, curieux et dynamique, avec une solide expérience dans la
-              fourniture d’un soutien administratif et d’une assistance
-              opérationnelle pour répondre aux besoins de l’équipe.
-            </p>
+            <!-- Encart repliable: Un peu d'histoire -->
+            <div
+              class="mt-4 rounded-xl bg-white/5 border border-white/10 overflow-hidden"
+            >
+              <!-- En-tête encart: titre + icône croix -->
+              <button
+                type="button"
+                class="w-full flex items-center justify-between gap-3 px-4 py-3 text-left hover:bg-white/10 transition"
+                @click="isStoryOpen = !isStoryOpen"
+                aria-controls="story-panel"
+                :aria-expanded="isStoryOpen ? 'true' : 'false'"
+              >
+                <span class="font-medium">À propos de moi</span>
+                <span
+                  class="relative inline-flex items-center justify-center w-6 h-6"
+                  aria-hidden="true"
+                >
+                  <!-- Croix (2 traits) -->
+                  <span
+                    class="absolute w-4 h-[1.5px] bg-current transition-transform duration-300"
+                    :class="isStoryOpen ? 'rotate-45' : 'rotate-0'"
+                  ></span>
+                  <span
+                    class="absolute w-4 h-[1.5px] bg-current transition-transform duration-300"
+                    :class="isStoryOpen ? '-rotate-45' : 'rotate-90'"
+                  ></span>
+                </span>
+              </button>
+
+              <!-- Contenu de l'encart -->
+              <div
+                v-if="isStoryOpen"
+                id="story-panel"
+                class="px-4 pb-4 text-white/85 text-sm leading-relaxed"
+              >
+                <p class="mb-3">
+                  Mon parcours n’a rien de linéaire, et c’est sans doute ce qui
+                  fait ma force. Après un bac STG option Communication et
+                  Gestion des Ressources Humaines obtenu en 2009, j’ai poursuivi
+                  mes études en psychologie à Nancy, sans aller jusqu’à la
+                  licence. À l’époque, je suivais simplement le chemin “qu’il
+                  fallait suivre” — jusqu’à ce que je réalise que ce n’était pas
+                  vraiment le mien.
+                </p>
+                <p class="mb-3">
+                  Ma première vraie expérience professionnelle, je l’ai vécue
+                  chez Sidermat SARL. J’y suis entré par la petite porte, en
+                  nettoyant l’intérieur des voitures, et j’y suis resté plus de
+                  huit ans. Grâce à la confiance de mon employeur, j’ai pu
+                  évoluer : logistique, gestion administrative, vente, puis
+                  responsable de la location et responsable technique sur la
+                  partie écrans LED géants. Cette expérience m’a tout appris :
+                  la rigueur, l’autonomie, la polyvalence — et surtout,
+                  l’importance d’apprendre chaque jour.
+                </p>
+                <p class="mb-3">
+                  C’est là, au contact de graphistes, monteurs et techniciens
+                  audiovisuels, que j’ai découvert ce qui m’animait vraiment :
+                  la création. Fin 2019, j’ai choisi de partir pour me
+                  reconvertir dans ce domaine, et j’ai eu la chance de suivre
+                  une formation en webdesign via Pôle Emploi. Cette formation a
+                  été un déclic : j’ai découvert les logiciels, les techniques,
+                  les codes du graphisme et du développement web. J’avais enfin
+                  trouvé ma voie.
+                </p>
+                <p class="mb-3">
+                  J’ai ensuite intégré Concept Factory, une expérience
+                  exceptionnelle à mes yeux : une équipe bienveillante, des
+                  mentors passionnés, une communication fluide… J’y ai appris,
+                  progressé, et surtout, j’y ai pris goût à ce que j’aime
+                  profondément faire : créer.
+                </p>
+                <p class="mb-3">
+                  Mais parfois, la vie personnelle prend le dessus. J’ai fait le
+                  choix — sans doute trop vite — de quitter l’agence pour tenter
+                  de sauver une relation. Cette décision a été difficile, et la
+                  suite l’a été tout autant. J’ai travaillé dans d’autres
+                  secteurs (intérim, banque, gestion administrative…), mais sans
+                  jamais retrouver ce sentiment d’évidence, cette énergie que je
+                  ressens quand je conçois un site, un logo ou une affiche.
+                </p>
+                <p class="mb-3">
+                  Alors j’ai pris une décision : reprendre ma route là où je
+                  l’avais laissée. Quitter un poste stable pour suivre à nouveau
+                  ma passion n’est pas simple, mais c’est le pari de ma vie.
+                </p>
+                <p class="mb-3">
+                  Aujourd’hui, je sais ce que je veux : travailler à nouveau en
+                  agence, collaborer avec des créatifs, apprendre, partager, et
+                  continuer à donner vie à des projets digitaux et visuels. J’ai
+                  des compétences variées, une solide expérience du terrain, une
+                  grande rigueur administrative — mais surtout, une vraie envie
+                  de créer, d’innover, et de vibrer à travers mon travail.
+                </p>
+                <p class="mb-3">💬 En quelques mots</p>
+                <p class="mb-3">
+                  Si vous lisez ces lignes aujourd’hui, c’est probablement parce
+                  que j’ai postulé dans votre agence. Et si je l’ai fait, c’est
+                  parce que j’espère sincèrement pouvoir rejoindre une équipe
+                  passionnée, dans laquelle je pourrai mettre à profit mes
+                  compétences, apprendre encore, et surtout, créer avec plaisir.
+                  Je ne cherche pas seulement un poste, je cherche un
+                  environnement où la créativité a du sens, où chaque projet
+                  devient une aventure collective.
+                </p>
+                <p>
+                  Merci d’avoir pris le temps de me lire — peut-être le début
+                  d’une belle collaboration.
+                </p>
+              </div>
+            </div>
           </div>
 
           <!-- Compétences (mise en avant) -->
@@ -84,10 +190,6 @@
           >
             <div class="flex items-center justify-between gap-4">
               <h3 class="text-xl md:text-2xl font-semibold">Compétences</h3>
-              <span
-                class="text-xs px-2.5 py-1 rounded-full bg-gradient-to-r from-[#22d3ee]/20 via-[#ec4899]/20 to-[#8b5cf6]/20 border border-white/10"
-                >Mise en avant</span
-              >
             </div>
             <div class="mt-5 grid md:grid-cols-2 gap-5">
               <!-- Langues -->
@@ -339,12 +441,6 @@
                 <span>2021 → BTS Webdesigner – EESC, Longwy</span>
               </li>
               <li class="flex items-start justify-between gap-2">
-                <span
-                  >2013 → DIT Banques & Assurances – IUT Henri Poincaré,
-                  Longwy</span
-                >
-              </li>
-              <li class="flex items-start justify-between gap-2">
                 <span>2009 → Bac STG CGRH – Lycée Pierre Bayle, Sedan</span>
               </li>
             </ul>
@@ -367,22 +463,13 @@
             </div>
           </section>
 
-          <!-- Contact / Divers -->
-          <section
-            id="contact"
-            class="rounded-2xl bg-white/5 border border-white/10 p-6"
-          >
-            <h3 class="text-xl md:text-2xl font-semibold">Contact & divers</h3>
+          <!-- Divers -->
+          <section class="rounded-2xl bg-white/5 border border-white/10 p-6">
+            <h3 class="text-xl md:text-2xl font-semibold">Divers</h3>
             <div class="mt-3 grid sm:grid-cols-2 gap-3">
               <div class="rounded-xl bg-white/5 border border-white/10 p-4">
                 <p class="text-white/80 text-sm">Permis B</p>
               </div>
-              <a
-                href="mailto:ferrandsabry@gmail.com"
-                class="rounded-xl bg-white/5 border border-white/10 p-4 hover:border-[#22d3ee]/40 hover:bg-white/10 transition"
-              >
-                <p class="text-white/80 text-sm">Me contacter par e‑mail</p>
-              </a>
             </div>
           </section>
         </div>
@@ -392,7 +479,10 @@
 </template>
 
 <script setup>
-// Pas de logique spécifique pour l'instant
+import { ref } from "vue";
+
+// État de l'encart "Un peu d'histoire"
+const isStoryOpen = ref(false);
 </script>
 
 <style scoped>

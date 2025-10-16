@@ -4,7 +4,8 @@
     class="fixed top-0 left-0 w-full h-[72px] z-50 transition-transform duration-300"
     :class="{
       'translate-y-[-72px]': isHeaderHidden,
-      'text-white': $route.path === '/about' && isOverHero,
+      'text-white':
+        ($route.path === '/about' && isOverHero) || $route.path === '/cv',
     }"
   >
     <div class="h-full flex justify-between items-center relative">
@@ -17,7 +18,7 @@
         class="text-xl font-bold ml-[2%] hover:text-gray-700 transition-colors relative z-10"
         :class="{
           'text-white hover:text-gray-300':
-            $route.path === '/about' && isOverHero,
+            ($route.path === '/about' && isOverHero) || $route.path === '/cv',
         }"
         @click="scrollToTop"
       >
@@ -29,7 +30,10 @@
       <div class="flex items-end mr-[2%] relative z-10">
         <span
           class="fs-menu-text"
-          :class="{ 'text-white': $route.path === '/about' && isOverHero }"
+          :class="{
+            'text-white':
+              ($route.path === '/about' && isOverHero) || $route.path === '/cv',
+          }"
           style="margin-bottom: -6%"
           >menu</span
         >
@@ -42,7 +46,9 @@
             class="fs-burger-icon"
             :class="{
               open: isMenuOpen,
-              'text-white': $route.path === '/about' && isOverHero,
+              'text-white':
+                ($route.path === '/about' && isOverHero) ||
+                $route.path === '/cv',
             }"
           >
             <span></span>
@@ -69,7 +75,10 @@
       >
         <div
           class="close-icon"
-          :class="{ 'text-white': $route.path === '/about' && isOverHero }"
+          :class="{
+            'text-white':
+              ($route.path === '/about' && isOverHero) || $route.path === '/cv',
+          }"
         >
           <span></span>
           <span></span>
@@ -79,7 +88,10 @@
       <!-- Menu -->
       <nav
         class="menu-container text-center z-10"
-        :class="{ 'text-white': $route.path === '/about' && isOverHero }"
+        :class="{
+          'text-white':
+            ($route.path === '/about' && isOverHero) || $route.path === '/cv',
+        }"
       >
         <ul class="menu-list">
           <li v-for="item in menuItems" :key="item.path">
@@ -191,6 +203,7 @@ header {
   z-index: 1000;
   padding: 1rem 2rem;
   transition: all 0.3s ease;
+  color: black; /* Forcer une couleur par défaut cohérente sur toutes les pages */
 }
 
 .header-content {
@@ -544,6 +557,11 @@ nav a:hover::after {
   font-weight: 300 !important;
   letter-spacing: 0.5px;
   transition: color 0.3s ease;
+}
+
+/* Assurer le blanc quand la classe utility est présente */
+.fs-menu-text.text-white {
+  color: #ffffff;
 }
 
 /* Media queries pour le responsive */
