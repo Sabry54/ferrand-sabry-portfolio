@@ -252,9 +252,19 @@ const selectedImage = ref<GalleryImage | null>(null);
 const currentImageIndex = ref(0);
 const shuffledImages = ref<GalleryImage[]>([]);
 
-// Nouveau computed pour le slider qui retourne toujours toutes les images
+// Normaliser/encoder les URLs (accents, espaces, parenthèses) pour la prod
+const encodedGalleryImages = computed(() =>
+  galleryImages.value.map((img) => ({
+    ...img,
+    path: encodeURI(img.path),
+  }))
+);
+
+// Nouveau computed pour le slider qui retourne toujours toutes les images (encodées)
 const sliderImages = computed(() => {
-  return galleryImages.value.filter((img) => img.genre === currentGenre.value);
+  return encodedGalleryImages.value.filter(
+    (img) => img.genre === currentGenre.value
+  );
 });
 
 const filteredGallery = computed(() => {
