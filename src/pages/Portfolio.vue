@@ -6,11 +6,11 @@
       <div class="container mx-auto px-4">
         <div class="max-w-4xl">
           <h1 class="text-6xl md:text-8xl font-bold leading-tight">
-            <span class="block">A small collection</span>
-            <span class="block">of visual</span>
-            <span class="block">experiments —</span>
-            <span class="block">playful, inspired,</span>
-            <span class="block">sometimes strange.</span>
+            <span class="block">Une petite collection</span>
+            <span class="block">d'expériences</span>
+            <span class="block">visuelles —</span>
+            <span class="block">ludiques, inspirées,</span>
+            <span class="block">parfois étranges.</span>
           </h1>
         </div>
       </div>
@@ -26,19 +26,32 @@
     <!-- Works Section -->
     <section class="py-32">
       <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold mb-16">Works</h2>
+        <h2 class="text-4xl font-bold mb-16">Ils m'ont fait confiance</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div
             v-for="(project, index) in projects"
             :key="index"
             class="project-card"
           >
-            <div class="relative overflow-hidden group">
+            <div
+              class="relative overflow-hidden group cursor-pointer md:cursor-pointer"
+              @click="
+                window.innerWidth >= 768 ? openProjectModal(project) : null
+              "
+            >
               <img
                 :src="project.image"
                 :alt="project.title"
                 class="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105"
               />
+              <!-- Barre d'info au survol -->
+              <div
+                class="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+              >
+                <div class="bg-black/70 text-white px-4 py-3 text-sm">
+                  <p class="truncate">{{ project.description }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -48,7 +61,7 @@
     <!-- Gallery Section -->
     <section class="py-32 bg-white/5">
       <div class="container mx-auto px-4">
-        <h2 class="text-4xl font-bold mb-16">Gallery</h2>
+        <h2 class="text-4xl font-bold mb-16">Gallerie Midjourney</h2>
 
         <!-- Genre Filter -->
         <div class="flex flex-wrap gap-4 mb-12">
@@ -176,17 +189,17 @@
     <section class="py-32">
       <div class="container mx-auto px-4">
         <div class="max-w-2xl">
-          <h2 class="text-4xl font-bold mb-8">Let's Talk!</h2>
+          <h2 class="text-4xl font-bold mb-8">Parlons-en&nbsp;!</h2>
           <p class="text-xl text-gray-700 mb-12">
-            If you already have a clear idea of what you need, you can write to
-            me directly indicating the type of project, desired publication date
-            and budget.
+            Si vous avez déjà une idée claire de votre besoin, écrivez‑moi en
+            indiquant le type de projet, la date de publication souhaitée et le
+            budget.
           </p>
           <router-link
             to="/contact"
             class="inline-block px-8 py-4 bg-black text-white font-bold hover:bg-gray-800 transition-colors"
           >
-            Get in touch
+            Me contacter
           </router-link>
         </div>
       </div>
@@ -201,27 +214,26 @@ import BackToTop from "../components/BackToTop.vue";
 const projects = ref([
   {
     title: "Digital Art Collection",
-    description:
-      "A showcase of digital art pieces exploring the intersection of technology and creativity",
+    description: "Création de logo pour une société de paysagiste",
     image: "/images/portfolio/work/work1.png",
     tags: ["Digital Art", "Animation", "WebGL"],
   },
   {
     title: "Manga Series",
-    description: "A collection of original manga artwork and character designs",
+    description: "Flyer pour événement organisé par Drena Dance Luxembourg",
     image: "/images/portfolio/work/work2.png",
     tags: ["Manga", "Character Design", "Storytelling"],
   },
   {
     title: "Live Action Portfolio",
     description:
-      "Behind the scenes of our live action productions and photo shoots",
+      "Création de logo et carte de visite pour une société de thanatopraxie",
     image: "/images/portfolio/work/work3.png",
     tags: ["Photography", "Production", "Direction"],
   },
   {
     title: "Realistic Artworks",
-    description: "Hyper-realistic digital paintings and illustrations",
+    description: "Refonte de logo pour une société de maçonnerie",
     image: "/images/portfolio/work/work4.png",
     tags: ["Digital Painting", "Realism", "Illustration"],
   },
@@ -262,6 +274,16 @@ const filteredGallery = computed(() => {
 watch(currentGenre, () => {
   shuffledImages.value = [];
 });
+
+const openProjectModal = (project: any) => {
+  // Créer un objet GalleryImage à partir du projet
+  const image: GalleryImage = {
+    title: project.title,
+    path: project.image,
+    genre: "work", // Genre spécial pour les projets
+  };
+  openModal(image);
+};
 
 const openModal = (image: GalleryImage) => {
   selectedImage.value = image;
