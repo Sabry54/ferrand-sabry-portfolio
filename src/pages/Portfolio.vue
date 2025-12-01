@@ -58,6 +58,99 @@
       </div>
     </section>
 
+    <!-- Drena Dance Website Section -->
+    <section class="py-32">
+      <div class="container mx-auto px-4">
+        <h2 class="text-6xl md:text-8xl font-bold leading-tight mb-8">
+          <span class="block">site web déployé :</span>
+          <span class="block">Drena Dance Luxembourg</span>
+        </h2>
+        <p class="text-lg md:text-xl text-gray-700 mb-16 max-w-3xl leading-relaxed">
+          Projet passionnant de création d'un site web pour Drena Dance, une école de danse à Luxembourg. 
+          Un défi créatif et technique qui m'a permis de mettre en valeur l'univers de la danse à travers 
+          une interface moderne et intuitive. Ce projet a été particulièrement enrichissant, alliant 
+          design visuel et expérience utilisateur pour offrir une plateforme qui reflète l'énergie et 
+          la passion de cette école.
+        </p>
+        <!-- Mosaïque de 4 images -->
+        <div class="website-mosaic grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+          <div
+            class="mosaic-item mosaic-item-large group cursor-pointer"
+            @click="openWebsiteModal(drenaDanceImages[0])"
+          >
+            <div class="relative overflow-hidden w-full h-full">
+              <img
+                :src="drenaDanceImages[0].path"
+                :alt="drenaDanceImages[0].title"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          </div>
+          <div
+            class="mosaic-item mosaic-item-medium group cursor-pointer"
+            @click="openWebsiteModal(drenaDanceImages[1])"
+          >
+            <div class="relative overflow-hidden w-full h-full">
+              <img
+                :src="drenaDanceImages[1].path"
+                :alt="drenaDanceImages[1].title"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          </div>
+          <div
+            class="mosaic-item mosaic-item-small group cursor-pointer"
+            @click="openWebsiteModal(drenaDanceImages[2])"
+          >
+            <div class="relative overflow-hidden w-full h-full">
+              <img
+                :src="drenaDanceImages[2].path"
+                :alt="drenaDanceImages[2].title"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          </div>
+          <div
+            class="mosaic-item mosaic-item-small group cursor-pointer"
+            @click="openWebsiteModal(drenaDanceImages[3])"
+          >
+            <div class="relative overflow-hidden w-full h-full">
+              <img
+                :src="drenaDanceImages[3].path"
+                :alt="drenaDanceImages[3].title"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- Lien vers le site -->
+        <div class="mt-12 flex justify-center md:justify-start">
+          <a
+            href="https://www.drenadance.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="website-link inline-flex items-center gap-3 px-8 py-4 bg-black text-white font-medium hover:bg-gray-800 transition-all duration-300 group"
+          >
+            <span>Visiter le site</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Gallery Section -->
     <section class="py-32 bg-white/5">
       <div class="container mx-auto px-4">
@@ -239,6 +332,36 @@ const projects = ref([
   },
 ]);
 
+// Images du site Drena Dance
+const drenaDanceImages = ref([
+  {
+    title: "Drena Dance Luxembourg - Capture 1",
+    path: "/images/portfolio/drena-dance/drena-dance-1.png",
+  },
+  {
+    title: "Drena Dance Luxembourg - Capture 2",
+    path: "/images/portfolio/drena-dance/drena-dance-2.png",
+  },
+  {
+    title: "Drena Dance Luxembourg - Capture 3",
+    path: "/images/portfolio/drena-dance/drena-dance-3.png",
+  },
+  {
+    title: "Drena Dance Luxembourg - Capture 4",
+    path: "/images/portfolio/drena-dance/drena-dance-4.png",
+  },
+]);
+
+const openWebsiteModal = (image: any) => {
+  // Créer un objet GalleryImage compatible
+  const galleryImage: GalleryImage = {
+    title: image.title,
+    path: image.path,
+    genre: "drena-dance", // Genre spécial pour Drena Dance
+  };
+  openModal(galleryImage);
+};
+
 const genres = ref(["curious", "mangas", "live-action", "realistic", "ghibli"]);
 const currentGenre = ref("curious");
 
@@ -262,6 +385,15 @@ const encodedGalleryImages = computed(() =>
 
 // Nouveau computed pour le slider qui retourne toujours toutes les images (encodées)
 const sliderImages = computed(() => {
+  // Si une image Drena Dance est sélectionnée, retourner toutes les images Drena Dance
+  if (selectedImage.value && selectedImage.value.genre === "drena-dance") {
+    return drenaDanceImages.value.map((img) => ({
+      title: img.title,
+      path: encodeURI(img.path),
+      genre: "drena-dance",
+    }));
+  }
+  // Sinon, retourner les images du genre actuel
   return encodedGalleryImages.value.filter(
     (img) => img.genre === currentGenre.value
   );
@@ -297,11 +429,19 @@ const openProjectModal = (project: any) => {
 
 const openModal = (image: GalleryImage) => {
   selectedImage.value = image;
-  // Utiliser sliderImages au lieu de filteredGallery pour avoir toutes les images
-  currentImageIndex.value = sliderImages.value.findIndex(
-    (img) => img.path === image.path
-  );
   document.body.style.overflow = "hidden";
+  // Trouver l'index de l'image dans le slider approprié
+  // Utiliser nextTick pour s'assurer que sliderImages est à jour
+  setTimeout(() => {
+    const encodedPath = encodeURI(image.path);
+    currentImageIndex.value = sliderImages.value.findIndex(
+      (img) => encodeURI(img.path) === encodedPath || img.path === encodedPath
+    );
+    // Si l'image n'est pas trouvée, mettre l'index à 0
+    if (currentImageIndex.value === -1) {
+      currentImageIndex.value = 0;
+    }
+  }, 0);
 };
 
 const closeModal = () => {
@@ -926,6 +1066,92 @@ const handleKeyDown = (e: KeyboardEvent) => {
 
 .gallery-item:hover img {
   transform: scale(1.05);
+}
+
+/* Styles pour la mosaïque du site web */
+.website-mosaic {
+  margin-top: 2rem;
+}
+
+.mosaic-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.mosaic-item-large {
+  grid-column: span 1;
+  grid-row: span 2;
+  aspect-ratio: 2/3;
+}
+
+.mosaic-item-medium {
+  grid-column: span 1;
+  grid-row: span 1;
+  aspect-ratio: 1/1;
+}
+
+.mosaic-item-small {
+  grid-column: span 1;
+  grid-row: span 1;
+  aspect-ratio: 1/1;
+}
+
+@media (min-width: 768px) {
+  .website-mosaic {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(250px, auto);
+  }
+
+  .mosaic-item-large {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: 1/1;
+  }
+
+  .mosaic-item-medium {
+    grid-column: span 2;
+    grid-row: span 1;
+    aspect-ratio: 2/1;
+  }
+
+  .mosaic-item-small {
+    grid-column: span 1;
+    grid-row: span 1;
+    aspect-ratio: 1/1;
+  }
+}
+
+.mosaic-item img {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mosaic-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Styles pour le lien du site web */
+.website-link {
+  border-radius: 4px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.website-link:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.website-link:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .website-link {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
